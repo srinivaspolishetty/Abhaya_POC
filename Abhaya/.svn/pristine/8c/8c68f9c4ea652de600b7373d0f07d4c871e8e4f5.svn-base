@@ -1,0 +1,136 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active icon_alignment text_align"><img class="img_topnav" src="assets/images/SVG/ic_drivers_blue.svg" style="width:22px !important;"><span>DRIVERS</span></a>
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="col-1 m-0 p-0">
+          <div class="add_btn">
+            <button type="button" class="add_btn" (click)="openDriver()"><span>+</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container container_height">
+   <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a>Driver Management</a></li>
+           <li class="breadcrumb-item" aria-current="page">Drivers</li>
+        </ol>
+      </nav>
+
+
+
+      <div class="row page-filters">
+          <div class="col-md-3 p-t-6">
+            <span>Total Vehicles: <b>{{page.totalElements}}</b></span>
+          </div>
+          <div class="col-md-9 text-right">
+            <button type="button" class="btn btn-bare" (click)="refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
+              Refresh</button>
+            <button type="button" class="btn btn-bare" (click)="downloadPdf()"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download</button>|
+            <button type="button" class="btn btn-bare" (click)="btnShowFilters()"><i class="fa fa-filter" aria-hidden="true"></i>
+              Filters</button>
+          </div>
+        </div>
+        <div class="slide-filters" [ngClass]="{'show': showFilters == true}">
+          <div class="row slide-filters-content">
+            <div class="col-md-3">
+              <div class="form-group">
+                <input type="text" class="filter_style form-control" aria-describedby="emailHelp" placeholder="Search RFID Number / DL Number"
+                  [(ngModel)]="searchValue" (keyup)="searchData();">
+                <button type="button" class="btn_close close" aria-label="Close">
+                  <span aria-hidden="true" (click)="clearSearch();" *ngIf="showSearchClear">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCities(districtModel)">
+                  <option value="" [selected]="!districtModel">Select District</option>
+                  <option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <select class="filter_style form-control" [(ngModel)]="cityModel" name="cityId" (change)="cityChange()">
+                  <option value="" [selected]="!cityModel">Select City</option>
+                  <option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+  <table class="table table-borderless table_today_installed">
+    <thead class="thead-bg">
+      <tr>
+          <th>ID</th>
+          <th>DL NO</th>
+          <th>Driver Name</th>
+          <th>RFID</th>
+          <th>#Mobile Number</th>
+          <th>Gender</th>
+          <th>City</th>
+          <th>District</th>
+          <th>DL Expiry Date</th>
+          <th colspan="2">Action</th>
+      </tr>
+    </thead>
+    <tbody class="hoverTable align-middle no-border-x table_alignment row_bg" *ngIf="driveArray !== null || driveArray.length !== 0">
+      <tr *ngFor="let driver of driveArray | paginate: { id: 'driverList', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+          <td class="align-middle">{{driver.driverId}}</td>
+          <td class="align-middle">{{driver.dlNumber}}</td>
+        <td class="align-middle">{{driver.driverName}}</td>
+        <td class="align-middle">{{driver.rfId}}</td>
+        <td class="align-middle">{{driver.contactNumber}}</td>
+        <td class="align-middle">{{driver.gender}}</td>
+        <td class="align-middle">{{driver.cityName}}</td>
+        <td class="align-middle">{{driver.districtName}}</td>
+        <td class="align-middle">{{driver.dlExpiryDate}}</td>
+        <td>
+          <div class='actions-menu dropdown-click'>
+            <button>
+                <i class="fa fa-list-ul" aria-hidden="true"></i>
+            </button>
+            <ul>
+              <li>
+                <a title="Edit Vehicle Details" class="icon" (click)="editDriver(driver);">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>Edit Driver</span>
+                </a>
+              </li>
+              <li>
+                <a title="Download QR Code" class="icon" (click)="openDriverdetails(driver);">
+                  <i class="fa fa-id-card-o" aria-hidden="true"></i> <span>Driver Details</span>
+                </a>
+              </li>
+              </ul>
+              </div>
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="driveArray == null || driveArray.length == 0">
+      <tr>
+        <td colspan="10">
+            <div class="alert alert-warning tablealert">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> No Drivers Available.
+              </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div style="margin:0px auto;">
+      <pagination-controls id="driverList" class="pagination" (pageChange)="pageChanged($event)" maxSize="9"
+        directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+      </pagination-controls>
+    </div>
+  </div>
+</div>

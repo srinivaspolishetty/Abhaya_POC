@@ -1,0 +1,26 @@
+input[type="text"]{
+	border:1px solid $form-control-border;
+	border-radius:0px;
+	box-shadow:none;
+	&:focus{
+		border:1px solid $grey-darker;
+		box-shadow: none!important;
+		+ i.fa{
+			color:$grey-darker!important;
+		}
+	}
+}
+.form{
+	&-control{
+		&-icon{
+			padding-left:30px;
+			+ i.fa{
+				position:relative;;
+				top:-24px;
+				left:10px;
+				color:$grey;
+				margin:100px;
+			}
+		}
+	}
+}

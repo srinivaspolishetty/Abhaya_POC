@@ -1,0 +1,28 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LiveTrackingServiceAPI {
+
+  constructor(private httpClient: HttpClient) { }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+      'Authorization': 'my-auth-token'
+    })
+  };
+  getVehicleAuthDetails() {
+    return this.httpClient.get(`${environment.apiBase}${environment.version}/getAuthVehicles`);
+  }
+
+  getPanicSummary(eventSource, districtId, cityId) {
+    let url = `${environment.apiBase}${environment.version}/panicSummary`;
+    url = url + `?eventSource=${eventSource}&districtId=${districtId}&cityId=${cityId}`;
+    return this.httpClient.get(url);
+  }
+}

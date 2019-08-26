@@ -1,0 +1,93 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active" *ngIf="!isTodaysInstalled"><img src="assets/images/device_deport_icon.png">VEHICLES</a>
+          <a class="active" *ngIf="isTodaysInstalled"><img src="assets/images/device_deport_icon.png">Today's Installed</a>
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="col-1 m-0 p-0" *ngIf="isTodaysInstalled">
+          <div class="btn-group btn_todays">
+            <button type="button" class="active out_line_green btn_all btn btn btn-outline-primary">Today's</button>
+            <button type="button" class="out_line_green btn_all btn btn btn-outline-primary" (click)="changeResults();">All</button>
+          </div>
+        </div>
+        <div class="col-1 m-0 p-0" *ngIf="!isTodaysInstalled"> 
+          <div class="add_btn">
+            <button type="button" class="add_btn" (click)="openVehicle();"><span>+</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container container_height">
+  <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/dashboard']" routerLinkActive="active">Home</a></li>
+           <li class="breadcrumb-item" aria-current="page">Vehicles</li>
+        </ol>
+      </nav>
+  <div class="row filter_alignment">
+    <div class="col-5 col-ls-5 col-md-5 col-sm-5 m-0 p-0">
+      <div class="form-group">
+        <input type="text" class="filter_style form-control" aria-describedby="emailHelp" 
+          placeholder="Search IoT Number / RC Number" [(ngModel)]="searchValue" (keyup)="searchData();" (keypress)="omitSpecialChar($event)">
+        <button type="button" class="btn_close close"aria-label="Close">
+          <span aria-hidden="true" (click)="clearSearch();" *ngIf="showSearchClear">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <table class="table table-borderless table_today_installed table-fixed m-0 p-0">
+    <thead class="thead-bg">
+      <tr>
+        <th>Vehicle No.</th>
+        <th>IoT Number</th>
+        <th>Owner Name</th>
+        <th>#Mobile Number</th>
+        <th>City</th>
+        <th>District</th>
+        <th>Valid from</th>
+        <th>Valid to</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+      <tr *ngFor="let vehicle of vehicleArray | paginate: { id: 'vehicleList', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+        <!-- <td class="align-middle"><img src="assets/images/SVG/ic_deviceInstalled.svg"></td> -->
+        <td><span> {{vehicle.rcNumber}} </span></td>
+        <td class="align-middle">{{vehicle.serialNumber}}</td>
+        <td class="align-middle">{{vehicle.ownerName}}</td>
+        <td class="number align-middle">{{vehicle.ownerContactNumber}}</td>
+        <td class="align-middle">{{vehicle.cityName}}</td>
+        <td class="align-middle">{{vehicle.districtName}}</td>
+        <td class="align-middle">{{vehicle.registrationDate}}</td>
+        <td class="align-middle">{{vehicle.rcExpiryDate}}</td>
+        <td class="action align-middle"><a class="icon" (click)="editVehicle(vehicle);"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+      </tr>
+       <tr *ngIf="vehicleArray == null || vehicleArray.length == 0">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <span style="color:red;">No Data Found</span>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div style="margin:0px auto;">
+      <pagination-controls id="vehicleList" class="pagination" (pageChange)="pageChanged($event)" maxSize="9"
+        directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+      </pagination-controls>
+    </div>
+  </div>
+</div>

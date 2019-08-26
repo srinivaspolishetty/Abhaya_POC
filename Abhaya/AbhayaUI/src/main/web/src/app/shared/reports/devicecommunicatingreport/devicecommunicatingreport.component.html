@@ -1,0 +1,63 @@
+<div class="row">
+    <div [className]="isShow == true ? 'col-md-2' : 'col-md-4'">
+      <div class="auto_img gradient_box_right">
+        <img src="assets/images/SVG/ic_stoppageVehc.svg" style="width:72%;">
+        <h4>Device Status
+            <br><span class="totalcount">{{totalVehicleinstalled}}</span>
+        </h4>
+      </div>
+    </div>
+        <div [className]="isShow == true ? 'col-md-2' : 'col-md-4'">
+          <div (click)="navigateTocommunication()" class="cursor-hand div_padding progress_bar_text1 text-center">
+            <p>
+              <span>Communicating</span>
+            </p>
+            <h4>{{deviceSummaryDetails}}</h4>
+            <div class="">
+              <span class="vertical_line_right"></span>
+            </div>
+          </div>
+        </div>
+        <div [className]="isShow == true ? 'col-md-2' : 'col-md-4'">
+          <div class="div_padding progress_bar_text2 text-center">
+            <p>
+              <span> Not Communicating</span>
+            </p>
+            <h4>{{totalVehicleNotCommunicating}}</h4>
+            <div class="">
+              <span *ngIf="isShow == true" class="vertical_line_right2"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2" *ngIf="isShow == true">
+          <div class="div_padding progress_bar_text3 text-center">
+            <p>
+              <span> ON Battery </span>
+            </p>
+            <h4>{{onBattery}}</h4>
+            <div class="">
+              <span *ngIf="isShow == true" class="vertical_line_right"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2" *ngIf="isShow == true">
+          <div class="div_padding progress_bar_text3 text-center">
+            <p>
+              <span>Ignition Off</span>
+            </p>
+            <h4>{{ignitionOff}}</h4>
+            <div class="">
+              <span *ngIf="isShow == true" class="vertical_line_right"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2" *ngIf="isShow == true">
+          <div class="div_padding progress_bar_text3 text-center">
+            <p>
+              <span> Ignition ON</span>
+            </p>
+            <h4>{{ignitionOn}}</h4>
+          </div>
+        </div>
+
+  </div>

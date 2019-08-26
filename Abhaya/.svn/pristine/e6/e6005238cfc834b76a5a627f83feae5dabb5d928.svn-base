@@ -1,0 +1,344 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HorizontalBarChart } from '../util/horizontalbar';
+import { PieChart } from '../util/piechart';
+import { LiveTrackingServiceAPI } from './services/livetracking.api.service';
+import { VehicleApiService } from '../vehicles/services/vehicle.api.service';
+import { District } from '../util/district.model';
+import { City } from '../util/city.model';
+import { MastersServicesApi } from '../util/services/masters.api';
+import { UserDetails } from '../../login/userdetails.model';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { PanicSummary } from '../panic-alerts-list/panicsummary.model';
+import { NgbDateFRParserFormatter } from '../util/dateformatter';
+import { DeviceCommunicationServiceApi } from "../../services/devicecommunication.api";
+import { devicecommunication } from "../../models/devicecommunication.model";
+import { PaginationModel } from '../pagination.model';
+
+@Component({
+  selector: 'app-livetracking',
+  templateUrl: './livetracking.component.html',
+  styleUrls: ['./livetracking.component.css']
+})
+export class LivetrackingComponent implements OnInit {
+
+  vehicleIdel: number;
+  vehicleStopped: number;
+  vehicleRunning: number;
+  vehicleTowing: number;
+  vehicleParked : number;
+  vehicleOverSpeed : number;
+  ignitionOn: number;
+  ignitionOff: number;
+  onBattery: number;
+
+  devicecommunicationdata: Array<devicecommunication> = [];
+  movementStatus: Array<devicecommunication> = [];
+  deviceSummaryDetails:number;
+  districtModel: any;
+  cityModel: any;
+  districtArray: Array<District> = [];
+  panicSummary: Array<PanicSummary> = [];
+  videoPanicSummary: PanicSummary = new PanicSummary();
+  webPanicSummary: PanicSummary = new PanicSummary();
+  cityArray: Array<City> = [];
+  userDetails: UserDetails;
+  model: NgbDateStruct;
+  formatDate: string;
+
+  totalVehicleinstalled;
+  totalVehicleCommunicating;
+  totalVehicleNotCommunicating;
+  runnigVehicle: number;
+  stoppedVehicles: number;
+  isTripClosed: boolean;
+  horizontalBarChart: HorizontalBarChart = new HorizontalBarChart([636, 375], true, true, false, false, false, false, true,
+    'Label of X', 'Label of Y');
+  pieChart: PieChart = new PieChart([400, 280], true, false, false, true, false, 'below', '0.30', '');
+
+  // https://plnkr.co/edit/BooZfKJz0nLATpTe1SwH?p=preview
+  constructor(private router: Router, private liveTrackingServiceAPI: LiveTrackingServiceAPI,
+    private vehicleApiService: VehicleApiService, private mastersServicesApi: MastersServicesApi,
+    private calendar: NgbCalendar, private ngbDateFRParserFormatter: NgbDateFRParserFormatter,
+    private deviceCommunicationApi: DeviceCommunicationServiceApi) {
+
+    this.horizontalBarChart.colorScheme = { domain: ['#6742c0'] };
+    this.pieChart.colorScheme = { domain: ['#003f5c', '#ff0000', '#00ff00', '#ffa600', '#bc5090', '#7f0000' ] };
+
+    this.userDetails = JSON.parse(localStorage.getItem('userdetails'));
+    this.districtModel = '';
+    this.cityModel = '';
+    this.model = this.calendar.getToday();
+    this.isTripClosed = false;
+    this.vehicleIdel = 0;
+    this.vehicleStopped = 0;
+    this.vehicleRunning = 0;
+    this.vehicleTowing = 0;
+    this.vehicleParked = 0;
+    this.vehicleOverSpeed = 0;
+    this.ignitionOn = 0;
+    this.ignitionOff = 0;
+    this.onBattery = 0;
+  }
+
+  vehicleAuthDetails;
+  liveVehicleStatus;
+  authValue;
+  unAuthValue;
+  totalAuthCount;
+  parkingStatus;
+  overSpeedStatus;
+  idealStatus;
+  routeDeviationStatus;
+  selected: string;
+
+  ngOnInit() {
+
+    this.getVehicleAuthDetails();
+    this.getLiveVehicleStatus();
+    this.getDistricts(this.userDetails.stateId);
+    this.getPanicSummary();
+    // this.getDistrictSummaryChart();
+    this.getallmodemdetails(0, '');
+    this.getDistrictWiseTracking();
+  }
+  openTrip() {
+    this.router.navigate(['/rta/closedtrips']);
+  }
+
+
+  getDistricts(value) {
+    if (value === '') {
+      this.districtArray = [];
+    }
+    this.videoPanicSummary = new PanicSummary();
+    this.webPanicSummary = new PanicSummary();
+    this.getPanicSummary();
+    this.districtModel = '';
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+
+  getCities(value) {
+    this.cityModel = '';
+    if (value === '') {
+      this.cityArray = [];
+    }
+    else{
+      this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+        this.cityArray = data;
+      });
+    }
+    this.videoPanicSummary = new PanicSummary();
+    this.webPanicSummary = new PanicSummary();
+    this.getPanicSummary();
+    this.getLiveVehicleStatus();
+    this.getallmodemdetails(0, '');
+    this.getVehicleAuthDetails();
+    
+  }
+
+  cityChange() {
+    this.getLiveVehicleStatus();
+    this.getallmodemdetails(0, '');
+  }
+
+  changeDate() {
+    this.getLiveVehicleStatus();
+    this.getVehicleAuthDetails();
+    this.getallmodemdetails(0, '');
+  }
+
+  getPanicSummary() {
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.liveTrackingServiceAPI.getPanicSummary('', this.districtModel, this.cityModel, this.formatDate).subscribe((data: PanicSummary[]) => {
+      this.panicSummary = data;
+      for (let count = 0; count < this.panicSummary.length; count++) {
+        if (this.panicSummary[count].eventSource === 'WEB') {
+          if (this.panicSummary[count].isClosed) {
+            this.webPanicSummary.closedCount = this.panicSummary[count].count;
+          } else {
+            this.webPanicSummary.openCount = this.panicSummary[count].count;
+          }
+        } else {
+          if (this.panicSummary[count].isClosed) {
+            this.videoPanicSummary.closedCount = this.panicSummary[count].count;
+          } else {
+            this.videoPanicSummary.openCount = this.panicSummary[count].count;
+          }
+        }
+
+      }
+    });
+  }
+  navigateToPanic(eventType, isClosed) {
+    this.router.navigate(['/rta/panicalertslist'], { queryParams: { eventType: eventType, isClosed: isClosed } });
+  }
+  getVehicleAuthDetails() {
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.liveTrackingServiceAPI.getVehicleAuthDetails(this.userDetails.stateId, this.districtModel, this.formatDate).subscribe((data: any) => {
+      this.vehicleAuthDetails = data;
+
+      for (let i = 0; i < this.vehicleAuthDetails.length; i++) {
+        if (this.vehicleAuthDetails[i].authType === 'Auth') {
+          this.authValue = this.vehicleAuthDetails[i].count;
+        } else {
+          this.unAuthValue = this.vehicleAuthDetails[i].count;
+        }
+      }
+
+      this.vehicleApiService.getAll(0, 10, '', this.districtModel, this.cityModel).subscribe((data: any) => {
+        this.totalAuthCount = data.page.totalElements;
+        this.unAuthValue = this.totalAuthCount - this.authValue;
+        
+    });
+    
+    });
+  }
+
+
+  getLiveVehicleStatus() {
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.liveTrackingServiceAPI.gtLiveVehicleStatus(this.userDetails.stateId, this.districtModel, this.cityModel, this.formatDate)
+      .subscribe((data: any) => {
+        this.liveVehicleStatus = data;
+        for (let i = 0; i < this.liveVehicleStatus.length; i++) {
+          if (this.liveVehicleStatus[i].statusType === 'Parking Status') {
+            this.parkingStatus = this.liveVehicleStatus[i].count;
+          }
+          if (this.liveVehicleStatus[i].statusType === 'Over Speed') {
+            this.overSpeedStatus = this.liveVehicleStatus[i].count;
+          }
+          if (this.liveVehicleStatus[i].statusType === 'Vehicle Ideal') {
+            this.idealStatus = this.liveVehicleStatus[i].count;
+          }
+          if (this.liveVehicleStatus[i].statusType === 'Route Deviation') {
+            this.routeDeviationStatus = this.liveVehicleStatus[i].count;
+          }
+        }
+      });
+  }
+getDistrictWiseTracking(){
+  this.liveTrackingServiceAPI.getMovementDetailsDistrictWise(this.userDetails.stateId, true)
+      .subscribe((data: any) => {
+        const newdataarray = data;
+        const temparray = [];
+        for(let i=0; i<newdataarray.length; i++){
+          if(newdataarray[i].statusType == 'Running'){
+            const newOj = { 'name': newdataarray[i].districtName, 'value': newdataarray[i].count };
+            temparray.push(newOj);
+          }
+        }
+        const districtNames = ['Anantapur', 'Chittor', 'East Godavari', 'Guntur', 'Ysr Kadapa', 'Kurnool', 'Nellore',
+        'Prakasam', 'Srikakulam', 'Vizianagaram', 'West Godavari'];
+      districtNames.forEach(function (value) {
+        const newOj = { 'name': value, 'value': '0' };
+        temparray.push(newOj);
+      });
+      this.horizontalBarChart.data = temparray;
+      });
+}
+
+  // getDistrictSummaryChart() {
+  //   this.liveTrackingServiceAPI.getDistrictWiseTracking()
+  //     .subscribe((data: any) => {
+  //       const newdataarray = data;
+  //       const districtNames = ['Anantapur', 'Chittor', 'East Godavari', 'Guntur', 'Ysr Kadapa', 'Kurnool', 'Nellore',
+  //         'Prakasam', 'Srikakulam', 'Vizianagaram', 'West Godavari'];
+  //       districtNames.forEach(function (value) {
+  //         const newOj = { 'name': value, 'value': '0' };
+  //         newdataarray.push(newOj);
+  //       });
+  //       this.horizontalBarChart.data = newdataarray;
+  //     });
+  // }
+
+
+  getallmodemdetails(page: number, searchString: string) {
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.mastersServicesApi.getModemData(page, 10, searchString, '').subscribe((data: PaginationModel) => {
+      this.totalVehicleinstalled = data.page.totalElements;
+      this.getMovementDetails(0, '')
+      this.getCommunicationDetails(0, '');
+      this.getdevicecommSummary();
+    });
+  }
+
+  getMovementDetails(page, searchvalue) {
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.deviceCommunicationApi.getMovementSummary(this.userDetails.stateId, this.districtModel, this.cityModel)
+      .subscribe((data: any) => {
+        this.movementStatus = data;
+        this.vehicleIdel = 0;
+    this.vehicleStopped = 0;
+    this.vehicleRunning = 0;
+    this.vehicleTowing = 0;
+    this.vehicleParked = 0;
+        const itemNew = this.movementStatus;
+        itemNew.forEach(element => {
+          if (element.statusType == 'Idling') {
+            this.vehicleIdel = element.count;
+          }
+          else if (element.statusType == 'Stopped') {
+            this.vehicleStopped = element.count;
+          }
+          else if (element.statusType == 'Running') {
+            this.vehicleRunning = element.count;
+          }
+          else if (element.statusType == 'Towing') {
+            this.vehicleTowing = element.count;
+          }
+          else if (element.statusType == 'Parked') {
+            this.vehicleParked = element.count;
+          }
+          else if (element.statusType == 'Overspeed') {
+            this.vehicleOverSpeed = element.count;
+          }
+        });
+        this.pieChart.data = [
+          { 'name': 'Idling', 'value': this.vehicleIdel },
+          { 'name': 'Stopped', 'value': this.vehicleStopped },
+          { 'name': 'Running', 'value': this.vehicleRunning },
+          { 'name': 'Towing', 'value': this.vehicleTowing },
+          { 'name': 'Parked', 'value': this.vehicleParked },
+          { 'name': 'Over Speed', 'value': this.vehicleOverSpeed },
+        ];
+      });
+  }
+
+getdevicecommSummary(){
+  this.deviceCommunicationApi.getDeviceCommunicationSummary(this.userDetails.stateId, this.districtModel, this.cityModel)
+  .subscribe((data: any) => {
+    this.deviceSummaryDetails = data[0].count;
+    this.totalVehicleNotCommunicating = this.totalVehicleinstalled - this.deviceSummaryDetails;
+
+  });
+}
+  getCommunicationDetails(page, searchvalue) {
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.deviceCommunicationApi.getCommunicationDetails(page, 10, 'Communicating', '', this.userDetails.stateId, this.districtModel, this.cityModel, searchvalue, this.formatDate)
+      .subscribe((data: PaginationModel) => {
+        this.devicecommunicationdata = data.content;
+        this.ignitionOn = 0;
+    this.ignitionOff = 0;
+    this.onBattery = 0;
+        const itemNew = this.devicecommunicationdata;
+        itemNew.forEach(element => {
+          if (element.ignitionStatus == 'ON') {
+            this.ignitionOn++
+          }
+          else if (element.ignitionStatus == 'OFF') {
+            this.ignitionOff++
+          }
+
+          if (element.batteryStatus == 'Low') {
+            this.onBattery++
+          }
+        });
+
+      });
+  }
+
+
+}

@@ -1,0 +1,53 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LiveTrackingServiceAPI {
+
+  constructor(private httpClient: HttpClient) { }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+      'Authorization': 'my-auth-token'
+    })
+  };
+  getVehicleAuthDetails() {
+    return this.httpClient.get(`${environment.apiBase}${environment.version}/getAuthVehicles`);
+  }
+
+  gtLiveVehicleStatus(stateid, districtid, cityid, selectDate) {
+    let url = `${environment.apiBase}${environment.version}/getVehicleStatus`;
+    url = url + `?stateId=${stateid}&packetDate=${selectDate}`;
+
+    if (districtid == '') {
+      return this.httpClient.get(url);
+    }
+   else{
+    if (districtid !== '' && cityid == '') {
+      url = url + `&districtId=${districtid}`;
+      return this.httpClient.get(url);
+    }
+    else {
+      url = url + `&districtId=${districtid}&cityId=${cityid}`;
+      return this.httpClient.get(url);
+    }
+   }
+  }
+
+  getPanicSummary(eventSource, districtId, cityId) {
+    let url = `${environment.apiBase}${environment.version}/panicSummary`;
+    url = url + `?eventSource=${eventSource}&districtId=${districtId}&cityId=${cityId}`;
+    return this.httpClient.get(url);
+  }
+
+  getDistrictWiseChart() {
+    let url = `${environment.apiBase}${environment.version}/`;
+    url = url + `getVehicleIntSummaryByDistrict`;
+    return this.httpClient.get(url);
+  }
+}

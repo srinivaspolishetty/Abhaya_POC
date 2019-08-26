@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 14 14">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-ic_drivers);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-ic_drivers">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="ic_drivers" class="cls-1">
+    <g id="Group_2" data-name="Group 2" transform="translate(-0.345 0.01)">
+      <g id="Group_1" data-name="Group 1" transform="translate(2.345 6.541)">
+        <path id="Path_1" data-name="Path 1" class="cls-2" d="M8.135,12.427a2.75,2.75,0,0,0-2.75,2.75h5.5A2.75,2.75,0,0,0,8.135,12.427Z" transform="translate(-3.072 -9.35)"/>
+        <path id="Path_2" data-name="Path 2" class="cls-2" d="M8.937,8.382a.382.382,0,0,0-.328.182L7.7,9.948a.364.364,0,0,1-.583,0L6.206,8.564a.382.382,0,0,0-.328-.182,3.589,3.589,0,0,0-3.533,3.423v3.278a.091.091,0,0,0,.091.091H4.257a.528.528,0,1,0,0-1.056H3.985a3.424,3.424,0,0,1,6.845,0h-.272a.528.528,0,1,0,0,1.056h1.821a.091.091,0,0,0,.091-.091V11.805A3.589,3.589,0,0,0,8.937,8.382Z" transform="translate(-2.345 -8.382)"/>
+      </g>
+      <path id="Path_3" data-name="Path 3" class="cls-2" d="M8.263.69a2.343,2.343,0,1,0,2.343,2.343A2.343,2.343,0,0,0,8.263.69Zm0,3.931A1.589,1.589,0,1,1,9.852,3.033,1.589,1.589,0,0,1,8.263,4.621Z" transform="translate(-0.855)"/>
+    </g>
+  </g>
+</svg>

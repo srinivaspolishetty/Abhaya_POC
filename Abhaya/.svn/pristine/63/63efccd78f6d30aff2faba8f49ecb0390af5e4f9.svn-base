@@ -1,0 +1,30 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class administrativeServiceapi {
+
+  constructor(private httpClient: HttpClient) { }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+      'Authorization': 'my-auth-token'
+    })
+  };
+  creatState(createObject) {
+    return this.httpClient.post(`${environment.apiBase}${environment.version}/createState`, createObject, this.httpOptions);
+  }
+
+  createDistrict(createObject) {
+    return this.httpClient.post(`${environment.apiBase}${environment.version}/createDistrict`, createObject, this.httpOptions);
+  }
+
+  createCity(createObject) {
+    return this.httpClient.post(`${environment.apiBase}${environment.version}/createCity`, createObject, this.httpOptions);
+  }
+}

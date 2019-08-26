@@ -1,0 +1,16 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-Driverdetailsview',
+  templateUrl: './Driverdetailsview.component.html',
+  styleUrls: ['./Driverdetailsview.component.css']
+})
+export class DriverdetailsviewComponent implements OnInit {
+
+  constructor(public activeModal: NgbActiveModal) { }
+
+  ngOnInit() {
+  }
+
+}

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-ic_usermanagement">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="ic_usermanagement" clip-path="url(#clip-ic_usermanagement)">
+    <g id="group" transform="translate(0.5 -0.045)">
+      <g id="Group_9" data-name="Group 9" transform="translate(0 0.545)">
+        <g id="Group_8" data-name="Group 8" transform="translate(0 0)">
+          <circle id="Ellipse_1" data-name="Ellipse 1" cx="1.14" cy="1.14" r="1.14" transform="translate(5.398)" fill="#fff"/>
+          <path id="Path_13" data-name="Path 13" d="M159.154,88.317h-.868a1.581,1.581,0,0,0-1.551,1.611c0,.005,0,.011,0,.016v.243c0,.122.046.259.182.259h3.588c.137,0,.182-.137.182-.259v-.243A1.581,1.581,0,0,0,159.154,88.317Z" transform="translate(-152.174 -85.763)" fill="#fff"/>
+          <path id="Path_14" data-name="Path 14" d="M47.272,116.981a.228.228,0,0,0,.228-.228,4.7,4.7,0,0,1,1.764-3.68.213.213,0,0,0,.03-.319.228.228,0,0,0-.319-.03,5.17,5.17,0,0,0-1.931,4.029A.228.228,0,0,0,47.272,116.981Z" transform="translate(-45.675 -109.409)" fill="#fff"/>
+          <path id="Path_15" data-name="Path 15" d="M166.578,406.116h0a4.805,4.805,0,0,1-3,0,.228.228,0,0,0-.287.147l0,.005a.243.243,0,0,0,.152.289,5.279,5.279,0,0,0,1.627.259,5.124,5.124,0,0,0,1.657-.274.228.228,0,0,0-.152-.426Z" transform="translate(-158.534 -394.302)" fill="#fff"/>
+          <path id="Path_16" data-name="Path 16" d="M314.812,106.857l0,0a4.729,4.729,0,0,1,1.992,3.847.228.228,0,1,0,.456,0,5.2,5.2,0,0,0-2.19-4.227.243.243,0,0,0-.319.061A.228.228,0,0,0,314.812,106.857Z" transform="translate(-305.554 -103.362)" fill="#fff"/>
+          <circle id="Ellipse_2" data-name="Ellipse 2" cx="1.14" cy="1.14" r="1.14" transform="translate(0.837 8.363)" fill="#fff"/>
+          <path id="Path_17" data-name="Path 17" d="M2.419,375.664H1.552A1.581,1.581,0,0,0,0,377.275c0,.005,0,.011,0,.016v.243c0,.122.046.259.182.259H3.772c.137,0,.182-.137.182-.259v-.243A1.581,1.581,0,0,0,2.419,375.664Z" transform="translate(0 -364.747)" fill="#fff"/>
+          <circle id="Ellipse_3" data-name="Ellipse 3" cx="1.14" cy="1.14" r="1.14" transform="translate(9.96 8.363)" fill="#fff"/>
+          <path id="Path_18" data-name="Path 18" d="M315.888,375.664h-.868a1.581,1.581,0,0,0-1.551,1.611v.259c0,.122.046.259.182.259h3.588c.137,0,.182-.137.182-.259v-.243A1.581,1.581,0,0,0,315.888,375.664Z" transform="translate(-304.346 -364.747)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

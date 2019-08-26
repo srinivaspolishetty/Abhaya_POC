@@ -1,0 +1,21 @@
+
+export class LiveVehicle {
+    public trackId: number;
+
+    public rcNumber: string;
+
+    public latitude: number;
+
+    public langitude: number;
+
+    public serialNumber: string;
+
+    constructor(trackId: number, rcNumber: string, latitude: number, langitude: number, serialNumber: string) {
+        this.trackId = trackId;
+        this.rcNumber = rcNumber;
+        this.langitude = langitude;
+        this.latitude = latitude;
+        this.serialNumber = serialNumber;
+    }
+
+}

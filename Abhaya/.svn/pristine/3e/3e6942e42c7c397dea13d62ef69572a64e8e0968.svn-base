@@ -1,0 +1,65 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active" href="#home"><img src="assets/images/device_deport_icon.png">USER MANAGEMENT</a>
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="col-1 m-0 p-0">
+          <div class="add_btn">
+            <button type="button" class="add_btn" (click)="openDriver()"><span>+</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+   <div class="row filter_alignment">
+    <div class="col-3 m-0 p-0">
+     <div class="form-group">
+          <select class="filter_style form-control">
+            <option>Andhra Pradesh</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+     <div class="form-group">
+          <select class="filter_style form-control">
+            <option>Guntur</option>
+          </select>
+        </div>
+    </div>
+      <div class="col-3 filer_last_child_align">
+      <div class="form-group">
+          <select class="filter_style form-control">
+            <option>Guntur</option>
+          </select>
+        </div>
+    </div>
+  </div>
+  <table class="table table-borderless table_today_installed">
+    <thead class="thead-bg">
+      <tr>
+        <th>Name</th>
+          <th>Email</th>
+          <th>#Mobile Number</th>
+          <th>Role</th>
+          <th>Department</th>
+          <th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+      <tr *ngFor="let user of userDetails">
+        <td class="align-middle">{{user.firstName}} {{user.lastName}}</td>
+        <td class="align-middle">{{user.emailId}}</td>
+        <td class="align-middle">{{user.mobileNumber}}</td>
+        <td class="align-middle">{{user.rolesVO[0].name}}</td>
+        <td class="align-middle">{{user.departmentName}}</td>
+        <td class="action align-middle"><a class="icon" (click)="editDriver(driver);"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

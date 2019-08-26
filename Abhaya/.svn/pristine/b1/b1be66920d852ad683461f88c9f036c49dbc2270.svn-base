@@ -1,0 +1,17 @@
+
+export class LiveVehicle {
+    public trackId: number;
+
+    public rcNumber: string;
+
+    public latitude: number;
+
+    public langitude: number;
+
+    public serialNumber: string;
+
+    public angle: number;
+
+    constructor() { }
+
+}

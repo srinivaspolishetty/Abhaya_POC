@@ -1,0 +1,125 @@
+<div class="row row_shadow">
+	<div class="container">
+		<div class="topnav">
+			<div class="row m-0 p-0">
+				<div class="col-10 m-0 p-0">
+					<a class="active icon_alignment text_align"> <img class="img_topnav" src="assets/images/SVG/ic_SuspiciousVehicles_blue.svg"
+						 style="width:23px !important;">
+						<span>SUSPICIOUS VEHICLES</span></a>
+				</div>
+				<div class="col-1 m-0 p-0">
+					<div class="add_btn float-right">
+						<button type="button" class="add_btn" (click)="addSuspiciousVehicle()"><span>+</span></button>
+					</div>
+				</div>
+				<!-- <div class="col-2 btn_green">
+					<button type="button" class="btn btn-primary btn_green" (click)="addSuspiciousVehicle()">Add Vehicle</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="dashboard_secondrow">
+	<div class="container container_height">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page"><a>Vehicle Management</a></li>
+				<li class="breadcrumb-item" aria-current="page">Suspicious Vehicles</li>
+			</ol>
+		</nav>
+
+
+		<div class="row page-filters">
+				<div class="col-md-3 p-t-6">
+				  <span>Total Records: <b>{{page.totalElements}}</b></span>
+				</div>
+				<div class="col-md-9 text-right">
+				  <button type="button" class="btn btn-bare" (click)="refreshPage()" ><i class="fa fa-refresh" aria-hidden="true"></i>
+					Refresh</button>|
+				  <!-- <button type="button" class="btn btn-bare"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download</button>| -->
+				  <button type="button" class="btn btn-bare" (click)="btnShowFilters()"><i class="fa fa-filter" aria-hidden="true"></i>
+					Filters</button>
+				</div>
+			  </div>
+			  <div class="slide-filters" [ngClass]="{'show': showFilters == true}">
+				<div class="row slide-filters-content">
+				  <div class="col-md-3">
+						<div class="form-group">
+							<select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCities(districtModel)">
+								<option value="" [selected]="!districtModel">Select District</option>
+								<option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<select class="filter_style form-control" [(ngModel)]="cityModel" name="cityId">
+								<option value="" [selected]="!cityModel">Select City</option>
+								<option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<div class="input-group-append">
+								<input type="text" class="filter_style form-control" readOnly placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model"
+								 ngbDatepicker #d="ngbDatepicker">
+								<button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button"> <i class="fa fa-calendar"
+									 aria-hidden="true"></i></button>
+							</div>
+						</div>
+					</div>
+				  
+				</div>
+			  </div>
+
+
+
+
+
+
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row" *ngIf="vehicleDetails !== null || vehicleDetails.length !== 0">
+					<div class="col-md-4" *ngFor="let vechile of vehicleDetails | paginate: { id: 'suspiciousvehiclepages', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+						<div class="media Suspicious-box">
+							<div class="icon-close-btn">
+									<button type="button" (click)="removeSuspiciousVehicle(vechile)">
+											<i class="fa fa-times-circle" aria-hidden="true"></i>
+									</button>
+							</div>
+							<a class="pull-left" href="#">
+								<img class="Suspicious-driver-photo" src="assets/images/ic_male.png" />
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">{{vechile.ownerName}}</h4>
+								<h5><small> Vehicle No: </small>{{vechile.rcNumber}}</h5>
+								<hr style="margin:8px auto">
+
+								<h6 class=""><b>Current Location</b></h6>
+								<span class="label label-default">{{vechile.location}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-center" *ngIf="vehicleDetails == null || vehicleDetails.length == 0">
+						<div class="alert alert-warning tablealert">
+							<strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> No Vehicles Available.
+						  </div>
+					</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div style="margin:0px auto;">
+			  <pagination-controls id="suspiciousvehiclepages" class="pagination" (pageChange)="pageChanged($event)" maxSize="9"
+				directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+			  </pagination-controls>
+			</div>
+		  </div>
+
+	</div>

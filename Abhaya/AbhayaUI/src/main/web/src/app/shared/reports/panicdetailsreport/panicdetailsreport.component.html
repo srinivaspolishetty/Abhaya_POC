@@ -1,0 +1,71 @@
+<div class="row">
+            <div class="col-md-3">
+                <div class="section-head">
+                  <img class="lg" src="assets/images/SVG/ic_panic-alert.svg">
+                  <h4>Panic Alerts
+                      <br><span class="totalcount">{{panicTotalCount}}</span>
+                  </h4>
+                </div>
+              </div>
+
+          <div class="col-md-3">
+            <div class="row p-a-2">
+              <div class="col-md-12 section-icon">
+                <img src="assets/images/SVG/ic_video.svg">
+                <span>Video Panic Status</span>
+              </div>
+              <div class="col-sm-6 p-2">
+                <div class="cursor-hand section-count left" (click)="navigateToPanic('MOBILE', false);">
+                  <span>Open</span>
+                  <h4>{{videoPanicSummary.openCount}}</h4>
+                </div>
+              </div>
+              <div class="col-sm-6 p-2">
+                <div class="cursor-hand section-count right" (click)="navigateToPanic('MOBILE', true);">
+                  <span>Closed</span>
+                  <h4>{{videoPanicSummary.closedCount}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+              <div class="row p-a-2">
+              <div class="col-sm-12 section-icon">
+                <img class="sm" src="assets/images/SVG/ic_help.svg">
+                <span>Mobile Panic Status</span>
+              </div>
+              <div class="col-sm-6 p-2">
+                <div class="cursor-hand section-count left" (click)="navigateToPanic('WEB', false);">
+                  <span>Open</span>
+                  <h4>{{webPanicSummary.openCount}}</h4>
+                </div>
+              </div>
+              <div class="col-sm-6 p-2">
+                <div class="cursor-hand section-count right" (click)="navigateToPanic('WEB', true);">
+                  <span>Closed</span>
+                  <h4>{{webPanicSummary.closedCount}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+              <div class="row p-a-2">
+              <div class="col-sm-12 section-icon">
+                <img src="assets/images/SVG/ic_bell.svg">
+                <span>Device Panic Status</span>
+              </div>
+              <div class="col-sm-6 p-2">
+                <div class="section-count left">
+                  <span>Open</span>
+                  <h4>5</h4>
+                </div>
+              </div>
+              <div class="col-sm-6 p-2">
+                <div class="section-count right">
+                  <span>Closed</span>
+                  <h4>5</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

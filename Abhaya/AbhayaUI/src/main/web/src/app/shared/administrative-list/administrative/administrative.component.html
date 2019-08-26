@@ -1,0 +1,145 @@
+<div class="modal-content popup_width">
+	<div class="modal-header popup_size">
+		<h5 class="modal-title">Add Administrative</h5>
+		<button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+	<form name="form" #f="ngForm" novalidate>
+		<div class="row popup_size">
+			<div class="col-12">
+				<div class="form-group">
+					<label class="label_text">Select Type</label>
+					<select class="form-control form_select" [(ngModel)]="selectType" name="selectId" (change)="changeSelect()">
+						<option value="">Please Select</option>
+						<option *ngIf="showDistrictOption === true" value="District">District</option>
+						<option *ngIf="showCityOption === true" value="City">City</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-md-12" *ngIf="selectType == 'State'">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label_text">State Name</label>
+							<input type="text" name="newStateName" [(ngModel)]="newStateName" class="form-control form_select" placeholder="State Name" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label_text">State Code</label>
+							<input type="text" name="newStateCode" [(ngModel)]="newStateCode" class="form-control form_select" placeholder="State Code" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-12" *ngIf="selectType == 'District'">
+				<div class="row">
+					<!-- <div class="col-6" *ngIf="showStateOption === true">
+						<div class="form-group">
+							<label class="label_text">State Name</label>
+							<select class="filter_style form-control" [(ngModel)]="stateModel" name="stateModel" (change)="stateChange(stateModel, $event)">
+								<option value="" [selected]="!stateModel">Select State</option>
+								<option *ngFor="let state of stateArray" [ngValue]="state.id">{{state.name}}</option>
+							</select>
+						</div>
+					</div> -->
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label_text">State Name</label>
+							<input [(ngModel)]="stateNameRO" name="stateNameRO" type="text" readonly class="form-control form_select"
+							 placeholder="State Name" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label_text">District Name</label>
+							<input [(ngModel)]="newDistrictName" name="newDistrictName" type="text" class="form-control form_select"
+							 placeholder="District Name" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="col-md-12" *ngIf="selectType == 'City'">
+				<div class="row">
+					<!-- <div class="col-6" *ngIf="showDistrictOption === true && selectType !== 'City'">
+						<div class="form-group">
+							<label class="label_text">Select Stat Name</label>
+							<select class="filter_style form-control" [(ngModel)]="stateModel" name="stateModel" (change)="stateChange(stateModel, $event)">
+								<option value="" [selected]="!stateModel">Select State</option>
+								<option *ngFor="let state of stateArray" [ngValue]="state.id">{{state.name}}</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-md-6" *ngIf="showDistrictOption !== true || selectType == 'City'">
+						<div class="form-group">
+							<label class="label_text">State Name</label>
+							<input [(ngModel)]="stateNameRO" name="stateNameRO" type="text" readonly class="form-control form_select"
+							 placeholder="State Name" />
+						</div>
+					</div> -->
+
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label_text">State Name</label>
+							<input [(ngModel)]="stateNameRO" name="stateNameRO" type="text" readonly class="form-control form_select"
+							 placeholder="State Name" />
+						</div>
+					</div>
+					
+					<div class="col-6" *ngIf="showDistrictOption === true">
+						<div class="form-group">
+							<label class="label_text">Select District</label>
+							<select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="districtChange(districtModel, $event)">
+									<option value="" [selected]="!districtModel">Select District</option>
+									<option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+								  </select>
+						</div>
+					</div>
+
+					
+
+					<div class="col-md-6" *ngIf="showDistrictOption !== true">
+						<div class="form-group">
+							<label class="label_text">District Name</label>
+							<input [(ngModel)]="districtNameRO" name="districtNameRO" type="text" readonly class="form-control form_select"
+							 placeholder="State Name" />
+						</div>
+					</div>
+
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label_text">City Name</label>
+							<input type="text" [(ngModel)]="newCityName" name="newCityName" class="form-control form_select" placeholder="City Name" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label_text">City Code</label>
+							<input type="text" [(ngModel)]="newCityCode" name="newCityCode" class="form-control form_select" placeholder="City Code" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="row">
+					<button class="btn btn-primary btn_save align-middle" (click)="onSubmit()">Save</button>
+				</div>
+			</div>
+
+
+		</div>
+	</form>
+</div>
+</div>

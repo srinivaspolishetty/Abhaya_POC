@@ -1,0 +1,12 @@
+<div class="card_boxshadow_right2">
+    <div class="col-8 table_heading_main m-0 p-0">
+      <h3>Live Tracking Reports</h3>
+    </div>
+    <div>
+      <ngx-charts-pie-chart [view]="pieChart.view" [scheme]="pieChart.colorScheme" [results]="pieChart.data"
+        [legend]="pieChart.showLegend" [explodeSlices]="pieChart.explodeSlices" [labels]="pieChart.showLabels"
+        [doughnut]="pieChart.doughnut" [gradient]="pieChart.gradient" [legendPosition]="pieChart.legendPosition"
+        [arcWidth]="pieChart.arcWidth" [legendTitle]="pieChart.legendTitle">
+      </ngx-charts-pie-chart>
+    </div>
+  </div>

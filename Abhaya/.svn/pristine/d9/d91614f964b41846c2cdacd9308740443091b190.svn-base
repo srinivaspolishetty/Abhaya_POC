@@ -1,0 +1,10 @@
+<div class="row footer">
+  <div class="text-center col-4">
+    <img style="padding-left:30px;" src="assets/images/logo_ap.png">
+  </div>
+  <div class="text-center col-4">
+    <p style="padding-top:15px;">Copyright &copy; 2015 &middot; All Rights Reserved &middot; <a href="http://yourwebsite.com/">My Website</a></p>
+  </div>
+  <div class="text-center col-4">
+    <span> Developed By</span> <img src="assets/images/logo_otsi.png"></div>
+</div>

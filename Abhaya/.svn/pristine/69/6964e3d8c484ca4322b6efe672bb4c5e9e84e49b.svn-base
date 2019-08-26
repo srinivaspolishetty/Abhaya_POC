@@ -1,0 +1,90 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active">
+            <img src="assets/images/device_deport_icon.png">USER MANAGEMENT</a>
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="col-1 m-0 p-0">
+          <div class="add_btn">
+            <button type="button" class="add_btn" (click)="openModal();">
+              <span>+</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container container_height">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">
+        <a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">User Management</li>
+    </ol>
+  </nav>
+  <div class="row filter_alignment">
+    <div class="col-3 m-0 p-0">
+      <div class="form-group">
+        <select class="filter_style form-control">
+          <option>Andhra Pradesh</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <select class="filter_style form-control">
+          <option>Guntur</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3 filer_last_child_align">
+      <div class="form-group">
+        <select class="filter_style form-control">
+          <option>Guntur</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <table class="table table-borderless table_today_installed">
+    <thead class="thead-bg">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>#Mobile Number</th>
+        <th>Role</th>
+        <th>Department</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+      <tr *ngFor="let user of userDetails">
+        <td class="align-middle">{{user.username}}</td>
+        <td class="align-middle">{{user.emailId}}</td>
+        <td class="align-middle">{{user.mobileNumber}}</td>
+        <td class="align-middle">{{(user.rolesVO.length > 0) ? user.rolesVO[0].name : ''}}</td>
+        <td class="align-middle">{{user.departmentName}}</td>
+        <td class="action align-middle">
+          <a class="icon" *ngIf="(user.rolesVO.length > 0 && user.rolesVO[0].name !== 'SUPER_ADMIN')">
+            <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="openModal(user);"></i>
+          </a>
+        </td>
+      </tr>
+      <tr *ngIf="userDetails == null || userDetails.length == 0">
+        <td></td>
+        <td></td>
+        <td>
+          <span style="color:red;">No Data Found</span>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

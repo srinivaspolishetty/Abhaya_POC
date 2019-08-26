@@ -1,0 +1,106 @@
+import { Component, OnInit } from '@angular/core';
+import { PageModel } from '../page.model';
+import { PaginationModel } from '../pagination.model';
+import { VehicleApiService } from './services/vehicle.api.service';
+import { Vehicle } from './vehicle.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-vehicles',
+  templateUrl: './vehicles.component.html',
+  styleUrls: ['./vehicles.component.css']
+})
+export class VehiclesComponent implements OnInit {
+
+  public vehicleArray:  Array<Vehicle> = [];
+  public page: PageModel;
+  public p: number;
+  searchValue;
+  public showSearchClear = false;
+  isTodaysInstalled  = false;
+  closedText = 'Todays';
+  openText = 'All';
+
+  constructor(private vehicleApiService: VehicleApiService, private modalService: NgbModal, private activatedRoute: ActivatedRoute) {
+    this.page = new PageModel(0, 0, 0, 0);
+    this.activatedRoute.params.subscribe(params => {
+      this.isTodaysInstalled = params['isTodaysInstalled'] !== undefined ? params['isTodaysInstalled'] : false;
+      console.log('isTodaysInstalled ' + this.isTodaysInstalled);
+    });
+   }
+
+  ngOnInit() {
+     this.getVehicles(0, ' ');
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    this.getVehicles(this.p - 1, this.searchValue);
+  }
+
+  searchData() {
+    if (this.searchValue !== undefined) {
+      this.getVehicles(0, this.searchValue);
+      this.showSearchClear = (this.searchValue.length > 4) ? true : false;
+    }
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.showSearchClear = false;
+    this.searchData();
+  }
+
+  changeResults() {
+    this.isTodaysInstalled = !this.isTodaysInstalled;
+  }
+  getVehicles(page: number, searchValue: string) {
+    this.vehicleApiService.getAll(page, 10, searchValue).subscribe((data:  PaginationModel) => {
+      this.vehicleArray  =  data.content;
+      this.page = data.page;
+      console.log(this.vehicleArray);
+    });
+  }
+  
+  openVehicle() {
+    const modalRef = this.modalService.open(VehicleComponent, {backdrop: 'static', keyboard: false});
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'refreshContent') {
+        this.getVehicles(0, ' ');
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  editVehicle(vehicle: Vehicle) {
+    const modalRef = this.modalService.open(VehicleComponent, {backdrop: 'static', keyboard: false});
+    modalRef.componentInstance.rcNumber = vehicle.rcNumber;
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'refreshContent') {
+        this.getVehicles(0, ' ');
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  
+  omitSpecialChar(event)
+  {
+    var k;  
+    k = event.charCode;
+    return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+  }
+  
+  onlyAllowNumbers(event)
+  {
+    var k;  
+    k = event.charCode;
+    return((k >= 48 && k <= 57));
+  }
+}

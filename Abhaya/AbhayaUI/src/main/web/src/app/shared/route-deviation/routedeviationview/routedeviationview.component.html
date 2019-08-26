@@ -1,0 +1,109 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+    <h4 class="modal-title">Route Deviation Details</h4>
+    <button type="button" class="close" (click)="activeModal.close('Close click')">&times;</button>
+  </div>
+  <div class="modal-body" *ngIf="showData == true;">
+    <div class="row popup_size">
+      <div class="col-6">
+        <div class="row">
+      <h6 class="col-md-5">Trip ID</h6>
+      <div class="col-md-7">{{routeDetails.tripId}}</div>
+    </div>
+    </div>
+    <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">Vehicle Number</h6>
+            <div class="col-md-7">{{routeDetails.rcNumber}}</div>
+        </div>
+    </div>
+        <div class="col-6">
+          <div class="row">
+          <h6 class="col-md-5">RF ID</h6>
+          <div class="col-md-7">{{routeDetails.rfId}}</div>
+        </div>
+        </div>
+      
+      <div class="col-6">
+        <div class="row">
+          <h6 class="col-md-5">Trip Request ID</h6>
+          <div class="col-md-7">{{routeDetails.tripRequestId}}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">Serial No</h6>
+            <div class="col-md-7">{{routeDetails.serialNumber}}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">Driver Name</h6>
+            <div class="col-md-7">{{routeDetails.driverName}}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">DL Number</h6>
+            <div class="col-md-7">{{routeDetails.dlNumber}}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">Driver Number</h6>
+            <div class="col-md-7">{{routeDetails.driverContactNumber}}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">Owner Name</h6>
+            <div class="col-md-7">{{routeDetails.ownerName}}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">Owner Number</h6>
+            <div class="col-md-7">{{routeDetails.ownerContactNumber}}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">Citizen Mobile No</h6>
+            <div class="col-md-7">{{routeDetails.citizenMobileNumber}}</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+            <h6 class="col-md-5">Deviation Time</h6>
+            <div class="col-md-7">{{routeDetails.deviationTime}}</div>
+        </div>
+      </div>
+      <div class="col-12 m-t-4">
+        <div class="row">
+            <h6 class="col-md-2">Deviation Location</h6>
+            <div class="col-md-10" style="padding-left:40px;">{{routeDetails.geoLocation}}</div>
+        </div>
+      </div>
+      <div class="col-12 m-t-4">
+        <div class="row">
+            <h6 class="col-md-2">Source</h6>
+            <div class="col-md-10" style="padding-left:40px;">{{routeDetails.slocation}}</div>
+        </div>
+      </div>
+      <div class="col-12 m-t-4">
+        <div class="row">
+            <h6 class="col-md-2">Destination</h6>
+            <div class="col-md-10"style="padding-left:40px;">{{routeDetails.dlocation}}</div>
+        </div>
+      </div>
+  </div>
+  </div>
+  <div class="modal-body" *ngIf="showData == false;">
+    <div class="alert alert-warning">
+      <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> There are not Route Deviations for this Trip.
+    </div>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+  </div> -->
+</div>

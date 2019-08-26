@@ -1,0 +1,115 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { VehicleApiService } from '../../shared/vehicles/services/vehicle.api.service';
+import { PaginationModel } from '../../shared/pagination.model';
+import { LiveVehicle } from '../../shared/vehicles/livevehicle.model';
+import { GoogleMapsAPIWrapper, MapsAPILoader } from '@agm/core';
+import { District } from '../../shared/util/district.model';
+import { City } from '../../shared/util/city.model';
+import { MastersServicesApi } from '../../shared/util/services/masters.api';
+import { UserDetails } from '../../login/userdetails.model';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
+declare var google: any;
+
+@Component({
+  selector: 'app-operational-reports',
+  templateUrl: './operational-reports.component.html',
+  styleUrls: ['./operational-reports.component.css']
+})
+export class OperationalReportsComponent implements OnInit, OnDestroy {
+
+  districtModel: any;
+  cityModel: any;
+  districtArray: Array<District> = [];
+  cityArray: Array<City> = [];
+  userDetails: UserDetails;
+  model: NgbDateStruct;
+
+  lat = 17.6868;
+  lng = 83.2185;
+  iconURL = '/assets/images/ic_auto_yellow.png';
+
+  liveVehicleArray: Array<LiveVehicle> = [];
+  gMaps;
+  map: any;
+  zoom: 13;
+  animation: string;
+
+  constructor(private vehicleApiService: VehicleApiService, private calendar: NgbCalendar, private mastersServicesApi: MastersServicesApi) {
+    this.gMaps = GoogleMapsAPIWrapper;
+    this.userDetails = JSON.parse(localStorage.getItem('userdetails'));
+    this.districtModel = '';
+    this.cityModel = '';
+    this.model = this.calendar.getToday()
+  }
+  angle: number;
+
+  getVehicle;
+  ngOnInit() {
+    this.getDistricts(this.userDetails.stateId);
+    this.getLiveVehicles();
+    this.getVehicle = setInterval(() => {
+      this.getLiveVehicles();
+    }, 10000);
+  }
+
+
+
+  getDistricts(value) {
+    if (value === '') {
+      this.districtArray = [];
+    }
+    this.districtModel = '';
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+
+  getCities(value) {
+    this.cityModel = '';
+    if (value === '') {
+      this.cityArray = [];
+    }
+    this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+      this.cityArray = data;
+    });
+  }
+
+
+
+  mapReady(map) {
+    this.map = map;
+    // const oldposition = new google.maps.LatLng(17.763933, 83.329420);
+    // const newposition = new google.maps.LatLng(17.763793, 83.329987);
+    // this.angle = google.maps.geometry.spherical.computeHeading(oldposition, newposition);
+    // console.log(Math.ceil(this.angle));
+  }
+  clickedMarker(label: string, index: number, $event) {
+    this.lat = $event.latitude;
+    this.lng = $event.longitude;
+    this.map.setCenter({ lat: $event.latitude, lng: $event.longitude });
+    const position = new google.maps.LatLng($event.latitude, $event.longitude);
+    this.map.panTo(position);
+    this.map.setZoom(15);
+  }
+
+  mapClicked($event: MouseEvent) {
+    console.log($event);
+  }
+
+  markerDragEnd(m: Marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+
+  getLiveVehicles() {
+    this.vehicleApiService.getLiveVehicles().subscribe((data: PaginationModel) => {
+      this.liveVehicleArray = data.content;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.getVehicle) {
+      clearInterval(this.getVehicle);
+    }
+  }
+}

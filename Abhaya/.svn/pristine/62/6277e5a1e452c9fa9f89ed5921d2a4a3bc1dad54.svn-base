@@ -1,0 +1,74 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+    <h5 class="modal-title">{{selectedVehicle.rcNumber}} Authenticated Drivers</h5>
+    <button type="button" class="close" (click)="activeModal.close('Close click')">&times;</button>
+  </div>
+  <div class="modal-body">
+  <div class="row popup_size">
+    <div class="alert alert-warning" *ngIf="noAuthData == true">
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Drivers Authenticated for this Vehicle
+    </div>
+    <div *ngIf="noAuthData == false">
+      <div class="row popup_size bottom-line" *ngFor="let driverdata of driversList">
+        <div class="col-3">
+          <img class="driverimage" [src]="driverdata.image">
+        </div>
+        <div class="col-9">
+          <div class="row driver-details ">
+            <div class="col-4">
+              <h6>Name</h6>
+            </div>
+            <div class="col-8">
+              <h5>{{driverdata.driverName}}</h5>
+            </div>
+          </div>
+          <div class="row driver-details ">
+            <div class="col-4">
+              <h6>Mobile No</h6>
+            </div>
+            <div class="col-8">
+              <h5>{{driverdata.contactNumber}}</h5>
+            </div>
+          </div>
+          <div class="row driver-details">
+            <div class="col-4">
+              <h6>Gender</h6>
+            </div>
+            <div class="col-8">
+              <h5>{{driverdata.gender}}</h5>
+            </div>
+          </div>
+          <div class="row driver-details ">
+            <div class="col-4">
+              <h6>Driving Licence</h6>
+            </div>
+            <div class="col-8">
+              <h5>{{driverdata.dlNumber}}</h5>
+            </div>
+          </div>
+          <div class="row driver-details ">
+            <div class="col-4">
+              <h6>DL Expiry Date</h6>
+            </div>
+            <div class="col-8">
+              <h5>{{driverdata.dlExpiryDate}}</h5>
+            </div>
+          </div>
+          <div class="row driver-details ">
+            <div class="col-4">
+              <h6>RFID</h6>
+            </div>
+            <div class="col-8">
+              <h5>{{driverdata.rfId}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+  <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div> -->
+</div>

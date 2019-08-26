@@ -1,0 +1,128 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <a class="active">
+        <img src="assets/images/device_deport_icon.png">NEW REGISTRATION</a>
+    </div>
+  </div>
+</div>
+
+<div class="container container_height dashboard_secondrow">
+  <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+           <li class="breadcrumb-item" aria-current="page">New Registration</li>
+        </ol>
+      </nav>
+  <div class="row m-0 p-0">
+    <div class="col-7 m-0 p-0">
+      <div class="row m-0 p-0">
+        <div class="col-6 m-0 p-0 vehicle_block_left">
+          <img class="img_auto_left" src="assets/images/SVG/ic_VehDevicemap.svg">
+          <h4>Vehicle Number</h4>
+          <h3>{{iotMappingModel.rcNumber}}</h3>
+        </div>
+        <div class="col-6 vehicle_block_right">
+          <img class="img_auto_right" src="assets/images/SVG/ic_IoTdevicemap.svg">
+          <h4>IoT Device Number</h4>
+          <h3>{{iotMappingModel.serialNumber}}</h3>
+        </div>
+      </div>
+      <div class="line_style">
+        <hr>
+      </div>
+      <div class="qr_style" *ngIf="!showQrCode">
+        <div class="form-check has-success terms_conditions_style">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input check_box" value="option1" (click)="showQRCode()">
+            <p class="">I agree
+              <span class="terms_conditions_text">Terms & Conditions</span>
+            </p>
+          </label>
+        </div>
+        <button type="button" class="btn btn-primary btn_blue" [disabled]="!mapDeviceFlag" (click)="mapDevice()"> Map IoT Device</button>
+        <button type="button" class="btn btn-outline-primary btn_outline" (click)="navigate();">Cancel</button>
+      </div>
+
+      <div class="qr_style" *ngIf="showQrCode">
+       <div class="qrimage">
+        <qrcode [qrdata]="iotMappingModel.rcNumber" [size]="256" [level]="'M'" style="width:140px;"></qrcode>
+      </div>
+
+        <div id="qrcode" class="qrcode-download">
+          <div class="qrcode-download-image">
+            <qrcode [qrdata]="iotMappingModel.rcNumber" [size]="256" [level]="'M'" style="width:140px;"></qrcode>
+          <h1>{{iotMappingModel.rcNumber}}</h1>
+          </div>
+        </div>
+
+
+       
+        <!-- <img src="assets/images/qr_demo.png" style="width:140px;"> -->
+        <br><br>
+        <h5>
+          <span style="color:red;">Note: </span>Please Download & Stick this QR Code on the Autorickshaw</h5>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary btn_blue" (click)="downloadpdf()">Download QR Code</button>
+          <button type="button" class="btn btn-outline-primary btn_outline" (click)="navigate();">Back to home</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-5 m-0 p-0" *ngFor="let vehicle of vehicleArray">
+      <div class="vehicle_info_card">
+        <div class="row">
+          <h4>VEHICLE INFORMATION</h4>
+        </div>
+        <div class="table_info table-border-less">
+          <table class="" >
+            <tr>
+              <td>Owner Type</td>
+              <td>:</td>
+              <td>
+                <span>Individual</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>:</td>
+              <td>
+                <span>{{vehicle.ownerName}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>RC Number</td>
+              <td>:</td>
+              <td>
+                <span>{{vehicle.rcNumber}}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Registration Date</td>
+              <td>:</td>
+              <td>
+                <span>{{vehicle.registrationDate}}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Owner Contact Number</td>
+              <td>:</td>
+              <td>
+                <span>{{vehicle.ownerContactNumber}}</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>RC Expiry Date</td>
+              <td>:</td>
+              <td>
+                <span>{{vehicle.rcExpiryDate}}</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

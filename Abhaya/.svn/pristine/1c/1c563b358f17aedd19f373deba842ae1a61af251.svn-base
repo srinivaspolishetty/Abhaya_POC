@@ -1,0 +1,49 @@
+import { Component, OnInit } from '@angular/core';
+import { MastersServicesApi } from "../util/services/masters.api";
+import { PaginationModel } from '../pagination.model';
+import { PageModel } from '../page.model';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RawdatadetailsComponent } from "./rawdatadetails/rawdatadetails.component";
+
+@Component({
+  selector: 'app-rawdata',
+  templateUrl: './rawdata.component.html',
+  styleUrls: ['./rawdata.component.css']
+})
+export class RawdataComponent implements OnInit {
+  rawDataDetails = [];
+  public page: PageModel;
+  public p: number;
+  private selected: string;
+  model: NgbDateStruct;
+  maxDate = this.calendar.getToday();
+  constructor(private mastersServicesApi:MastersServicesApi, private calendar: NgbCalendar, private modalService:NgbModal) {
+    this.page = new PageModel(0, 0, 0, 0);
+    this.model = this.calendar.getToday();
+   }
+
+  ngOnInit() {
+    this.getAllRawData(0);
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    this.getAllRawData(this.p - 1); // need to remove param
+  }
+
+  getrawdatadetails(rawdataselected){
+    const modalRef = this.modalService.open(RawdatadetailsComponent, {backdrop: 'static', keyboard: false});
+    modalRef.componentInstance.rawdataid = rawdataselected.rawData;
+  }
+
+  getAllRawData(page: number){
+    this.selected = this.model.day + '/' + this.model.month + '/' + this.model.year;
+    this.mastersServicesApi.getRawData(page, 10, 19/12/2018).subscribe((data:any) => {
+      this.rawDataDetails  =  data.content;
+      this.page = data.page;
+      console.log(this.rawDataDetails);
+    });
+  }
+
+}

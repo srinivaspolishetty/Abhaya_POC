@@ -1,0 +1,75 @@
+import { Component, OnInit } from '@angular/core';
+import { RouteDeviationService } from './services/route.deviation.services';
+import { PageModel } from '../page.model';
+import { RouteDeviation } from './route-deviation.model';
+import { PaginationModel } from '../pagination.model';
+import { District } from '../util/district.model';
+import { City } from '../util/city.model';
+import { MastersServicesApi } from '../util/services/masters.api';
+import { UserDetails } from '../../login/userdetails.model';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-route-deviation',
+  templateUrl: './route-deviation.component.html',
+  styleUrls: ['./route-deviation.component.css']
+})
+export class RouteDeviationComponent implements OnInit {
+
+  public routeDeviationArray: Array<RouteDeviation> = [];
+  public page: PageModel;
+  public p: number;
+
+  searchValue;
+
+
+  districtModel: any;
+  cityModel: any;
+  districtArray: Array<District> = [];
+  cityArray: Array<City> = [];
+  userDetails: UserDetails;
+  model: NgbDateStruct;
+
+  constructor(private routeDeviationService: RouteDeviationService, private mastersServicesApi: MastersServicesApi, private calendar: NgbCalendar) {
+    this.page = new PageModel(0, 0, 0, 0);
+    this.userDetails = JSON.parse(localStorage.getItem('userdetails'));
+    this.districtModel = '';
+    this.cityModel = '';
+    this.model = this.calendar.getToday();
+   }
+
+  ngOnInit() {
+    this.getDistricts(this.userDetails.stateId);
+    this.getRouteDeviations(0, ' ');
+  }
+
+  getDistricts(value) {
+    if (value === '') {
+      this.districtArray = [];
+    }
+    this.districtModel = '';
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+
+  getCities(value) {
+    this.cityModel = '';
+    if (value === '') {
+      this.cityArray = [];
+    }
+    this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+      this.cityArray = data;
+    });
+  }
+  pageChanged(event) {
+    this.p = event;
+    this.getRouteDeviations(this.p - 1, this.searchValue);
+  }
+  getRouteDeviations(page: number, searchValue: string) {
+    this.routeDeviationService.getAll(page, 10, searchValue).subscribe((data:  PaginationModel) => {
+      this.routeDeviationArray  =  data.content;
+      this.page = data.page;
+    });
+  }
+}

@@ -1,0 +1,22 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SuspiciousVehicleComponent } from './suspicious-vehicle/suspicious-vehicle.component';
+
+@Component({
+  selector: 'app-suspicious-vehicles',
+  templateUrl: './suspicious-vehicles.component.html',
+  styleUrls: ['./suspicious-vehicles.component.css']
+})
+export class SuspiciousVehiclesComponent implements OnInit {
+
+  constructor(private modalService: NgbModal) { }
+
+  ngOnInit() {
+  }
+
+  addSuspiciousVehicle() {
+    const modalRef = this.modalService.open(SuspiciousVehicleComponent, { windowClass: 'popup_alignment_dashBoard', backdrop: 'static',
+    keyboard: false });
+  }
+
+}

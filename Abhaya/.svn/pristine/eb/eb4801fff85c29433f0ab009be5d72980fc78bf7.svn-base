@@ -1,0 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserComponent } from './user/user.component';
+import { UserDetails } from '../../login/userdetails.model';
+import { PaginationModel } from '../pagination.model';
+import { UserApiService } from './services/user.api.service';
+
+@Component({
+  selector: 'app-usermanagement',
+  templateUrl: './usermanagement.component.html',
+  styleUrls: ['./usermanagement.component.css']
+})
+export class UsermanagementComponent implements OnInit {
+
+  public userDetails: Array<UserDetails> = [];
+  constructor(private modalService: NgbModal, private userApiService: UserApiService) { }
+
+  ngOnInit() {
+    this.getUsers();
+  }
+  getUsers() {
+    this.userApiService.getUsers().subscribe((data: PaginationModel) => {
+      this.userDetails = data.content;
+    });
+  }
+
+
+  openModal(userDetails: UserDetails) {
+    const modalRef = this.modalService.open(UserComponent, { backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.editUserDetails = userDetails;
+    modalRef.result.then((result) => {
+      if (result === 'refreshContent') {
+        this.getUsers();
+      }
+    });
+  }
+
+}

@@ -1,0 +1,202 @@
+<div class="row m-0 p-0 row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+
+          <div class="">
+            <a class="icon_alignment text_align" [routerLink]="['/rta/livetracking']">
+              <!-- <i class="fa fa-map" aria-hidden="true"></i> -->
+              <img class="img_topnav" src="assets/images/SVG/ic_dashboard_blue.svg">
+              <span>MASTER DASHBOARD</span>
+            </a>
+          </div>
+            <div class="">
+            <a class="icon_alignment text_align" [routerLink]="['/rta/operationalreports']">
+             <!--  <i class="fa fa-map" aria-hidden="true"></i> -->
+             <img class="img_topnav" src="assets/images/SVG/ic_google_map_blue.svg">
+              <span>GOOGLE MAP VIEW</span>
+            </a>
+          </div>
+          <a class="active icon_alignment" [routerLink]="['/rta/dashboard']">
+            <!-- <i class="fa fa-pie-chart" aria-hidden="true"></i> -->
+            <img class="img_topnav" src="assets/images/SVG/ic_DeviceReport_blue.svg">
+            <span>DEVICE REPORT</span>
+          </a>
+        
+        </div>
+        <div class="col-1 m-0 p-0" *ngIf="!isTodaysInstalled">
+          <div class="add_btn">
+            <button type="button" class="add_btn" (click)="openRegistration()">
+              <span>+</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="">
+  <div class="container dashboard_secondrow">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Device Management</li>
+        <li class="breadcrumb-item active" aria-current="page">Device Report</li>
+      </ol>
+    </nav>
+
+
+
+    <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCities(districtModel)" 
+            [disabled]="isdisable == true">
+              <option value="" [selected]="!districtModel">Select District</option>
+              <option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <select class="filter_style form-control" [(ngModel)]="cityModel" name="cityId" (change)="cityChange()">
+              <option value="" [selected]="!cityModel">Select City</option>
+              <option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <div class="input-group-append">
+              <input type="text" class="filter_style form-control" readOnly placeholder="yyyy-mm-dd" name="dp"
+                [(ngModel)]="model" (dateSelect)="changeDate();" ngbDatepicker #d="ngbDatepicker">
+              <button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button"> <i class="fa fa-calendar"
+                  aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    <div class="row m-0 p-0">
+      <div class="col-7">
+        <div class="card_boxshadow_left">
+          <div class="row">
+            <div class="col-3">
+              <div class="auto_img gradient_box_left">
+                <img src="assets/images/SVG/ic_deviceInstalled.svg" style="width:72%;">
+                <h4>Total Vehicles
+                  <br>{{vehicleInstallSummary.totalInstalled+vehicleInstallSummary.totalPending}}
+                </h4>
+              </div>
+            </div>
+            <div class="col-3">
+              <div (click)="allInstalled();" class="div_padding progress_bar_text1 text-center cursor-hand">
+                <p>
+                  <span> Total Installed</span>
+                </p>
+                <h4>{{vehicleInstallSummary.totalInstalled}}</h4>
+                <div class="progress progress_line">
+                  <div class="progress-bar progress_bar_line" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  <span class="vertical_line_left"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <div (click)="todayinstallednavigate();" class="div_padding progress_bar_text2 text-center cursor-hand">
+                <p>
+                  <span> Today's Installed</span>
+                </p>
+                <div>
+                  <a>
+                    <h4>{{vehicleInstallSummary.todaysInstalled}}</h4>
+                  </a>
+                </div>
+                <div class="progress progress_line">
+                  <div class="progress-bar progress_bar_line2" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  <span class="vertical_line_left"></span>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="col-3">
+
+              <div (click)="pendingNavigate();" class="div_padding progress_bar_text3 text-center cursor-hand">
+                <p>
+                  <span> Total Pending's</span>
+                </p>
+                <h4>{{vehicleInstallSummary.totalPending}}</h4>
+                <div class="progress progress_line">
+                  <div class="progress-bar progress_bar_line3" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="card_boxshadow_right">
+            <app-devicecommunicatingreport #devicereportpage></app-devicecommunicatingreport>
+  </div>
+
+</div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-7">
+    <div class="card_boxshadow_left2">
+      <div class="row m-0 p-0">
+        <div class="col-8">
+          <div class="table_graph_heading">
+            <h3>District Wise Installs</h3>
+          </div>
+        </div>
+        <ngx-charts-bar-horizontal [view]="horizontalBarChart.view" [scheme]="horizontalBarChart.colorScheme" [results]="horizontalBarChart.data"
+          [gradient]="horizontalBarChart.gradient" [xAxis]="horizontalBarChart.showXAxis" [yAxis]="horizontalBarChart.showYAxis"
+          [legend]="horizontalBarChart.showLegend" [showXAxisLabel]="horizontalBarChart.showXAxisLabel" [showYAxisLabel]="horizontalBarChart.showYAxisLabel"
+          [xAxisLabel]="horizontalBarChart.xAxisLabel" [yAxisLabel]="horizontalBarChart.yAxisLabel" [showDataLabel]="horizontalBarChart.showDataLabel"
+          (select)="onSelect($event)">
+        </ngx-charts-bar-horizontal>
+      </div>
+    </div>
+  </div>
+
+<div class="col-5">
+  <div class="card_boxshadow_right2">
+
+    <div class="row">
+      <div class="col-8 table_heading_main">
+        <h3>Recent History</h3>
+      </div>
+      <div class="col-4">
+        <button type="button" class="btn-primary btn_custom" value="view" (click)="navigateVehicle();">View All</button>
+      </div>
+    </div>
+
+    <table class="table table_heading" style="width:380px; margin:10px 20px 20px 20px;">
+      <thead>
+        <tr>
+          <th class="table_heading" scope="col">VEHICLE NO</th>
+          <th class="table_heading" scope="col">IoT Device NO</th>
+          <th class="table_heading" scope="col">STATUS</th>
+        </tr>
+      </thead>
+      <tbody class="">
+        <tr *ngFor="let vehicle of vehicleArray">
+          <td>{{vehicle.rcNumber}}</td>
+          <td>{{vehicle.serialNumber}}</td>
+          <td class="table_data">{{vehicle.isDeviceMapped}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

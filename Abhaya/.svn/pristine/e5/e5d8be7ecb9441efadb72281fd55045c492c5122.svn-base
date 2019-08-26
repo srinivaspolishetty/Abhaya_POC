@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-ic_DeviceReport">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="ic_DeviceReport" clip-path="url(#clip-ic_DeviceReport)">
+    <g id="Group_14" data-name="Group 14" transform="translate(0 -1)">
+      <g id="Group_13" data-name="Group 13">
+        <path id="Path_23" data-name="Path 23" d="M13.067,350.785H0v2.1a.7.7,0,0,0,.7.7H12.367a.7.7,0,0,0,.7-.7ZM1.4,353.118a.933.933,0,1,1,.933-.933A.933.933,0,0,1,1.4,353.118Zm4.433-.7h-2.8a.233.233,0,0,1,0-.467h2.8a.233.233,0,0,1,0,.467Zm1.633.233H7v-.933h.467Zm.933,0H7.933v-.933H8.4Zm.933,0H8.867v-.933h.467Zm.933,0H9.8v-.933h.467Zm.933,0h-.467v-.933H11.2Zm.933,0h-.467v-.933h.467Zm0,0" transform="translate(0.5 -339.585)" fill="#fff"/>
+        <path id="Path_27" data-name="Path 27" d="M32.933,383.252a.467.467,0,1,1-.467-.467A.467.467,0,0,1,32.933,383.252Zm0,0" transform="translate(-30.567 -370.652)" fill="#fff"/>
+      </g>
+      <g id="pie-chart_1_" data-name="pie-chart (1)" transform="translate(2.923 2)">
+        <path id="Path_28" data-name="Path 28" d="M42.539,13.26a2.206,2.206,0,0,1-.383,1.246l1.286,1.286a4.016,4.016,0,0,0,0-5.064l-1.286,1.286A2.207,2.207,0,0,1,42.539,13.26Z" transform="translate(-36.248 -9.241)" fill="#fff"/>
+        <path id="Path_29" data-name="Path 29" d="M5.32,33.418A2.216,2.216,0,0,1,1.9,32H.077a4.018,4.018,0,0,0,6.53,2.7Z" transform="translate(0 -27.566)" fill="#fff"/>
+        <path id="Path_30" data-name="Path 30" d="M1.9,3.6A2.216,2.216,0,0,1,5.32,2.185L6.607.9A4.018,4.018,0,0,0,.077,3.6Z" transform="translate(0)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

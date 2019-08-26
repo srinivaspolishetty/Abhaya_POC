@@ -1,0 +1,16 @@
+.blockdiv{
+    margin: 0;
+    padding: 160px 0px 0px 0px;
+    background-color: #000000;
+    height: 385px;
+    width: 579px;
+    position: absolute;
+    top: 89px;
+    z-index: 99;
+    opacity: 0.8;
+    left: 48px;;
+    color:#ffffff;
+    font-weight:bolc;
+    text-align:center;
+    font-size:22px;
+}

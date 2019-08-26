@@ -1,0 +1,43 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MastersServicesApi {
+
+  constructor(private httpClient: HttpClient) { }
+  getStates() {
+    return this.httpClient.get(`${environment.apiBase}${environment.version}/comboData?actionType=stateService&page=0&size=25`);
+  }
+
+  getDistricts(value) {
+    const url = `${environment.apiBase}${environment.version}/comboData?actionType=districtService&extraParams=${value}&page=0&size=25`;
+    return this.httpClient.get(url);
+  }
+
+  getCities(value) {
+    const url = `${environment.apiBase}${environment.version}/comboData?actionType=cityService&extraParams=${value}&page=0&size=25`;
+    return this.httpClient.get(url);
+  }
+
+  getUsers() {
+    return this.httpClient.get(`${environment.apiBase}${environment.version}/userDetails?page=0&size=100`);
+  }
+
+  getRawData(page, size, searchValue, searchDate) {
+    let url = `${environment.apiBase}${environment.version}/rawData?page=${page}&size=${size}`;
+    url += `&searchValue=${searchValue}&packetDate=${searchDate}`;
+    return this.httpClient.get(url);
+  }
+
+  getModemData(page, size, searchValue, searchDate) {
+    let url = `${environment.apiBase}${environment.version}/modemDetails?page=${page}&size=${size}`;
+    url += `&searchValue=${searchValue}&searchDate=${searchDate}`;
+    return this.httpClient.get(url);
+  }
+  getAllSuspiciousVehicles(page, size) {
+    return this.httpClient.get(`${environment.apiBase}${environment.version}/watchVehicle?page=${page}&size=${size}`);
+  }
+}

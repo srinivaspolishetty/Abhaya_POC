@@ -1,0 +1,107 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-10 m-0 p-0">
+
+          <div class="">
+            <a class="active icon_alignment text_align" [routerLink]="['/rta/livetracking']">
+              <img class="img_topnav" src="assets/images/SVG/ic_dashboard_blue.svg">
+              <span>MASTER DASHBOARD</span>
+            </a>
+          </div>
+          <div class="">
+            <a class="icon_alignment text_align" [routerLink]="['/rta/operationalreports']">
+              <!--   <i class="fa fa-map" aria-hidden="true"></i> -->
+              <img class="img_topnav" src="assets/images/SVG/ic_google_map_blue.svg">
+              <span>GOOGLE MAP VIEW</span>
+            </a>
+          </div>
+          <a class="icon_alignment" [routerLink]="['/rta/dashboard']">
+            <!-- <i class="fa fa-pie-chart" aria-hidden="true"></i> -->
+            <img class="img_topnav" src="assets/images/SVG/ic_DeviceReport_blue.svg">
+            <span>DEVICE REPORT</span>
+          </a>
+
+        </div>
+        <div class="col-2 m-0 p-0">
+          <div class="btn-group btn_left float-right">
+            <button type="button" [ngClass]="!isTripClosed ? 'active out_line_blue btn btn btn-outline-primary' : 'out_line_blue btn btn btn-outline-primary'">Today's</button>
+            <button type="button" [ngClass]="isTripClosed ? 'active out_line_blue2 btn btn btn-outline-primary' : 'out_line_blue2 btn btn btn-outline-primary'">All</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="container dashboard_secondrow">
+    <br>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCities(districtModel)" [disabled]="isdisable == true">
+            <option value="" [selected]="!districtModel">Select District</option>
+            <option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <select class="filter_style form-control" [(ngModel)]="cityModel" name="cityId" (change)="cityChange()">
+            <option value="" [selected]="!cityModel">Select City</option>
+            <option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <div class="input-group-append">
+            <input type="text" class="filter_style form-control" readOnly placeholder="yyyy-mm-dd" name="dp"
+              [(ngModel)]="model" (dateSelect)="changeDate();" ngbDatepicker #d="ngbDatepicker">
+            <button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button"> <i class="fa fa-calendar"
+                aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row m-0 p-0">
+      <div class="section-main">
+        <app-tripandroutedeviation #tripandroutedeviationpage></app-tripandroutedeviation>
+        <div class="border-bottom-1p"></div>
+        <app-panicdetailsreport #panicalertreportpage></app-panicdetailsreport>
+      </div>
+    </div>
+
+    <div class="row m-0 p-0">
+      <div class="col-8 m-0 p-0">
+        <app-movementdetailsreport #movementreportpage></app-movementdetailsreport>
+      </div>
+
+      <div class="col-4 m-0 p-0">
+        <app-vehicle-authreport #vehicleauthreportpage></app-vehicle-authreport>
+      </div>
+    </div>
+
+    <div class="row m-0 p-0">
+      <div class="card_boxshadow">
+        <app-devicecommunicatingreport #devicereportpage></app-devicecommunicatingreport>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-7">
+        <div class="card_boxshadow_left2">
+          <app-districtwisetrackingreport #districtwisereportpage></app-districtwisetrackingreport>
+        </div>
+      </div>
+
+      <div class="col-5">
+        <app-movementgraphreport #movementgraphpage></app-movementgraphreport>
+      </div>
+    </div>
+
+  </div>
+</div>

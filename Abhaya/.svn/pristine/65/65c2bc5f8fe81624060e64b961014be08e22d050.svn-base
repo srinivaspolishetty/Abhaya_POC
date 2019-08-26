@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-ic_VideoStreaming">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="ic_VideoStreaming" clip-path="url(#clip-ic_VideoStreaming)">
+    <path id="Subtraction_3" data-name="Subtraction 3" d="M-203.328,7.737H-211a1,1,0,0,1-1-1V1a1,1,0,0,1,1-1h7.672a1,1,0,0,1,1,1V6.737A1,1,0,0,1-203.328,7.737ZM-204.9,2.375h0V4.953h1.754V4.482h-1.1v-.59h.957V3.421h-.957V2.848h1.028V2.375H-204.9Zm-3.1,0,1,2.578h.747l1.007-2.578h-.689l-.606,1.786a1.281,1.281,0,0,0-.063.265h-.013a1.094,1.094,0,0,0-.059-.257l-.609-1.794Zm-1.01,0V4.953h.659V2.375Zm-2.135,0V4.953h1.741V4.482h-1.083V2.375h-.659Z" transform="translate(212.4 3)" fill="#fff"/>
+    <path id="XMLID_823_" d="M3.205,2.388.589,3.931a.363.363,0,0,1-.395-.014A.469.469,0,0,1,0,3.528V.454A.469.469,0,0,1,.193.066.363.363,0,0,1,.588.051L3.2,1.583a.482.482,0,0,1,0,.8Z" transform="translate(13.687 8.917) rotate(180)" fill="#fff"/>
+  </g>
+</svg>

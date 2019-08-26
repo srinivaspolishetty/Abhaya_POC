@@ -1,0 +1,122 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active icon_alignment text_align"><img style="width:25px;" class="img_topnav" src="assets/images/SVG/ic_AdministrativeHierarchy_blue.svg"><span>ADMINISTRATIVE
+              HIERARCHY</span></a>
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="add_btn" *ngIf="showAddBtn === true">
+          <button type="button" class="add_btn" (click)="openAdministrative()">
+            <span>+</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container dashboard_secondrow container_height">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a>User Management</a></li>
+      <li class="breadcrumb-item" aria-current="page">Administrative Hierarchy
+      </li>
+    </ol>
+  </nav>
+
+  <div class="tab-menu">
+    <a [ngClass]="{'active': showStateDiv=== true}" (click)="showState()">States</a>
+    <a [ngClass]="{'active': showDistrictDiv=== true}" (click)="showDistrict()">Districts</a>
+    <a [ngClass]="{'active': showCityDiv=== true}" (click)="showCity()">City</a>
+  </div>
+
+
+  <div class="tab-content" *ngIf="showStateDiv == true">
+    <table class="table table-borderless table_today_installed">
+      <thead class="thead-bg">
+        <tr>
+          <th>State Id</th>
+          <th>State Code</th>
+          <th>State Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+        <tr *ngFor="let state of stateArray">
+          <td class="align-middle">{{state.id}}</td>
+          <td class="align-middle">{{state.code}}</td>
+          <td class="align-middle">{{state.name}}</td>
+          <td class="action align-middle"><a class="icon" (click)="openAdministrative()"><i class="fa fa-pencil-square-o"
+                aria-hidden="true"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+  <div class="tab-content" *ngIf="showDistrictDiv == true">
+    <table class="table table-borderless table_today_installed">
+      <thead class="thead-bg">
+        <tr>
+          <th>District Id</th>
+          <th>District Code</th>
+          <th>District Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+        <tr *ngFor="let district of districtArray">
+          <td class="align-middle">{{district.id}}</td>
+          <td class="align-middle">{{district.code}}</td>
+          <td class="align-middle">{{district.name}}</td>
+          <td class="action align-middle"><a class="icon" (click)="openAdministrative()"><i class="fa fa-pencil-square-o"
+                aria-hidden="true"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tab-content" *ngIf="showCityDiv == true">
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCityDetails(districtModel)">
+            <option value="" [selected]="!districtModel">Select District</option>
+            <option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <table class="table table-borderless table_today_installed">
+      <thead class="thead-bg">
+        <tr>
+          <th>City Id</th>
+          <th>City Code</th>
+          <th>City Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+        <tr *ngFor="let city of cityArray">
+          <td class="align-middle">{{city.id}}</td>
+          <td class="align-middle">{{city.code}}</td>
+          <td class="align-middle">{{city.name}}</td>
+          <td class="action align-middle"><a class="icon" (click)="openAdministrative()"><i class="fa fa-pencil-square-o"
+                aria-hidden="true"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

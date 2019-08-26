@@ -1,0 +1,43 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MastersServicesApi } from '../../util/services/masters.api';
+import { State } from '../../util/states.model';
+import { District } from '../../util/district.model';
+import { City } from '../../util/city.model';
+
+@Component({
+  selector: 'app-users',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
+})
+export class UserComponent implements OnInit {
+
+  stateArray = [];
+
+  districtArray = [];
+
+  cityArray = [];
+
+  constructor(public activeModal: NgbActiveModal, private mastersServicesApi: MastersServicesApi) { }
+
+  ngOnInit() {
+  }
+
+  getStates() {
+    this.mastersServicesApi.getStates().subscribe((data: State[]) => {
+      this.stateArray = data;
+    });
+  }
+
+  getDistricts(value) {
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+
+  getCities(value) {
+    this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+      this.cityArray = data;
+    });
+  }
+}

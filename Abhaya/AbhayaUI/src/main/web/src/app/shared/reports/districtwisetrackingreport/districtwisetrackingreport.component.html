@@ -1,0 +1,14 @@
+<div class="row m-0 p-0">
+    <div class="col-8">
+      <div class="table_graph_heading">
+        <h3>District Wise Trackings</h3>
+      </div>
+    </div>
+
+    <ngx-charts-bar-horizontal [view]="horizontalBarChart.view" [scheme]="horizontalBarChart.colorScheme"
+      [results]="horizontalBarChart.data" [gradient]="horizontalBarChart.gradient" [xAxis]="horizontalBarChart.showXAxis"
+      [yAxis]="horizontalBarChart.showYAxis" [legend]="horizontalBarChart.showLegend" [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
+      [showYAxisLabel]="horizontalBarChart.showYAxisLabel" [xAxisLabel]="horizontalBarChart.xAxisLabel"
+      [yAxisLabel]="horizontalBarChart.yAxisLabel" [showDataLabel]="horizontalBarChart.showDataLabel">
+    </ngx-charts-bar-horizontal>
+  </div>

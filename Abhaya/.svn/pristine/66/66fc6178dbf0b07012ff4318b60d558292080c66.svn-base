@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 14 14">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-ic_tripdetails);
+      }
+
+      .cls-2, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+
+      .cls-4, .cls-5 {
+        stroke: none;
+      }
+    </style>
+    <clipPath id="clip-ic_tripdetails">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="ic_tripdetails" class="cls-1">
+    <g id="Livello_110" data-name="Livello 110" transform="translate(-15.479 -4.528)">
+      <path id="Path_1" data-name="Path 1" class="cls-2" d="M26.992,9.225a1.355,1.355,0,1,1-1.355-1.348,1.352,1.352,0,0,1,1.355,1.348m1.406,0A2.709,2.709,0,1,0,23.6,10.947l2.087,3L27.808,10.9a2.676,2.676,0,0,0,.209-.3l.021-.031h0A2.676,2.676,0,0,0,28.4,9.225" transform="translate(0 0)"/>
+    </g>
+    <g id="Path_7" data-name="Path 7" class="cls-3" transform="translate(1 4.5)">
+      <path class="cls-4" d="M0,0H4.906V1H0Z"/>
+      <path class="cls-5" d="M -4.76837158203125e-06 0 L 4.906245231628418 0 L 4.906245231628418 1 L -4.76837158203125e-06 1 L -4.76837158203125e-06 0 Z"/>
+    </g>
+    <g id="Path_9" data-name="Path 9" class="cls-3" transform="translate(1 7.5)">
+      <path class="cls-4" d="M0,0H6.438V1H0Z"/>
+      <path class="cls-5" d="M 0 0 L 6.4375 0 L 6.4375 1 L 0 1 L 0 0 Z"/>
+    </g>
+    <g id="Path_8" data-name="Path 8" class="cls-3" transform="translate(6 10.5)">
+      <path class="cls-4" d="M-5,0H7V1H-5Z"/>
+      <path class="cls-5" d="M -5 0 L 7 0 L 7 1 L -5 1 L -5 0 Z"/>
+    </g>
+  </g>
+</svg>

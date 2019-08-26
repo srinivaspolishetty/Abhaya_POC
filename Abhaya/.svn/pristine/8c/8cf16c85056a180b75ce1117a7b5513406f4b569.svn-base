@@ -1,0 +1,169 @@
+import { Component, OnInit } from '@angular/core';
+import { PageModel } from '../page.model';
+import { PaginationModel } from '../pagination.model';
+import { VehicleApiService } from './services/vehicle.api.service';
+import { Vehicle } from './vehicle.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { ActivatedRoute } from '@angular/router';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-vehicles',
+  templateUrl: './vehicles.component.html',
+  styleUrls: ['./vehicles.component.css']
+})
+export class VehiclesComponent implements OnInit {
+
+  public vehicleArray:  Array<Vehicle> = [];
+  public page: PageModel;
+  public p: number;
+  searchValue = '';
+  public showSearchClear = false;
+  isTodaysInstalled  = false;
+  pendinginstallation = false;
+  totalInstalled = false;
+  currentPageTitle = "Vehicles";
+  closedText = 'Todays';
+  openText = 'All';
+  selected : string;
+  model: NgbDateStruct;
+  constructor(private vehicleApiService: VehicleApiService, private calendar: NgbCalendar, private modalService: NgbModal, private activatedRoute: ActivatedRoute) {
+    this.page = new PageModel(0, 0, 0, 0);
+    this.model = this.calendar.getToday();
+    this.activatedRoute.params.subscribe(params => {
+      this.isTodaysInstalled = params['isTodaysInstalled'] !== undefined ? params['isTodaysInstalled'] : false;
+    });
+    this.activatedRoute.params.subscribe(params => {
+      this.pendinginstallation = params['pendinginstallation'] !== undefined ? params['pendinginstallation'] : false;
+    });
+    this.activatedRoute.params.subscribe(params => {
+      this.totalInstalled = params['totalInstalled'] !== undefined ? params['totalInstalled'] : false;
+    });
+   }
+
+  ngOnInit() {
+    console.log(this.isTodaysInstalled);
+    console.log(this.pendinginstallation);
+    console.log(this.totalInstalled);
+    if(this.isTodaysInstalled){
+      this.selected = this.model.day + '/' + this.model.month + '/' + this.model.year;
+      this.getVehiclesbystatus(0,this.isTodaysInstalled, this.selected);
+      this.currentPageTitle = "Today's Installed";
+      return false;
+    }
+    if(this.pendinginstallation){
+      this.getAllPendingVehicles(0,this.pendinginstallation);
+      this.currentPageTitle = "Pending Installation";
+      return false;
+    }
+    if(this.totalInstalled){
+      this.getAllPendingVehicles(0,this.totalInstalled);
+      this.currentPageTitle = "Total Installed";
+    }
+    else{
+      this.getVehicles(0, ' ');
+      this.currentPageTitle = "Vehicles";
+    }
+     console.log(this.currentPageTitle);
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    if(this.isTodaysInstalled){
+      this.selected = this.model.day + '/' + this.model.month + '/' + this.model.year;
+      this.getVehiclesbystatus(this.p - 1,this.isTodaysInstalled, this.selected);
+      return false;
+    }
+    if(this.pendinginstallation){
+      this.getAllPendingVehicles(this.p - 1,this.pendinginstallation);
+      return false;
+    }
+    if(this.totalInstalled){
+      this.getAllPendingVehicles(this.p - 1,this.totalInstalled);
+    }
+    else{
+    this.getVehicles(this.p - 1, this.searchValue);
+    }
+
+
+    
+  }
+
+  searchData() {
+    if (this.searchValue !== undefined) {
+      this.getVehicles(0, this.searchValue);
+      this.showSearchClear = (this.searchValue.length > 4) ? true : false;
+    }
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.showSearchClear = false;
+    this.searchData();
+  }
+
+  changeResults() {
+    this.isTodaysInstalled = false;;
+    this.pendinginstallation = false;
+    this.totalInstalled = false;
+    this.getVehicles(0, ' ');
+    this.currentPageTitle = "Vehicles";
+  }
+  getVehiclesbystatus(page, status, selectdate, ){
+    this.vehicleApiService.getAllByStatus(page, 10, status, selectdate).subscribe((data:  PaginationModel) => {
+      this.vehicleArray  =  data.content;
+      this.page = data.page;
+    });
+  }
+
+  getAllPendingVehicles(page, status){
+    this.vehicleApiService.getAllPending(page, 10, status).subscribe((data:  PaginationModel) => {
+      this.vehicleArray  =  data.content;
+      this.page = data.page;
+    });
+  }
+
+  getVehicles(page: number, searchValue: string) {
+    this.vehicleApiService.getAll(page, 10, searchValue).subscribe((data:  PaginationModel) => {
+      this.vehicleArray  =  data.content;
+      this.page = data.page;
+    });
+  }
+  
+  openVehicle() {
+    const modalRef = this.modalService.open(VehicleComponent, {backdrop: 'static', keyboard: false});
+    modalRef.result.then((result) => {
+      if (result === 'refreshContent') {
+        this.getVehicles(0, ' ');
+      }
+    }).catch((error) => {
+    });
+  }
+
+  editVehicle(vehicle: Vehicle) {
+    const modalRef = this.modalService.open(VehicleComponent, {backdrop: 'static', keyboard: false});
+    modalRef.componentInstance.rcNumber = vehicle.rcNumber;
+    modalRef.result.then((result) => {
+      if (result === 'refreshContent') {
+        this.getVehicles(0, ' ');
+      }
+    }).catch((error) => {
+    });
+  }
+
+  
+  omitSpecialChar(event)
+  {
+    var k;  
+    k = event.charCode;
+    return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || (k >= 48 && k <= 57));
+  }
+  
+  onlyAllowNumbers(event)
+  {
+    var k;  
+    k = event.charCode;
+    return((k >= 48 && k <= 57));
+  }
+}

@@ -1,0 +1,54 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-10 m-0 p-0">
+          <a class="active"><img src="assets/images/device_deport_icon.png">ROUTE DEVIATION</a>
+          <div class="text_align">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+   <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/dashboard']" routerLinkActive="active">Home</a></li>
+           <li class="breadcrumb-item" aria-current="page">Route Deviation</li>
+        </ol>
+      </nav>
+<div _ngcontent-c17="" class="row filter_alignment"><div _ngcontent-c17="" class="col-3 m-0 p-0"><div _ngcontent-c17="" class="form-group"><input _ngcontent-c17="" aria-describedby="emailHelp" class="filter_style form-control" placeholder="Search RC Number / Serial Number" type="text"></div></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><div _ngcontent-c17="" class="col-3 ng-star-inserted"><div _ngcontent-c17="" class="form-group"><input _ngcontent-c17="" aria-describedby="emailHelp" class="filter_style form-control" placeholder="Select Date" type="text"></div></div></div>
+  <div style="overflow-y:auto;">
+  <table class="table table-borderless table_today_installed table-fixed">
+    <thead class="thead-bg">
+      <tr>
+        <th>Vehicle Number</th>
+        <th class="number">Driver Name</th>
+        <th>Location</th>
+        <th>Deviation Date Time</th>
+        <th>Geo Location </th>
+      </tr>
+  </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+        <tr *ngFor="let routeDeviation of routeDeviationArray | paginate: { id: 'routeDeviationList', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+          <td class="align-middle">{{routeDeviation.rcNumber}}</td>
+          <td class="number align-middle">{{routeDeviation.driverName}}</td>
+          <td class="align-middle">{{routeDeviation.location}}</td>
+          <td class="align-middle">{{routeDeviation.deviationTime}}</td>
+          <td class="align-middle">{{routeDeviation.geoLocation}}</td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="row">
+    <div style="margin:0px auto;">
+      <pagination-controls id="routeDeviationList" class="pagination" (pageChange)="pageChanged($event)" maxSize="9"
+        directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+      </pagination-controls>
+    </div>
+  </div>
+</div>
+</div>

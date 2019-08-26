@@ -1,0 +1,43 @@
+import { Component, OnInit } from '@angular/core';
+import { VehicleApiService } from '../../shared/vehicles/services/vehicle.api.service';
+import { PaginationModel } from '../../shared/pagination.model';
+import { LiveVehicle } from '../../shared/vehicles/livevehicle.model';
+
+@Component({
+  selector: 'app-operational-reports',
+  templateUrl: './operational-reports.component.html',
+  styleUrls: ['./operational-reports.component.css']
+})
+export class OperationalReportsComponent implements OnInit {
+
+  lat = 17.43759656018254;
+  lng = 78.39243650125854;
+  iconURL = '/assets/images/ic_auto.png';
+
+  liveVehicleArray: Array<LiveVehicle> = [];
+
+  constructor(private vehicleApiService: VehicleApiService) { }
+
+  ngOnInit() {
+    this.getLiveVehicles();
+  }
+
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`);
+  }
+
+  mapClicked($event: MouseEvent) {
+    console.log($event);
+  }
+
+  markerDragEnd(m: Marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+
+  getLiveVehicles() {
+    this.vehicleApiService.getLiveVehicles().subscribe((data: PaginationModel) => {
+      this.liveVehicleArray = data.content;
+    });
+  }
+
+}

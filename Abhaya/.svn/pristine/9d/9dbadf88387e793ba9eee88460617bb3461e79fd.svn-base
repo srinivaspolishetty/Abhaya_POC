@@ -1,0 +1,29 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
+})
+export class HeaderComponent implements OnInit {
+
+  showMenuFlag = false;
+  showProfileFlag = false;
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+  }
+
+  toogleHeader() {
+    this.showMenuFlag = !this.showMenuFlag;
+  }
+
+  toogleProfileHeader() {
+    this.showProfileFlag = !this.showProfileFlag;
+  }
+
+  navigateDashBoard() {
+    this.router.navigate(['/rta/dashboard']);
+  }
+}

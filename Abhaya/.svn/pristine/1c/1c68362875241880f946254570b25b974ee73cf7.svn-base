@@ -1,0 +1,17 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-vehicleauthdrivers',
+  templateUrl: './vehicleauthdrivers.component.html',
+  styleUrls: ['./vehicleauthdrivers.component.css']
+})
+export class VehicleauthdriversComponent implements OnInit {
+
+  @Input() vehicleIotNumber;
+  constructor(public activeModal: NgbActiveModal) { }
+
+  ngOnInit() {
+  }
+
+}

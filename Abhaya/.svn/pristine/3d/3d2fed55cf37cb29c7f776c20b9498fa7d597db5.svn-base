@@ -1,0 +1,67 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active" href="#home"><img src="assets/images/device_deport_icon.png">DRIVER DUTY DETAILS</a>
+          <div class="text_align">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row filter_alignment">
+    <div class="col-3 m-0 p-0">
+      <div class="form-group">
+        <input type="text" class="filter_style form-control" aria-describedby="emailHelp"
+          placeholder="Search DL Number / RFID Number" [(ngModel)]="searchValue" (keyup)="searchData();">
+          <button type="button" class="btn_close close"aria-label="Close">
+          <span aria-hidden="true" (click)="clearSearch();" *ngIf="showSearchClear">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+      <div class="input-group-append">
+        <input type="text" class="filter_style form-control" readOnly placeholder="yyyy-mm-dd" name="dp" 
+        [(ngModel)]="model" (dateSelect)="changeDate();" [maxDate]="maxDate" ngbDatepicker #d="ngbDatepicker">
+        
+          <button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button"> <i class="fa fa-calendar" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-borderless table_today_installed" style="width:100%">
+    <thead class="thead-bg">
+      <tr>
+      	<th>Vehicle Number</th>
+        <th>Driver DL</th>
+        <th>Driver Name</th>
+        <th>Driver Contact</th>
+        <th>Duty Date</th>
+        <th>Duty Time</th>
+        <th>RFID</th>
+      </tr>
+    </thead>
+    <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+      <tr *ngFor="let driverDuty of driverDutyArray | paginate: { id: 'driverDutyList', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+        <td class="align-middle"><img src="assets/images/SVG/ic_deviceInstalled.svg"><span> {{driverDuty.rcNumber}} </span></td>
+        <td class="align-middle">{{driverDuty.dlNumber}}</td>
+        <td class="align-middle">{{driverDuty.driverName}}</td>
+        <td class="align-middle">{{driverDuty.driverContactNumber}}</td>
+        <td class="align-middle">{{driverDuty.packetDate}}</td>
+        <td class="align-middle">{{driverDuty.packetTime}}</td>
+        <td class="align-middle">{{driverDuty.rfId}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div style="margin:0px auto;">
+      <pagination-controls id="driverDutyList" class="pagination" (pageChange)="pageChanged($event)" maxSize="6"
+        directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+      </pagination-controls>
+    </div>
+  </div>
+</div>

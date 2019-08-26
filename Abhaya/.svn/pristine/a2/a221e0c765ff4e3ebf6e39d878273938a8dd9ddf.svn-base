@@ -1,0 +1,39 @@
+<div class="col-4 m-0 p-0" *ngFor="let tripDetails of tripDetailsArray">
+  <div class="card_boxshadow_alert">
+    <div class="alert_details m-0 p-0">
+      <h5>Vehicle No: {{tripDetails.rcNumber}}</h5>
+    </div>
+    <div class="row row_top m-0 p-0">
+      <div class="passport col-4">
+        <img src="assets/images/Driver.png">
+      </div>
+      <div class=" details_text col-8">
+        <h6>Owner Name</h6>
+        <h5>{{tripDetails.ownerName}}</h5>
+        <h6>Mobile Number</h6>
+        <h5>{{tripDetails.ownerContactNumber}}</h5>
+        <h6>Address</h6>
+        <h5>{{tripDetails.vehicleAddress}}</h5>
+      </div>
+    </div>
+    <hr class="hr_custom">
+    <div class="alert_details m-0 p-0">
+      <h5>Driver Details</h5>
+    </div>
+    <div class="row m-0 p-0">
+      <div class="passport col-4">
+        <img src="assets/images/SVG/ic_deviceInstalled.svg">
+      </div>
+      <div class=" details_text col-8">
+        <h6>Driver Name</h6>
+        <h5>{{tripDetails.driverName}}</h5>
+        <h6>DL Number</h6>
+        <h5>{{tripDetails.dlNumber}}</h5>
+        <h6>Mobile Number</h6>
+        <h5>{{tripDetails.driverContactNumber}}</h5>
+        <h6>Address</h6>
+        <h5>{{tripDetails.driverAddress}}</h5>
+      </div>
+    </div>
+  </div>
+</div>

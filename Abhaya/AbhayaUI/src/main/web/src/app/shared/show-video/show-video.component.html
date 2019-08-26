@@ -1,0 +1,37 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active icon_alignment text_align">
+            <!-- <i class="fa fa-pie-chart" aria-hidden="true"></i>
+ -->            <img class="img_topnav" src="assets/images/SVG/ic_VideoStreaming_blue.svg"><span>LIVE VIDEO STREAMING</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="container dashboard_top">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+          <a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page"><a>Trip Management</a></li>
+        <li class="breadcrumb-item" aria-current="page">Live VIdeo Streaming</li>
+      </ol>
+    </nav>
+    <div class="row m-0 p-0">
+      <div class="col-12 col-sm-4 m-0 p-0" *ngFor="let panicAlert of panicAlertArray">
+        <div class="row m-0 p-0">
+          <div id="googleMap" class="closed_trip_height video_height">
+            <iframe [src]="template +'/'+ panicAlert.citizenMobileNumber | safe" allow="geolocation; microphone; camera; *;" width="100%" height="300px"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+       <div *ngIf="panicAlertArray == null || panicAlertArray.length == 0" class="no_videos"><h6>Currently No Panic Videos</h6></div>
+  </div>
+</div>

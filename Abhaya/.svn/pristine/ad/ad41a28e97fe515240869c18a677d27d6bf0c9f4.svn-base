@@ -1,0 +1,146 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewregistrationComponent } from '../newregistration/newregistration.component';
+import { Router } from '@angular/router';
+import { VehicleApiService } from '../../shared/vehicles/services/vehicle.api.service';
+import { PaginationModel } from '../../shared/pagination.model';
+import { PageModel } from '../../shared/page.model';
+import { Vehicle } from '../../shared/vehicles/vehicle.model';
+import { DashBoardApiService } from './services/dashboard.api.service';
+import { VehicleInstallSummary } from './vehicleInstallSummary.model';
+import { VehicleStoppageSummary } from './vehicleStoppageSummary.model';
+import { HorizontalBarChart } from '../../shared/util/horizontalbar';
+import { ToasterService } from '../../shared/util/toaster.service';
+import { District } from '../../shared/util/district.model';
+import { City } from '../../shared/util/city.model';
+import { MastersServicesApi } from '../../shared/util/services/masters.api';
+import { UserDetails } from '../../login/userdetails.model';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent implements OnInit {
+
+  vehicleArray: Array<Vehicle> = [];
+
+  page: PageModel;
+
+  vehicleInstallSummary: VehicleInstallSummary;
+
+  vehicleStoppageSummary: VehicleStoppageSummary;
+
+  horizontalBarChart: HorizontalBarChart;
+
+  districtModel: any;
+  cityModel: any;
+  districtArray: Array<District> = [];
+  cityArray: Array<City> = [];
+  userDetails: UserDetails;
+  model: NgbDateStruct;
+
+  constructor(private modalService: NgbModal, private router: Router, private vehicleApiService: VehicleApiService,
+              private dashBoardApiService: DashBoardApiService, private toasterService: ToasterService,
+              private mastersServicesApi: MastersServicesApi, private calendar: NgbCalendar) {
+    this.vehicleInstallSummary = new VehicleInstallSummary(0, 0, 0);
+    this.vehicleStoppageSummary = new VehicleStoppageSummary(0, 0);
+    /* Graph Changes  https://github.com/swimlane/ngx-charts*/
+    this.horizontalBarChart = new HorizontalBarChart([636, 375], true, true, true, false, false, false, true,
+      'Label of X', 'Label of X');
+    this.horizontalBarChart.data = [
+                                { 'name': 'Anantapur', 'value': 8940000},
+                                { 'name': 'Chittor', 'value': 5000000},
+                                { 'name': 'East Godavari', 'value': 7200000},
+                                { 'name': 'Guntur', 'value': 5000000},
+                                { 'name': 'Ysr Kadapa', 'value': 7200000},
+                                { 'name': 'Krishna', 'value': 5000000},
+                                { 'name': 'Kurnool', 'value': 7200000},
+                                { 'name': 'Nellore', 'value': 5000000},
+                                { 'name': 'Prakasam', 'value': 7200000},
+                                { 'name': 'Srikakulam', 'value': 5000000},
+                                { 'name': 'Vishkapatnam', 'value': 7200000},
+                                { 'name': 'Vizianagaram', 'value': 5000000},
+                                { 'name': 'West Godavari', 'value': 7200000}
+                              ];
+    this.horizontalBarChart.colorScheme = { domain: ['#26a1ee'] };
+    // domain: ['#26a1ee', '#A10A28', '#C7B42C', '#AAAAAA']
+
+    this.userDetails = JSON.parse(localStorage.getItem('userdetails'));
+    this.districtModel = '';
+    this.cityModel = '';
+    this.model = this.calendar.getToday();
+  }
+
+  ngOnInit() {
+    this.getVehicles(0);
+    this.getVehicleIntsallationSummary();
+    this.getVehicleStoppageSummary();
+    this.getDistricts(this.userDetails.stateId);
+  }
+
+
+  getDistricts(value) {
+    if (value === '') {
+      this.districtArray = [];
+    }
+    this.districtModel = '';
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+
+  getCities(value) {
+    this.cityModel = '';
+    if (value === '') {
+      this.cityArray = [];
+    }
+    this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+      this.cityArray = data;
+    });
+  }
+
+  openRegistration() {
+    const modalRef = this.modalService.open(NewregistrationComponent, { windowClass: 'popup_alignment_dashBoard', backdrop: 'static',
+    keyboard: false });
+  }
+
+  navigateVehicle() {
+    this.router.navigate(['/rta/vehicles']);
+  }
+
+  getVehicles(page: number) {
+    this.vehicleApiService.getAll(page, 8, '', '', '').subscribe((data: PaginationModel) => {
+      this.vehicleArray = data.content;
+      this.page = data.page;
+    });
+  }
+
+  getVehicleIntsallationSummary() {
+    this.dashBoardApiService.getVehicleIntsallationSummary().subscribe((data: VehicleInstallSummary) => {
+      this.vehicleInstallSummary = data;
+    });
+  }
+
+  getVehicleStoppageSummary() {
+    this.dashBoardApiService.getVehicleStoppageSummary().subscribe((data: VehicleStoppageSummary) => {
+      this.vehicleStoppageSummary = data;
+    });
+  }
+
+  todayinstallednavigate() {
+    this.router.navigate(['/rta/vehicles', { 'isTodaysInstalled': true }]);
+  }
+  pendingNavigate() {
+    this.router.navigate(['/rta/vehicles', { 'pendinginstallation': false }]);
+  }
+  allInstalled() {
+    this.router.navigate(['/rta/vehicles', { 'totalInstalled': true }]);
+  }
+
+  onSelect(event) {
+    console.log(event);
+  }
+
+}

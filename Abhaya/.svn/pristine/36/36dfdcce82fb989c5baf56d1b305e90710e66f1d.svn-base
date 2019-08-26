@@ -1,0 +1,32 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { DriverApiService } from '.././services/driver.api.service';
+import { Driver } from '.././driver.model';
+
+@Component({
+  selector: 'app-driverdetailsview',
+  templateUrl: './driverdetailsview.component.html',
+  styleUrls: ['./driverdetailsview.component.css']
+})
+export class DriverdetailsviewComponent implements OnInit {
+
+  @Input() selectDriverDetails;
+  driverImage: string;
+  driverdata;
+  validImage = false;
+  constructor(public activeModal: NgbActiveModal) {
+   }
+   ngOnInit() {
+     console.log(this.selectDriverDetails);
+    this.driverdata = this.selectDriverDetails;
+    console.log(this.driverdata);
+    if(this.driverdata.image == undefined){
+      this.validImage = false;
+    }
+    else{
+      this.validImage = true;
+      this.driverImage = 'data:image/jpeg;base64,' + this.driverdata.image;
+    }
+  }
+
+}

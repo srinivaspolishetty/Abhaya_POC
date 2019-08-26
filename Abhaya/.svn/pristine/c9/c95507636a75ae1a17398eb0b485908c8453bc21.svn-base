@@ -1,0 +1,28 @@
+<div class="modal-content popup_width">
+    <div class="modal-header popup_size">
+     
+      <h5 class="modal-title">Raw Data Details</h5>
+      
+      <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <div class="row popup_size">
+      <div class="col-md-3">
+        <div class="modal-title rawdata_text"><b>ID:</b> {{selectedRawData.rawDataId}}</div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="modal-title rawdata_text"><b>IMEI No:</b> {{selectedRawData.imeiNumber}}</div>
+      </div>
+
+      <div class="col-md-4 p-0">
+        <div class="modal-title rawdata_text"><b>Serial No:</b> {{selectedRawData.serialNumber}}</div>
+      </div>
+      <div class="col-md-12 wordbreakall rawdata">
+          {{selectedRawData.rawData}}
+      </div>
+    </div>
+    </div>
+  </div>

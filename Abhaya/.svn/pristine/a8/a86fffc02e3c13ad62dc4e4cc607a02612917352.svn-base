@@ -1,0 +1,19 @@
+import { Role } from './roles.model';
+
+export class UserDetails {
+    public id: Number;
+    public username: string;
+    public firstName: string;
+    public lastName: string;
+    public mobileNumber: string;
+    public isEnabled: boolean;
+    public emailId: string;
+    public departmentId: number;
+    public departmentName: string;
+    public stateId: number;
+    public stateName: string;
+    public createDate: Date;
+    public userRoles: Role[];
+
+    constructor() {}
+}

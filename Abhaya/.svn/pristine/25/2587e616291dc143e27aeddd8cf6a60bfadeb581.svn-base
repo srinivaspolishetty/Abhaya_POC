@@ -1,0 +1,153 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HorizontalBarChart } from '../util/horizontalbar';
+import { PieChart } from '../util/piechart';
+import { LiveTrackingServiceAPI } from './services/livetracking.api.service';
+import { VehicleApiService } from '../vehicles/services/vehicle.api.service';
+import { District } from '../util/district.model';
+import { City } from '../util/city.model';
+import { MastersServicesApi } from '../util/services/masters.api';
+import { UserDetails } from '../../login/userdetails.model';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import {PanicSummary} from '../panic-alerts-list/panicsummary.model';
+
+@Component({
+  selector: 'app-livetracking',
+  templateUrl: './livetracking.component.html',
+  styleUrls: ['./livetracking.component.css']
+})
+export class LivetrackingComponent implements OnInit {
+  districtModel: any;
+  cityModel: any;
+  districtArray: Array<District> = [];
+  panicSummary: Array<PanicSummary> = [];
+  videoPanicSummary: PanicSummary = new PanicSummary();
+  webPanicSummary: PanicSummary = new PanicSummary();
+  cityArray: Array<City> = [];
+  userDetails: UserDetails;
+  model: NgbDateStruct;
+
+
+
+  horizontalBarChart: HorizontalBarChart = new HorizontalBarChart([636, 375], true, true, true, false, false, false, true,
+      'Label of X', 'Label of Y');
+  pieChart: PieChart = new PieChart([400, 280], true, false, false, true, false, 'below', '0.35', '');
+
+  // https://plnkr.co/edit/BooZfKJz0nLATpTe1SwH?p=preview
+  constructor(private router: Router, private liveTrackingServiceAPI: LiveTrackingServiceAPI,
+              private vehicleApiService: VehicleApiService, private mastersServicesApi: MastersServicesApi,
+              private calendar: NgbCalendar) {
+
+    this.horizontalBarChart.data = [
+                                { 'name': 'Anantapur', 'value': 8940000},
+                                { 'name': 'Chittor', 'value': 5000000},
+                                { 'name': 'East Godavari', 'value': 7200000},
+                                { 'name': 'Guntur', 'value': 5000000},
+                                { 'name': 'Ysr Kadapa', 'value': 7200000},
+                                { 'name': 'Krishna', 'value': 5000000},
+                                { 'name': 'Kurnool', 'value': 7200000},
+                                { 'name': 'Nellore', 'value': 5000000},
+                                { 'name': 'Prakasam', 'value': 7200000},
+                                { 'name': 'Srikakulam', 'value': 5000000},
+                                { 'name': 'Vishkapatnam', 'value': 7200000},
+                                { 'name': 'Vizianagaram', 'value': 5000000},
+                                { 'name': 'West Godavari', 'value': 7200000}
+                              ];
+    this.horizontalBarChart.colorScheme = { domain: ['#26a1ee'] };
+
+    this.pieChart.data = [
+      {'name': 'Running', 'value': 89400},
+      { 'name': 'Stopped', 'value': 5000},
+      {'name': 'Completed', 'value': 720}
+    ];
+
+    this.pieChart.colorScheme =  {domain: [ '#5AA454','#A10A28','#C7B42C', '#AAAAAA']};
+
+    this.userDetails = JSON.parse(localStorage.getItem('userdetails'));
+    this.districtModel = '';
+    this.cityModel = '';
+    this.model = this.calendar.getToday();
+  }
+
+  vehicleAuthDetails;
+  authValue;
+  unAuthValue;
+  totalAuthCount;
+  ngOnInit() {
+    this.getVehicleAuthDetails();
+    this.getDistricts(this.userDetails.stateId);
+    this.getPanicSummary();
+  }
+  openTrip() {
+    this.router.navigate(['/rta/closedtrips']);
+  }
+
+
+  getDistricts(value) {
+    if (value === '') {
+      this.districtArray = [];
+    }
+    this.videoPanicSummary = new PanicSummary();
+    this.webPanicSummary = new PanicSummary();
+    this.getPanicSummary();
+    this.districtModel = '';
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+
+  getCities(value) {
+    this.cityModel = '';
+    if (value === '') {
+      this.cityArray = [];
+    }
+    this.videoPanicSummary = new PanicSummary();
+    this.webPanicSummary = new PanicSummary();
+    this.getPanicSummary();
+    this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+      this.cityArray = data;
+    });
+  }
+
+  getPanicSummary() {
+    this.liveTrackingServiceAPI.getPanicSummary('', this.districtModel, this.cityModel).subscribe((data: PanicSummary[]) => {
+      this.panicSummary = data;
+      for (let count = 0; count < this.panicSummary.length; count++) {
+        if (this.panicSummary[count].eventSource === 'WEB') {
+            if (this.panicSummary[count].isClosed) {
+                this.webPanicSummary.closedCount = this.panicSummary[count].count;
+            } else {
+                this.webPanicSummary.openCount = this.panicSummary[count].count;
+            }
+        } else {
+            if (this.panicSummary[count].isClosed) {
+                this.videoPanicSummary.closedCount = this.panicSummary[count].count;
+            } else {
+                this.videoPanicSummary.openCount = this.panicSummary[count].count;
+            }
+        }
+
+      }
+    });
+  }
+  navigateToPanic(eventType, isClosed) {
+      this.router.navigate(['/rta/panicalertslist'], { queryParams: { eventType: eventType, isClosed: isClosed } });
+   }
+  getVehicleAuthDetails() {
+    this.liveTrackingServiceAPI.getVehicleAuthDetails().subscribe((data: any) => {
+      this.vehicleAuthDetails  =  data;
+
+      for (let i = 0; i < this.vehicleAuthDetails.length; i++) {
+        if (this.vehicleAuthDetails[i].authType === 'Auth') {
+          this.authValue = this.vehicleAuthDetails[i].count;
+        } else {
+          this.unAuthValue = this.vehicleAuthDetails[i].count;
+        }
+      }
+    });
+    this.vehicleApiService.getAll(0, 10, '', '', '').subscribe((data: any) => {
+      this.vehicleAuthDetails  =  data.page;
+      this.totalAuthCount = data.page.totalElements;
+    });
+  }
+}

@@ -1,0 +1,114 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+           <a class="active icon_alignment text_align"><img style="width:25px;" class="img_topnav" src="assets/images/SVG/ic_administrative_blue.svg"><span>ADMINISTRATIVE HIERARCHY</span></a>
+          <div class="text_align">
+          </div>
+        </div>
+         <div class="col-1 m-0 p-0" *ngIf="!isTodaysInstalled">
+          <div class="add_btn">
+            <button type="button" class="add_btn" (click)="openAdministrative()">
+              <span>+</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="container dashboard_secondrow container_height">
+   <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" aria-current="page">Home</li>
+        </ol>
+      </nav>
+  <nav class="navbar navbar-expand-lg bg_form_nav">
+  <div class="collapse navbar-collapse bg_form_nav" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Andhra Pradesh
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="active dropdown-item" >Andhra Pradesh</a>
+          <a class="dropdown-item">Telangana</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          District
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item">Guntur</a>
+          <a class="dropdown-item">Krishna</a>
+          <a class="dropdown-item">Prakasam</a>
+        </div>
+      </li>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          City
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item">Guntur</a>
+          <a class="dropdown-item">Vijayawada</a>
+          <a class="dropdown-item">Narasaraopet</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="table-top-alignment">
+<table class="table table-borderless table_today_installed">
+      <thead class="thead-bg">
+        <tr>
+          <th>SNO</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Created By</th>
+          <th>Created Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+          <tr>
+          <td class="align-middle">01</td>
+          <td class="align-middle">AD</td>
+          <td class="align-middle">Andhra Pradesh</td>
+          <td class="align-middle">Raj Mohan</td>
+          <td class="align-middle">Dec 20th,2018</td>
+          <td class="action align-middle"><a class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        </tr>
+     <!--    <tr *ngIf="modemdetails == null || modemdetails.length == 0">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <span style="color:red;">No Data Found</span>
+          </td>
+          <td></td>
+          <td></td>
+        </tr> -->
+      </tbody>
+    </table>
+</div>
+<!-- <div class="row m-0 p-0 bg_form_nav text_nav">
+ <div class="col-1 form_spacing">
+        <div class="text_align_img">
+        <a [routerLink]="['/voter/dashboard']" routerLinkActive="active"><img src="assets/images/ic_Amaravathi.svg"><span>State</span></a>
+      </div>
+    </div>
+    <div class="col-1">
+      <div class="text_align_img">
+  <a [routerLink]="['/voter/dashboard']" routerLinkActive="active"><img src="assets/images/ic_Industries.svg"><span>District</span></a>
+   </div>  
+ </div>
+      <div class="col-1 form_spacing">
+        <div class="text_align_img">
+        <a [routerLink]="['/voter/dashboard']" routerLinkActive="active"><img src="assets/images/ic_Amaravathi.svg"><span>City</span></a>
+      </div>
+    </div>
+ 
+</div> -->
+</div>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-ic_modemdetails">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="ic_modemdetails" clip-path="url(#clip-ic_modemdetails)">
+    <g id="router" transform="translate(0.5 -5.692)">
+      <path id="Path_23" data-name="Path 23" d="M13.067,350.785H0v2.1a.7.7,0,0,0,.7.7H12.367a.7.7,0,0,0,.7-.7ZM1.4,353.118a.933.933,0,1,1,.933-.933A.933.933,0,0,1,1.4,353.118Zm4.433-.7h-2.8a.233.233,0,0,1,0-.467h2.8a.233.233,0,0,1,0,.467Zm1.633.233H7v-.933h.467Zm.933,0H7.933v-.933H8.4Zm.933,0H8.867v-.933h.467Zm.933,0H9.8v-.933h.467Zm.933,0h-.467v-.933H11.2Zm.933,0h-.467v-.933h.467Zm0,0" transform="translate(0 -336.893)" fill="#fff"/>
+      <path id="Path_26" data-name="Path 26" d="M2.675,207.332l-.707,3.185H14.921l-.707-3.186a.7.7,0,0,0-.685-.548H3.36a.7.7,0,0,0-.685.548Zm9.969-.081h.933a.233.233,0,0,1,0,.467h-.933a.233.233,0,0,1,0-.467Zm-.7.233a.233.233,0,0,1-.233.233h-8.4a.233.233,0,0,1,0-.467h8.4A.233.233,0,0,1,11.945,207.484Zm0,0" transform="translate(-1.911 -197.092)" fill="#fff"/>
+      <path id="Path_27" data-name="Path 27" d="M32.933,383.252a.467.467,0,1,1-.467-.467A.467.467,0,0,1,32.933,383.252Zm0,0" transform="translate(-31.067 -367.96)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

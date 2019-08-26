@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 14 14" style="enable-background:new 0 0 14 14;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#6742C0;}
+	.st1{fill:#FFFFFF;}
+	.st2{clip-path:url(#SVGID_2_);}
+</style>
+<g>
+	<g>
+		<path class="st0" d="M6.3,1.5H4.1C4,1.5,3.9,1.4,3.9,1.3S4,1.1,4.1,1.1h2.2c0.1,0,0.2,0.1,0.2,0.2S6.4,1.5,6.3,1.5z"/>
+		<path class="st0" d="M7.9,1.5H7.6c-0.1,0-0.2-0.1-0.2-0.2s0.1-0.2,0.2-0.2h0.2c0.1,0,0.2,0.1,0.2,0.2S8,1.5,7.9,1.5z"/>
+		<path class="st0" d="M5.5,12.9H5c-0.3,0-0.6-0.3-0.6-0.6v-0.1c0-0.3,0.3-0.6,0.6-0.6h0.5c0.3,0,0.6,0.3,0.6,0.6v0.1
+			C6.1,12.7,5.8,12.9,5.5,12.9z M5,12c-0.1,0-0.2,0.1-0.2,0.2v0.1c0,0.1,0.1,0.2,0.2,0.2h0.5c0.1,0,0.2-0.1,0.2-0.2v-0.1
+			c0-0.1-0.1-0.2-0.2-0.2H5z"/>
+		<path class="st0" d="M8.2,13.6H2.3c-0.4,0-0.8-0.4-0.8-0.8V1.2c0-0.4,0.4-0.8,0.8-0.8h5.9C8.6,0.4,9,0.8,9,1.2v11.6
+			C9,13.2,8.6,13.6,8.2,13.6z M2.3,0.9C2.1,0.9,1.9,1,1.9,1.2v11.6c0,0.2,0.2,0.4,0.4,0.4h5.9c0.2,0,0.4-0.2,0.4-0.4V1.2
+			c0-0.2-0.2-0.4-0.4-0.4H2.3z"/>
+		<path class="st0" d="M8.7,11.4h-7c-0.1,0-0.2-0.1-0.2-0.2V2c0-0.1,0.1-0.2,0.2-0.2h7C8.9,1.7,9,1.8,9,2v9.2
+			C9,11.3,8.9,11.4,8.7,11.4z M1.9,11h6.6V2.2H1.9V11z"/>
+	</g>
+	<circle class="st1" cx="9.2" cy="7.1" r="3.7"/>
+	<g>
+		<g>
+			<defs>
+				<rect id="SVGID_1_" x="5.8" y="3.5" width="6.9" height="6.9"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+			</clipPath>
+			<g id="ic_Reports" class="st2">
+				<g id="pie-chart_1_" transform="translate(0.423 0.5)">
+					<path id="Path_28" class="st0" d="M10.6,6.5c0,0.3-0.1,0.7-0.3,1l1,1c0.9-1.2,0.9-2.9,0-4.1l-1,1C10.5,5.8,10.6,6.2,10.6,6.5z"
+						/>
+					<path id="Path_29" class="st0" d="M9.8,8C9,8.5,7.9,8.3,7.3,7.5C7.2,7.3,7.1,7.1,7,6.8H5.6c0.2,1.8,1.8,3.1,3.5,2.9
+						c0.6,0,1.2-0.3,1.7-0.7L9.8,8z"/>
+					<path id="Path_30" class="st0" d="M7,6.2c0.2-0.9,1.1-1.6,2.1-1.4c0.2,0,0.4,0.1,0.6,0.3l1-1C9.4,2.9,7.4,3.1,6.3,4.5
+						C5.9,5,5.6,5.6,5.6,6.2L7,6.2L7,6.2z"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

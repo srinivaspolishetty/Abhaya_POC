@@ -1,0 +1,51 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {NgxToggleModule} from 'ngx-toggle';
+import { AgmDirectionModule } from 'agm-direction';
+import { AgmCoreModule } from '@agm/core';
+import { FooterComponent } from './footer/footer.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { DriversComponent } from './drivers/drivers.component';
+import { DriverDutyComponent } from './driver-duty/driver-duty.component';
+import { VehicleComponent } from './vehicles/vehicle/vehicle.component';
+import { TripTrackingComponent } from './trip-tracking/trip-tracking.component';
+import { TripDetailsComponent } from './trip-details/trip-details.component';
+import { DriverComponent } from './drivers/driver/driver.component';
+import { ClosedTripsComponent } from './trip-details/closed-trips/closed-trips.component';
+import { PanicAlertsListComponent } from './panic-alerts-list/panic-alerts-list.component';
+import { SafePipe } from './util/safepipe ';
+import { OpentripsComponent } from './trip-details/opentrips/opentrips.component';
+import { TripVehicleDetailsComponent } from './trip-details/trip-vehicle-details/trip-vehicle-details.component';
+import { PanicAlertComponent } from './panic-alerts-list/panic-alert/panic-alert.component';
+import { SuspiciousVehiclesComponent } from './suspicious-vehicles/suspicious-vehicles.component';
+import { RouteDeviationComponent } from './route-deviation/route-deviation.component';
+import { SuspiciousVehicleComponent } from './suspicious-vehicles/suspicious-vehicle/suspicious-vehicle.component';
+import { UsermanagementComponent } from './usermanagement/usermanagement.component';
+import { UsersComponent } from './usermanagement/users/users.component';
+import { TripComponent } from './trip-tracking/trip/trip.component';
+
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgbModule,
+    NgxPaginationModule,
+    NgxToggleModule,
+    AgmCoreModule,
+    AgmDirectionModule
+  ],
+  declarations: [FooterComponent, VehiclesComponent, DriversComponent, DriverDutyComponent,
+     VehicleComponent, TripTrackingComponent, TripDetailsComponent, DriverComponent, ClosedTripsComponent, PanicAlertsListComponent,
+    SafePipe, OpentripsComponent, TripVehicleDetailsComponent, PanicAlertComponent, SuspiciousVehiclesComponent, RouteDeviationComponent,
+    SuspiciousVehicleComponent,
+    UsermanagementComponent,
+    UsersComponent,
+    TripComponent],
+  exports: [FooterComponent],
+  entryComponents: [VehicleComponent, DriverComponent, SuspiciousVehicleComponent, UsersComponent, TripComponent]
+})
+export class SharedModule { }

@@ -1,0 +1,52 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PanicAlert } from '../panicalert.model';
+import { PanicApiService } from '../services/panic.alert.services';
+import { PaginationModel } from '../../pagination.model';
+import { environment } from '../../../../environments/environment';
+import { TripDetailsApiService } from '../../trip-details/services/tripdetails.api.service';
+import { TripDetails } from '../../trip-details/tripdetails.model';
+
+@Component({
+  selector: 'app-panic-alert',
+  templateUrl: './panic-alert.component.html',
+  styleUrls: ['./panic-alert.component.css']
+})
+export class PanicAlertComponent implements OnInit {
+
+  tripId: number;
+   template = '';
+  panicAlertArray: Array<PanicAlert> = [];
+  tripDetailsArray: Array<TripDetails> = [];
+
+  isDriver = false;
+  constructor(private activatedRoute: ActivatedRoute, private panicApiService: PanicApiService,
+    private tripDetailsApiService: TripDetailsApiService) { }
+
+  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const rcNumber = params['rcNumber'];
+      this.tripId = params['tripId'];
+      const citizenMobileNumber = params['citizenMobileNumber'];
+      this.template = `${environment.apiBase}?vehicleNumber=${rcNumber}&citizenMobileNumber=${citizenMobileNumber}&isShared=true`;
+      this.getTripDetails();
+      // this.template = `${environment.apiBase}?vehicleNumber=KA05HU1120&citizenMobileNumber=9848491839&isShared=true`;
+    });
+  }
+
+  toggleDriver(isDriver: boolean) {
+    this.isDriver = isDriver;
+  }
+  getTripDetails() {
+    this.tripDetailsApiService.getTripDetails(this.tripId).subscribe((data: TripDetails) => {
+      this.tripDetailsArray.push(data);
+    });
+  }
+
+  // getPanicAlert() {
+  //   this.panicApiService.getPanicAlert(this.distressId).subscribe((data:  PaginationModel) => {
+  //     this.panicAlertArray  =  data.content;
+  //   });
+  // }
+
+}

@@ -1,0 +1,25 @@
+import { Component, OnInit } from '@angular/core';
+import { MastersServicesApi } from '../util/services/masters.api';
+
+@Component({
+  selector: 'app-usermanagement',
+  templateUrl: './usermanagement.component.html',
+  styleUrls: ['./usermanagement.component.css']
+})
+export class UsermanagementComponent implements OnInit {
+
+  constructor(private mastersServicesApi: MastersServicesApi) {
+    this.getStates();
+   }
+
+  ngOnInit() {
+  }
+  userDetails = [];
+  getStates() {
+    this.mastersServicesApi.gerUsers().subscribe((data:any) => {
+      this.userDetails  =  data.content;
+      console.log(this.userDetails);
+    });
+  }
+
+}

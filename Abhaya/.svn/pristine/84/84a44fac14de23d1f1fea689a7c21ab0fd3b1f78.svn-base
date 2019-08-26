@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <clipPath id="clip-ic_PanicAlerts_device">
+      <rect width="18" height="18"/>
+    </clipPath>
+  </defs>
+  <g id="ic_PanicAlerts_device" clip-path="url(#clip-ic_PanicAlerts_device)">
+    <path id="Path_23" data-name="Path 23" d="M16.706,350.785H0v2.685a.9.9,0,0,0,.895.895H15.811a.9.9,0,0,0,.895-.895ZM1.79,353.768a1.193,1.193,0,1,1,1.193-1.193A1.193,1.193,0,0,1,1.79,353.768Zm5.668-.895H3.878a.3.3,0,1,1,0-.6h3.58a.3.3,0,0,1,0,.6Zm2.088.3h-.6v-1.193h.6Zm1.193,0h-.6v-1.193h.6Zm1.193,0h-.595v-1.193h.6Zm1.193,0h-.595v-1.193h.6Zm1.193,0h-.6v-1.193h.6Zm1.193,0h-.6v-1.193h.6Zm0,0" transform="translate(0.6 -340.414)" fill="#f90"/>
+    <path id="Path_26" data-name="Path 26" d="M2.872,207.485l-.9,4.072h16.56l-.9-4.073a.9.9,0,0,0-.876-.7h-13a.9.9,0,0,0-.876.7Zm12.745-.1H16.81a.3.3,0,0,1,0,.6H15.617a.3.3,0,0,1,0-.6Zm-.895.3a.3.3,0,0,1-.3.3H3.685a.3.3,0,1,1,0-.6H14.424a.3.3,0,0,1,.3.3Zm0,0" transform="translate(-1.295 -201.783)" fill="#f90"/>
+    <path id="Path_27" data-name="Path 27" d="M33.193,383.382a.6.6,0,1,1-.6-.6A.6.6,0,0,1,33.193,383.382Zm0,0" transform="translate(-30.207 -371.221)" fill="#f64938"/>
+  </g>
+</svg>

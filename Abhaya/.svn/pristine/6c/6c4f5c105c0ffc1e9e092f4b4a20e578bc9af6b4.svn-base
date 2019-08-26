@@ -1,0 +1,44 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TripDetailsApiService } from '../services/tripdetails.api.service';
+import { TripDetails } from '../tripdetails.model';
+
+@Component({
+  selector: 'app-opentrips',
+  templateUrl: './opentrips.component.html',
+  styleUrls: ['./opentrips.component.css']
+})
+export class OpentripsComponent implements OnInit {
+
+  isClosedTrip = false;
+
+  template = '';
+
+  tripId: number;
+
+  renderOpts = {
+    suppressMarkers: true,
+  };
+  tripDetailsArray: Array<TripDetails> = [];
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private tripDetailsApiService: TripDetailsApiService) { }
+
+  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+        this.tripId = params['tripId'];
+        const rcNumber = params['rcNumber'];
+        const citizenMobileNumber = params['citizenMobileNumber'];
+        this.template = `http://111.93.16.251:8099?vehicleNumber=${rcNumber}&citizenMobileNumber=${citizenMobileNumber}&isShared=true`;
+        this.getTripDetails();
+      });
+  }
+  openPanicAlerts() {
+    this.router.navigate(['/police/panicalerts']);
+  }
+
+   getTripDetails() {
+    this.tripDetailsApiService.getTripDetails(this.tripId).subscribe((data: TripDetails) => {
+      this.tripDetailsArray.push(data);
+    });
+  }
+
+}

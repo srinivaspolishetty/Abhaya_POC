@@ -1,0 +1,77 @@
+<div class="row m-0 p-0 row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">          
+          <div class="">
+            <a class="icon_alignment text_align" [routerLink]="['/rta/livetracking']">
+              <!-- <i class="fa fa-map" aria-hidden="true"></i> -->
+              <img class="img_topnav" src="assets/images/SVG/ic_dashboard_blue.svg">
+              <span>MASTER DASHBOARD</span>
+            </a>
+          </div>
+                <div class="">
+            <a class="active icon_alignment text_align" [routerLink]="['/rta/operationalreports']">
+             <!--  <i class="fa fa-map" aria-hidden="true"></i> -->
+             <img class="img_topnav" src="assets/images/SVG/ic_google_map_blue.svg">
+              <span>GOOGLE MAP VIEW</span>
+            </a>
+          </div>
+          <a class="icon_alignment" [routerLink]="['/rta/dashboard']">
+            <!-- <i class="fa fa-pie-chart" aria-hidden="true"></i> -->
+            <img class="img_topnav" src="assets/images/SVG/ic_DeviceReport_blue.svg">
+            <span>DEVICE REPORT</span>
+          </a>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="container container_height">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page">Google Map View</li>
+      </ol>
+    </nav>
+
+
+    
+    <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCities(districtModel, $event)" [disabled]="isdisable == true">
+              <option value="" [selected]="!districtModel">Select District</option>
+              <option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <select class="filter_style form-control" [(ngModel)]="cityModel" name="cityId" (change)="cityChange($event);">
+              <option value="" [selected]="!cityModel">Select City</option>
+              <option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    <div class="row m-0 p-0">
+      <div id="googleMap" class="google_map_align">
+        <agm-map [zoom]="10" [latitude]="lat" [longitude]="lng" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)" (mapReady)="mapReady($event)">
+          <agm-marker *ngFor="let m of liveVehicleArray; let i = index" (markerClick)="clickedMarker(m.rcNumber, i, $event)" [latitude]="m.latitude"
+            [longitude]="m.langitude" [label]="" [markerDraggable]="false" [iconUrl]="m.image" (dragEnd)="markerDragEnd(m, $event)">
+            <agm-info-window>
+                <div class="map-tool-tip">
+                    <h6>Vehicle No: <span>{{m.rcNumber}}</span></h6><br>
+                    <h6>Location: <span>{{m.location}}</span></h6>
+                </div>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+import { Component, OnInit } from '@angular/core';
+import { LiveTrackingServiceAPI } from "../../livetracking/services/livetracking.api.service";
+
+@Component({
+  selector: 'app-tripandroutedeviation',
+  templateUrl: './tripandroutedeviation.component.html',
+  styleUrls: ['./tripandroutedeviation.component.css']
+})
+export class TripandroutedeviationComponent implements OnInit {
+
+  routeDeviationCount : number;
+  panicTotalCount : number;
+  tripClosedCount : number;
+  tripOpenCount : number;
+  totalTripCount : number;
+
+  constructor(private liveTrackingServiceAPI: LiveTrackingServiceAPI) { }
+
+  ngOnInit() {
+  }
+
+
+  getrouteDeviationCount(value){
+    this.liveTrackingServiceAPI.getRouteDeviationAndPanicCount(value, '', '')
+    .subscribe((data: any) => {
+      for(let i=0; i<data.length; i++){
+        if(data[i].type == 'routeDeviation'){
+          this.routeDeviationCount = data[i].count;
+        }
+        else if(data[i].type == 'distressDetails'){
+          this.panicTotalCount = data[i].count;
+        }
+      }
+      this.getTripSummary('false')
+    });
+  }
+  getTripSummary(value){
+    this.liveTrackingServiceAPI.getTripSummanyForDboard(value)
+    .subscribe((data: any) => {
+      for(let i=0; i<data.length; i++){
+        if(data[i].isClosed == true){
+          this.tripClosedCount = data[i].count;
+        }
+        else if(data[i].isClosed == false ){
+          this.tripOpenCount = data[i].count;
+        }
+      }
+      this.totalTripCount = this.tripClosedCount + this.tripOpenCount;
+    });
+  }
+
+}

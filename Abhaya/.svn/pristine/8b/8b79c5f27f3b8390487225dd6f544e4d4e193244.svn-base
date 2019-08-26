@@ -1,0 +1,36 @@
+import { Component, OnInit } from '@angular/core';
+import { MastersServicesApi } from "../util/services/masters.api";
+import { PageModel } from '../page.model';
+
+@Component({
+  selector: 'app-modemdetails',
+  templateUrl: './modemdetails.component.html',
+  styleUrls: ['./modemdetails.component.css']
+})
+export class ModemdetailsComponent implements OnInit {
+
+  public page: PageModel;
+  public p: number;
+
+  constructor(private mastersServicesApi:MastersServicesApi) {
+    this.page = new PageModel(0, 0, 0, 0);
+   }
+  modemdetails;
+  ngOnInit() {
+    this.getallmodemdetails(0);
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    this.getallmodemdetails(this.p - 1); // need to remove param
+  }
+
+  getallmodemdetails(page){
+    this.mastersServicesApi.getModemData(page, 10).subscribe((data:any) => {
+      this.modemdetails  =  data.content;
+      this.page = data.page;
+      console.log(this.modemdetails);
+    });
+  }
+
+}

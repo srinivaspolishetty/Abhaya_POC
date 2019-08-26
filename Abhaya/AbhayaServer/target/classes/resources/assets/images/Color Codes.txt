@@ -1,0 +1,23 @@
+Header Color: #774fcd
+
+Search bg: #7048c4
+
+Font Family: Century Gothic
+
+box border: #e2e9f1
+
+Total vehcl bg
+top: #b262e1, bottom: #4d42bf
+
+Stoppage vehcl bg
+top: #e16862, bottom: #c3467b
+
+
+Text Color: #48596b
+
+Header Selected Text Color: #774fcd
+
+Button Color: #9d5cda
+
+Vehicle Information Text color: #54a0f5
+Vehicle info bg: #f3f6f9, border #ebf0f5

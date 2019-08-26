@@ -1,0 +1,79 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+   
+    <h6 class="headingsmall">Serial Number: <span>{{tradkingStatusDetails.serialNumber}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+       Packet Time: <span> {{tradkingStatusDetails.packetDate}} {{tradkingStatusDetails.packetTime}}</span>
+    </h6>
+    
+    <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="row popup_size">
+      <div class="col-md-5">
+          <div class="row rowpad">
+              <div class="col-md-9"><b>Ignition</b></div>
+              <div class="col-md-3" [ngClass]="tradkingStatusDetails.ignitionStatus==='ON' ? 'bg-green' : 'bg-red'"></div>
+          </div>
+          <div class="row rowpad">
+              <div class="col-md-9"><b>Stagnant</b></div>
+              <div class="col-md-3" [ngClass]="tradkingStatusDetails.vehicleStagnantStatus==='Default' ? 'bg-green' : 'bg-red'"></div>
+          </div>
+          <div class="row rowpad">
+              <div class="col-md-9"><b>Device Detached</b></div>
+              <div class="col-md-3" [ngClass]="tradkingStatusDetails.iotDeviceDetachedStatus ==='Default' ? 'bg-green' : 'bg-red'"></div>
+          </div>
+          <div class="row rowpad">
+              <div class="col-md-9"><b>Panic Status</b></div>
+              <div class="col-md-3" [ngClass]="tradkingStatusDetails.panicButtonStatus ==='ON' ? 'bg-red' : 'bg-green'"></div>
+          </div>
+
+          <div class="row rowpad">
+              <div class="col-md-9"><b>Vehicle Battery Status</b></div>
+              <div class="col-md-3" [ngClass]="tradkingStatusDetails.vehicleBatteryStatus ==='Default' ? 'bg-green' : 'bg-red'"></div>
+          </div>
+          <div class="row rowpad">
+              <div class="col-md-9"><b>Device Battery Status</b></div>
+              <div class="col-md-3" [ngClass]="tradkingStatusDetails.deviceBatteryStatus === 'Default' ? 'bg-green' : 'bg-red'"></div>
+          </div>
+          <div class="row rowpad">
+              <div class="col-md-9"><b>Engine Status</b></div>
+              <div class="col-md-3" [ngClass]="tradkingStatusDetails.engineStatus === 'ON' ? 'bg-green' : 'bg-red'"></div>
+          </div>
+        </div>
+
+
+        <div class="col-md-5 offset-md-2">
+            <div class="row rowpad">
+                <div class="col-md-9"><b>Vehicle Ideal</b></div>
+                <div class="col-md-3" [ngClass]="tradkingStatusDetails.vehicleIdealStatus ==='Vehicle Ideal' ? 'bg-green' : 'bg-red'"></div>
+            </div>
+            <div class="row rowpad">
+                <div class="col-md-9"><b>Vehicle Parking</b></div>
+                <div class="col-md-3" [ngClass]="tradkingStatusDetails.vehicleParkingStatus ==='Default' ? 'bg-green' : 'bg-red'"></div>
+            </div>
+            <div class="row rowpad">
+                <div class="col-md-9"><b>Device Power</b></div>
+                <div class="col-md-3" [ngClass]="tradkingStatusDetails.devicePowerDisconnectStatus ==='Default' ? 'bg-green' : 'bg-red'"></div>
+            </div>
+            <div class="row rowpad">
+                <div class="col-md-9"><b>Device Tamper</b></div>
+                <div class="col-md-3" [ngClass]="tradkingStatusDetails.deviceTamperStatus ==='Default' ? 'bg-green' : 'bg-red'"></div>
+            </div>
+  
+            <div class="row rowpad">
+                <div class="col-md-9"><b>Panic Button For Engine</b></div>
+                <div class="col-md-3" [ngClass]="tradkingStatusDetails.panicButtonForEngineSwithOff ==='Default' ? 'bg-green' : 'bg-red'"></div>
+            </div>
+            <div class="row rowpad">
+                <div class="col-md-9"><b>Over Speed</b></div>
+                <div class="col-md-3" [ngClass]="tradkingStatusDetails.overSpeed ==='Default' ? 'bg-green' : 'bg-red'"></div>
+            </div>
+            <div class="row rowpad">
+                <div class="col-md-9"><b>Sleep Mode</b></div>
+                <div class="col-md-3" [ngClass]="tradkingStatusDetails.sleepMode ==='Default' ? 'bg-green' : 'bg-red'"></div>
+            </div>
+          </div>
+  </div>
+</div>

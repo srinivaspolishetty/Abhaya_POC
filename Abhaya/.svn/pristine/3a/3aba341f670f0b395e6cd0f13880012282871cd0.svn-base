@@ -1,0 +1,11 @@
+<app-header></app-header>
+<div class="alert_style bell_icon" *ngIf="msgs.length > 0" (click)="openPanicAlerts(msgs[0].isMobile);">
+  <i class="fa fa-bell-o" *ngIf="!msgs[0].isMobile"></i>
+  <i class="fa fa-video-camera" *ngIf="msgs[0].isMobile"></i>
+  <div class="circle" style="animation-delay: -3s"></div>
+  <div class="circle" style="animation-delay: -2s"></div>
+  <div class="circle" style="animation-delay: -1s"></div>
+  <div class="circle" style="animation-delay: 0s"></div>
+</div>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

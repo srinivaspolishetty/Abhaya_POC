@@ -1,0 +1,104 @@
+import { Component, OnInit } from '@angular/core';
+import { DriverDutyApiService } from './services/driverduty.api.service';
+import { DriverDuty } from './driverDuty.model';
+import { PageModel } from '../page.model';
+import { PaginationModel } from '../pagination.model';
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { MastersServicesApi } from '../util/services/masters.api';
+import { District } from '../util/district.model';
+import { City } from '../util/city.model';
+import { UserDetails } from '../../login/userdetails.model';
+import {NgbDateFRParserFormatter} from '../util/dateformatter';
+
+@Component({
+  selector: 'app-driver-duty',
+  templateUrl: './driver-duty.component.html',
+  styleUrls: ['./driver-duty.component.css']
+})
+export class DriverDutyComponent implements OnInit {
+
+  public driverDutyArray:  Array<DriverDuty> = [];
+  public page: PageModel;
+  public p: number;
+  model: NgbDateStruct;
+  maxDate = this.calendar.getToday();
+  searchValue = '';
+  public showSearchClear = false;
+  showFilters = false;
+  districtModel: any;
+  cityModel: any;
+  districtArray: Array<District> = [];
+  cityArray: Array<City> = [];
+  userDetails: UserDetails;
+
+  constructor(private driverDutyApiService: DriverDutyApiService, private calendar: NgbCalendar,
+    private mastersServicesApi: MastersServicesApi, private ngbDateFRParserFormatter: NgbDateFRParserFormatter) {
+    this.page = new PageModel(0, 0, 0, 0);
+    this.model = this.calendar.getToday();
+    this.userDetails = JSON.parse(localStorage.getItem('userdetails'));
+    this.districtModel = '';
+    this.cityModel = '';
+  }
+
+  ngOnInit() {
+    this.getDistricts(this.userDetails.stateId);
+    this.getDriverDuties(0, '', this.districtModel, this.cityModel);
+  }
+  btnShowFilters(){
+    this.showFilters = !this.showFilters;
+  }
+  refreshData() {
+    this.getDriverDuties(0, '', this.districtModel, this.cityModel);
+  }
+
+  getDistricts(value) {
+    if (value === '') {
+      this.districtArray = [];
+    }
+    this.districtModel = '';
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+  getCities(value) {
+    this.cityModel = '';
+    if (value === '') {
+      this.cityArray = [];
+    }
+    this.getDriverDuties(0, '', this.districtModel, this.cityModel);
+    this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+      this.cityArray = data;
+    });
+  }
+  pageChanged(event) {
+    this.p = event;
+    this.getDriverDuties(this.p - 1, this.searchValue, this.districtModel, this.cityModel);
+  }
+
+  searchData() {
+    if (this.searchValue !== undefined) {
+      this.getDriverDuties(0, this.searchValue, this.districtModel, this.cityModel);
+      this.showSearchClear = (this.searchValue.length > 4);
+    }
+  }
+
+  changeDate() {
+    this.getDriverDuties(0, this.searchValue, this.districtModel, this.cityModel);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.showSearchClear = false;
+    this.searchData();
+  }
+
+  getDriverDuties(page: number, searchValue: string, districtId: string, cityId: string) {
+    const formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.driverDutyApiService.getAll(page, 10, formatDate, searchValue, districtId, cityId).subscribe((data:  PaginationModel) => {
+      this.driverDutyArray  =  data.content;
+      this.page = data.page;
+      console.log(this.driverDutyArray);
+    });
+  }
+
+}

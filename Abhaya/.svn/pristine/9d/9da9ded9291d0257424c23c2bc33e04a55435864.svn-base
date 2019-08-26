@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-modemdetails',
+  templateUrl: './modemdetails.component.html',
+  styleUrls: ['./modemdetails.component.css']
+})
+export class ModemdetailsComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

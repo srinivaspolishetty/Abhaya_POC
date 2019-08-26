@@ -1,0 +1,51 @@
+import { NgModule } from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {MainComponent} from './main/main.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { VehiclesComponent } from '../shared/vehicles/vehicles.component';
+import { DriversComponent } from '../shared/drivers/drivers.component';
+import { DriverDutyComponent } from '../shared/driver-duty/driver-duty.component';
+import { TripTrackingComponent } from '../shared/trip-tracking/trip-tracking.component';
+import { TripDetailsComponent } from '../shared/trip-details/trip-details.component';
+import { DevicemappingComponent } from './devicemapping/devicemapping.component';
+import { ClosedTripsComponent } from '../shared/trip-details/closed-trips/closed-trips.component';
+import { OperationalReportsComponent } from './operational-reports/operational-reports.component';
+import { PanicAlertsListComponent } from '../shared/panic-alerts-list/panic-alerts-list.component';
+import { ReportsComponent } from '../rta/reports/reports.component';
+import { OpentripsComponent } from '../shared/trip-details/opentrips/opentrips.component';
+import { PanicAlertComponent } from '../shared/panic-alerts-list/panic-alert/panic-alert.component';
+import { SuspiciousVehiclesComponent } from '../shared/suspicious-vehicles/suspicious-vehicles.component';
+import { RouteDeviationComponent } from '../shared/route-deviation/route-deviation.component';
+
+const rtaRoutes: Routes = [
+  { path: '',  component: MainComponent,
+    children: [
+        { path: 'dashboard', component: DashboardComponent}
+      , { path: 'vehicles', component: VehiclesComponent}
+      , { path: 'drivers', component: DriversComponent}
+      , { path: 'driverduty', component: DriverDutyComponent}
+      , { path: 'tripTracking', component: TripTrackingComponent}
+      , { path: 'tripDetails', component: TripDetailsComponent}
+      , { path: 'devicemapping', component: DevicemappingComponent}
+      , { path: 'closedtrips', component: ClosedTripsComponent}
+      , { path: 'opentrips', component: OpentripsComponent}
+      , { path: 'operationalreports', component: OperationalReportsComponent}
+      , { path: 'panicalertslist', component: PanicAlertsListComponent}
+      , { path: 'panicalert', component: PanicAlertComponent}
+      , { path: 'reports', component: ReportsComponent}
+      , { path: 'suspicious', component:  SuspiciousVehiclesComponent}
+      , { path: 'routedeviation', component:  RouteDeviationComponent}
+    ]
+ }
+];
+
+@NgModule({
+  imports: [
+    RouterModule.forChild(rtaRoutes)
+  ],
+  exports: [
+    RouterModule
+  ],
+  declarations: []
+})
+export class RtaRoutingModule { }

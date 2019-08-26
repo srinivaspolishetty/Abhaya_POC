@@ -1,0 +1,16 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DriverDutyApiService {
+
+  constructor(private  httpClient:  HttpClient) { }
+
+  getAll(page, size, packetDate, searchValue) {
+    const url = `${environment.apiBase}${environment.version}`;
+    return this.httpClient.get(`${url}/driverDutyDetails?page=${page}&size=${size}&packetDate=${packetDate}&searchValue=${searchValue}`);
+  }
+}

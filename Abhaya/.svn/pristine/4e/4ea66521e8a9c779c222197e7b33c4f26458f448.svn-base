@@ -1,0 +1,107 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active"><img src="assets/images/device_deport_icon.png">DRIVERS</a>
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="col-1 m-0 p-0">
+          <div class="add_btn">
+            <button type="button" class="add_btn" (click)="openDriver()"><span>+</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container container_height">
+   <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/dashboard']" routerLinkActive="active">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a>Driver Management</a></li>
+           <li class="breadcrumb-item" aria-current="page">Drivers</li>
+        </ol>
+      </nav>
+  <div class="row filter_alignment">
+    <div class="col-3 m-0 p-0">
+      <div class="form-group">
+        <input type="text" class="filter_style form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Search RFID Number / DL Number" [(ngModel)]="searchValue" (keyup)="searchData();" (keypress)="omitSpecialChar($event)">
+        <button type="button" class="btn_close close" aria-label="Close">
+          <span aria-hidden="true" (click)="clearSearch();" *ngIf="showSearchClear">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+          <select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCities(districtModel)">
+            <option value="" [selected]="!districtModel">Select District</option>
+            <option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <select class="filter_style form-control" [(ngModel)]="cityModel" name="cityId" (change)="getDrivers(0, '', districtModel, cityModel)">
+            <option value="" [selected]="!cityModel">Select City</option>
+            <option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="grid-total-count">
+          <span>Total Drivers: <b>{{page.totalElements}}</b></span>
+        </div>
+      </div>
+  </div>
+  <table class="table table-borderless table_today_installed">
+    <thead class="thead-bg">
+      <tr>
+        <th>DL NO.</th>
+          <th>Driver Name</th>
+          <th>RFID</th>
+          <th>#Mobile Number</th>
+          <th>Gender</th>
+          <th>City</th>
+          <th>District</th>
+          <th>DL Expiry Date</th>
+          <th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+      <tr *ngFor="let driver of driveArray | paginate: { id: 'driverList', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+        <td class="align-middle">{{driver.dlNumber}}</td>
+        <td class="align-middle">{{driver.driverName}}</td>
+        <td class="align-middle">{{driver.rfId}}</td>
+        <td class="align-middle">{{driver.contactNumber}}</td>
+        <td class="align-middle">{{driver.gender}}</td>
+        <td class="align-middle">{{driver.cityName}}</td>
+        <td class="align-middle">{{driver.districtName}}</td>
+        <td class="align-middle">{{driver.dlExpiryDate}}</td>
+        <td class="action align-middle"><a class="icon" (click)="editDriver(driver);"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+      </tr>
+      <tr *ngIf="driveArray == null || driveArray.length == 0">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <span style="color:red;">No Data Found</span>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div style="margin:0px auto;">
+      <pagination-controls id="driverList" class="pagination" (pageChange)="pageChanged($event)" maxSize="9"
+        directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+      </pagination-controls>
+    </div>
+  </div>
+</div>

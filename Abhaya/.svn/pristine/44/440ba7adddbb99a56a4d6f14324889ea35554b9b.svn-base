@@ -1,0 +1,26 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { DevicemappingService } from '../devicemapping/devicemapping.service';
+import { IoTMappingModel } from '../devicemapping/iotmapping.model';
+
+@Component({
+  selector: 'app-newregistration',
+  templateUrl: './newregistration.component.html',
+  styleUrls: ['./newregistration.component.css']
+})
+export class NewregistrationComponent implements OnInit {
+
+  model: any = {};
+  constructor(public activeModal: NgbActiveModal, private router: Router, private devicemappingService: DevicemappingService) { }
+
+  ngOnInit() {
+  }
+
+  onSubmit() {
+    this.activeModal.close();
+    // this.devicemappingService.subject.next(new IoTMappingModel(this.model.serialNumber, this.model.rcNumber));
+    this.router.navigate(['/rta/devicemapping', {'rcNumber': this.model.rcNumber, 'serialNumber': this.model.serialNumber}]);
+  }
+
+}

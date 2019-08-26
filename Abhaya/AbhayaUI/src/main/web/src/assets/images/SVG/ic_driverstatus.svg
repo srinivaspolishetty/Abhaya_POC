@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-ic_drivers">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="ic_drivers" clip-path="url(#clip-ic_drivers)">
+    <g id="Group_1" data-name="Group 1" transform="translate(2 6.551)">
+      <path id="Path_2" data-name="Path 2" d="M8.937,8.382a.382.382,0,0,0-.328.182L7.7,9.948a.364.364,0,0,1-.583,0L6.206,8.564a.382.382,0,0,0-.328-.182,3.589,3.589,0,0,0-3.533,3.423v3.278a.091.091,0,0,0,.091.091H4.257a.528.528,0,1,0,0-1.056H3.985a3.424,3.424,0,0,1,6.845,0h-.272a.528.528,0,1,0,0,1.056h1.821a.091.091,0,0,0,.091-.091V11.805A3.589,3.589,0,0,0,8.937,8.382Z" transform="translate(-2.345 -8.382)" fill="#303e48"/>
+    </g>
+    <path id="Path_3" data-name="Path 3" d="M8.263.69a2.343,2.343,0,1,0,2.343,2.343A2.343,2.343,0,0,0,8.263.69Zm0,3.931A1.589,1.589,0,1,1,9.852,3.033,1.589,1.589,0,0,1,8.263,4.621Z" transform="translate(-1.2 0.01)" fill="#ff1818"/>
+    <path id="Path_31" data-name="Path 31" d="M8.135,12.427a2.75,2.75,0,0,0-2.75,2.75h5.5A2.75,2.75,0,0,0,8.135,12.427Z" transform="translate(-1.072 -2.799)" fill="#ff1818"/>
+  </g>
+</svg>

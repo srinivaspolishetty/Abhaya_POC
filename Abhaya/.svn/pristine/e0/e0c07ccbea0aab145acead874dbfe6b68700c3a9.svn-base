@@ -1,0 +1,98 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AdministrativeComponent } from './administrative/administrative.component';
+import { administrativeServiceapi } from "./services/administrative.api.service";
+import { UserDetails } from '../../login/userdetails.model';
+import { State } from "../util/states.model";
+import { District } from '../util/district.model';
+import { City } from '../util/city.model';
+
+@Component({
+  selector: 'app-administrative-list',
+  templateUrl: './administrative-list.component.html',
+  styleUrls: ['./administrative-list.component.css']
+})
+export class AdministrativeListComponent implements OnInit {
+
+  userDetail: UserDetails;
+  stateArray: Array<State> = [];
+  districtArray: Array<District> = [];
+  cityArray: Array<City> = [];
+  allDistricts: any;
+  districtModel: any;
+  firstdistrictid;
+  showStateDiv = false;
+  showDistrictDiv = false;
+  showCityDiv = false;
+
+  constructor(private modalService: NgbModal, private administrativeServiceapi: administrativeServiceapi) {
+    this.userDetail = JSON.parse(localStorage.getItem('userdetails'));
+    console.log(this.userDetail);
+  }
+
+  ngOnInit() {
+    this.showStateDiv = true;
+    this.showDistrictDiv = false;
+    this.showCityDiv = false;
+    this.getStateDetails(this.userDetail.stateId);
+  }
+  showState() {
+    this.showStateDiv = true;
+    this.showDistrictDiv = false;
+    this.showCityDiv = false;
+    this.getStateDetails(this.userDetail.stateId);
+  }
+  showDistrict() {
+    this.showStateDiv = false;
+    this.showDistrictDiv = true;
+    this.showCityDiv = false;
+    this.getDistrictDetails(this.userDetail.stateId);
+  }
+  showCity() {
+    this.showStateDiv = false;
+    this.showDistrictDiv = false;
+    this.showCityDiv = true;
+    this.getDistrictDetails(this.userDetail.stateId);
+    this.firstdistrictid
+  }
+
+
+  getStateDetails(value) {
+    if (value !== '') {
+      this.administrativeServiceapi.getStates(value).subscribe((data: State[]) => {
+        this.stateArray = data;
+      });
+    }
+  }
+
+  getDistrictDetails(value) {
+    this.administrativeServiceapi.getDistricts(value).subscribe((data: District[]) => {
+      districtArray: District;
+      this.districtArray = data;
+      this.allDistricts = this.districtArray;
+      this.firstdistrictid = this.allDistricts[0].id;
+      this.districtModel = this.firstdistrictid;
+      this.getCityDetails(this.firstdistrictid);
+    });
+  }
+
+  getCityDetails(value) {
+    if (value !== '') {
+      this.administrativeServiceapi.getCities(value).subscribe((data: City[]) => {
+        this.cityArray = data;
+      });
+    }
+  }
+
+
+  openAdministrative() {
+    const modalRef = this.modalService.open(AdministrativeComponent, { backdrop: 'static', keyboard: false });
+    modalRef.result.then((result) => {
+      if (result === 'refreshContent') {
+        // this.getVehicles(0, '', this.districtModel, this.cityModel);
+      }
+    }).catch((error) => {
+    });
+  }
+
+}

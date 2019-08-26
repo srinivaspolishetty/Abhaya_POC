@@ -1,0 +1,71 @@
+<div class="modal-bgcolog">
+  <div class="modal-header">
+    <h4 class="modal-title">Route Deviation Details</h4>
+    <button type="button" class="close" (click)="activeModal.close('Close click')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="row row-underline">
+      <h6 class="col-md-4">Trip ID</h6>
+      <div class="col-md-8">{{routeDetails.tripId}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Vehicle Number</h6>
+      <div class="col-md-8">{{routeDetails.rcNumber}}</div>
+    </div>
+    <div class="row row-underline">
+        <h6 class="col-md-4">RF ID</h6>
+        <div class="col-md-8">{{routeDetails.rfId}}</div>
+      </div>
+      <div class="row row-underline">
+          <h6 class="col-md-4">Trip Request ID</h6>
+          <div class="col-md-8">{{routeDetails.tripRequestId}}</div>
+        </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Serial No</h6>
+      <div class="col-md-8">{{routeDetails.serialNumber}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Driver Name</h6>
+      <div class="col-md-8">{{routeDetails.driverName}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">DL Number</h6>
+      <div class="col-md-8">{{routeDetails.dlNumber}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Driver Number</h6>
+      <div class="col-md-8">{{routeDetails.driverContactNumber}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Owner Name</h6>
+      <div class="col-md-8">{{routeDetails.ownerName}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Owner Number</h6>
+      <div class="col-md-8">{{routeDetails.ownerContactNumber}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Citizen Mobile No</h6>
+      <div class="col-md-8">{{routeDetails.citizenMobileNumber}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Deviation Time</h6>
+      <div class="col-md-8">{{routeDetails.deviationTime}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Deviation Location</h6>
+      <div class="col-md-8">{{routeDetails.geoLocation}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Source</h6>
+      <div class="col-md-8">{{routeDetails.slocation}}</div>
+    </div>
+    <div class="row row-underline">
+      <h6 class="col-md-4">Destination</h6>
+      <div class="col-md-8">{{routeDetails.dlocation}}</div>
+    </div>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+  </div> -->
+</div>

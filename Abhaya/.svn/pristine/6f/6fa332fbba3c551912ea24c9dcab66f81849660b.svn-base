@@ -1,0 +1,121 @@
+<nav class="navbar nav_bg navbar-fixed">
+  <div class="container">
+
+    <div class="row col-md-12">
+      <div class="col-md-1">
+        <ul class="main-navbar">
+          <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </a>
+            <ul class="dropdown-menu multi-level">
+              <li><a class="dropdown-item" [routerLink]="['/rta/livetracking']" routerLinkActive="active">
+                  <img src="assets/images/SVG/ic_dashboard.svg">Dash Board</a></li>
+              <li class="dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/images/SVG/ic_vehclelist.svg">Vehicle
+                  Management</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item menulink" [routerLink]="['/rta/vehicles']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_vehclelist.svg">Vehicles</a></li>
+                  <li><a class="dropdown-item menulink" [routerLink]="['/rta/suspicious']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_SuspiciousVehicles.svg">Suspicious Vehicles</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/images/SVG/ic_driverlist.svg">Driver
+                  Management</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" [routerLink]="['/rta/drivers']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_driverlist.svg">Drivers</a></li>
+                  <li> <a class="dropdown-item" [routerLink]="['/rta/driverduty']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_driverduty.svg">Driver Duty Details</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/images/SVG/ic_triptackingdetails.svg">Trip
+                  Management
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" [routerLink]="['/rta/tripTracking']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_triptackingdetails.svg">Vehicle Tracking</a></li>
+                  <li> <a class="dropdown-item" [routerLink]="['/rta/tripDetails']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_tripdetails.svg">Trip Details</a></li>
+                  <li> <a class="dropdown-item" [routerLink]="['/rta/routedeviation']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_rootdeviation.svg">Route Deviation</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/rta/panicalertslist']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_panicalerts.svg">Panic Alerts</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/rta/showvideo']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_VideoStreaming.svg">Video Streaming</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/images/SVG/ic_modemdetails.svg">Device
+                  Management
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" [routerLink]="['/rta/modemdetails']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_modemdetails.svg">Device Details
+                    </a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/rta/dashboard']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_DeviceReport.svg">Device Report</a></li>
+                      <li><a class="dropdown-item" [routerLink]="['/rta/devicecommunitation']" routerLinkActive="active">
+                        <img src="assets/images/SVG/ic_CommunicationDetails.svg">Communication Details
+                      </a></li>
+                      <li><a class="dropdown-item" [routerLink]="['/rta/movementdetails']" routerLinkActive="active">
+                        <img src="assets/images/SVG/ic_Movement_Details.svg">Movement Details
+                      </a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/rta/rawdata']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_rawData.svg">Raw Data
+                    </a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="assets/images/SVG/ic_usermanagement.svg">User Management</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" [routerLink]="['/rta/usermanagement']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_usermanagement.svg">User</a></li>
+                  <li> <a class="dropdown-item" [routerLink]="['/rta/administrativelist']" routerLinkActive="active">
+                      <img src="assets/images/SVG/ic_AdministrativeHierarchy.svg">Administrative Hierarchy</a></li>
+                </ul>
+              </li>
+
+              <!-- <li><a class="dropdown-item" [routerLink]="['/rta/reports']" routerLinkActive="active">
+                  <img src="assets/images/SVG/ic_reports.svg">Reports</a></li> -->
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-4">
+        <div class="navbar_logo" (click)="navigateDashBoard()"></div>
+      </div>
+      <div class="col-md-7">
+        <div class="row pull-right">
+
+          <ul class="main-navbar profile">
+            <li>
+              <a href="#" class="dropdown-toggle profilemenu" data-toggle="dropdown">
+                <img src="assets/images/ic_male.png" alt="Avatar" class="avatar float-left">
+                <div class="profilename float-left">
+                  {{userDetails.username}}
+                  <b class="caret"></b><br>
+                  <span>{{userDetails.departmentName}}</span>
+                </div>
+              </a>
+              <ul class="dropdown-menu multi-level profile">
+                <li><a class="dropdown-item cursor-hand"> Change Password</a></li>
+                <li><a class="dropdown-item cursor-hand"> Settings</a></li>
+                <li><a class="dropdown-item cursor-hand" (click)="logout()"> Sign Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</nav>

@@ -1,0 +1,13 @@
+<div class="row footer">
+  <div class="text-center col-4">
+    <img style="padding-left:30px;" src="assets/images/logo_ap.png">
+  </div>
+  <div class="text-center col-3">
+    <p style="padding-top:25px;">Copyright &copy; 2018 &middot; All Rights Reserved.
+  </div>
+  <div class="text-right col-4">
+    <span> Developed By</span> <a href="http://otsi.co.in/"><img src="assets/images/logo_otsi.png"></a>|<a href="http://otsi.co.in/"><img
+        src="assets/images/yash.jpg" style="width:100px;"></a>
+
+  </div>
+</div>

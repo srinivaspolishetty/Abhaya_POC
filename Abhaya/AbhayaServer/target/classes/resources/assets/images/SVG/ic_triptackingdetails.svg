@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 14 14">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-ic_triptackingdetails);
+      }
+
+      .cls-2, .cls-3, .cls-6 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        stroke: rgba(0,0,0,0);
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+
+      .cls-5, .cls-6 {
+        stroke: none;
+      }
+    </style>
+    <clipPath id="clip-ic_triptackingdetails">
+      <rect width="14" height="14"/>
+    </clipPath>
+  </defs>
+  <g id="ic_triptackingdetails" class="cls-1">
+    <g id="Group_5" data-name="Group 5" transform="translate(0.198 0.406)">
+      <g id="Group_4" data-name="Group 4" transform="translate(-1.198 2.094)">
+        <path id="Path_1" data-name="Path 1" class="cls-2" d="M14.682,3.388h.576a.206.206,0,0,0,.19-.161l.087-.515a.142.142,0,0,1,.279.047l-.087.514a.488.488,0,0,1-.47.4h-.576" transform="translate(-6.921 -0.824)"/>
+        <path id="Path_2" data-name="Path 2" class="cls-2" d="M3.027,3.671H2.45a.487.487,0,0,1-.47-.4l-.087-.514a.142.142,0,1,1,.279-.047l.087.515a.206.206,0,0,0,.191.161h.576" transform="translate(-0.392 -0.824)"/>
+        <path id="Subtraction_2" data-name="Subtraction 2" class="cls-3" d="M2.177,7.69H1.416a1.271,1.271,0,0,1-1.2-1.025A17.491,17.491,0,0,1,0,3.845a17.491,17.491,0,0,1,.212-2.82A1.271,1.271,0,0,1,1.416,0H4.343a1.269,1.269,0,0,1,1.2,1.025,17.427,17.427,0,0,1,.212,2.82,17.427,17.427,0,0,1-.212,2.82,1.269,1.269,0,0,1-1.2,1.025H3.582v-1.3h.2V5.936a.9.9,0,1,0-1.807,0v.458h.2v1.3ZM4.6,3.845a.566.566,0,1,0,.566.566A.567.567,0,0,0,4.6,3.845Zm-3.439,0a.566.566,0,1,0,.566.566A.567.567,0,0,0,1.16,3.845ZM4.3.566V3.278h.889a15.765,15.765,0,0,0-.2-2.158A.7.7,0,0,0,4.343.566Zm-2.549,0V3.278H4.012V.566Zm-.33,0a.7.7,0,0,0-.646.554,15.818,15.818,0,0,0-.2,2.158h.889V.566Z" transform="translate(2.319 0.5)"/>
+        <path id="Path_6" data-name="Path 6" class="cls-2" d="M8.264,12.676v1.806a.58.58,0,0,0,1.16,0V12.676Z" transform="translate(-3.645 -5.971)"/>
+      </g>
+      <g id="Path_12" data-name="Path 12" class="cls-4" transform="translate(8 5.5)">
+        <path class="cls-5" d="M0,0H2.929V1H0Z"/>
+        <path class="cls-6" d="M 0 0 L 2.929460048675537 0 L 2.929460048675537 1 L 0 1 L 0 0 Z"/>
+      </g>
+      <g id="Path_11" data-name="Path 11" class="cls-4" transform="translate(8 7.5)">
+        <path class="cls-5" d="M0,0H3.844V1H0Z"/>
+        <path class="cls-6" d="M -5.006790161132813e-06 0 L 3.843744993209839 0 L 3.843744993209839 1 L -5.006790161132813e-06 1 L -5.006790161132813e-06 0 Z"/>
+      </g>
+      <g id="Path_10" data-name="Path 10" class="cls-4" transform="translate(13 9.5)">
+        <path class="cls-5" d="M-5,0H.281V1H-5Z"/>
+        <path class="cls-6" d="M -5.000004768371582 0 L 0.281245231628418 0 L 0.281245231628418 1 L -5.000004768371582 1 L -5.000004768371582 0 Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

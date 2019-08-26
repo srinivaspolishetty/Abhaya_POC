@@ -1,0 +1,37 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+    <h5 class="modal-title">IoT Installation</h5>
+    <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="row popup_size">
+      <div class="col-12">
+        <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label class="label_text" for="exampleInputEmail1">Enter Vehicle Number</label>
+          <input type="text" class="form-control form_select" [(ngModel)]="model.rcNumber" name="rcNumber" aria-describedby="emailHelp"
+            placeholder="AP09EQ5636" />
+        </div>
+      </div>
+      <div class="col-6">
+        <!-- <div class="form-group media_box a_style">
+        <img src="assets/images/bar_code.jpg">
+        <a href="new_registration.html"><button type="button" class="btn_scan">Scan</button></a>
+      </div> -->
+        <div class="form-group">
+          <label class="label_text" for="exampleInputEmail1">Enter Device Number</label>
+          <input type="text" class="form-control form_select" [(ngModel)]="model.serialNumber" name="serialNumber" aria-describedby="emailHelp"
+            placeholder="EE11234353633" />
+        </div>
+      </div>
+    </div>
+      <div claass="row m-0 p-0">
+      <button class="btn btn-primary btn_save align-middle" type="submit">Next</button>
+    </div>
+  </div>
+    </div>
+  </form>
+</div>

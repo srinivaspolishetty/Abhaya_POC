@@ -1,0 +1,124 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-10 m-0 p-0">
+          <a class="active icon_alignment text_align"><img class="img_topnav" src="assets/images/SVG/ic_rootdeviation_blue.svg"><span>ROUTE
+              DEVIATION</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container container_height">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a>Trip Management</a></li>
+      <li class="breadcrumb-item" aria-current="page">Route Deviation</li>
+    </ol>
+  </nav>
+
+   <div class="row page-filters">
+          <div class="col-md-3 p-t-6">
+            <span>Total Records: <b>{{page.totalElements}}</b></span>
+          </div>
+          <div class="col-md-9 text-right">
+            <button type="button" class="btn btn-bare" (click)="refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
+              Refresh</button>
+            <button type="button" class="btn btn-bare" (click)="downloadRouteDeviationTable()"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download</button>|
+            <button type="button" class="btn btn-bare" (click)="btnShowFilters()"><i class="fa fa-filter" aria-hidden="true"></i>
+              Filters</button>
+          </div>
+        </div>
+        <div class="slide-filters" [ngClass]="{'show': showFilters == true}">
+            <div class="row slide-filters-content">
+                <div _ngcontent-c17="" class="col-3 m-0 p-0">
+                    <div _ngcontent-c17="" class="form-group">
+                      <input [(ngModel)]="searchValue" (keyup)="searchData();" aria-describedby="emailHelp" class="filter_style form-control" placeholder="RC Number/Citizen Mobile No"
+                        type="text">
+                        <button type="button" class="btn_close close" aria-label="Close">
+                            <span aria-hidden="true" (click)="clearSearch();" *ngIf="showSearchClear">&times;</span>
+                          </button>
+                      </div>
+                  </div>
+                  <div class="col-3">
+                      <div class="form-group">
+                        <select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCities(districtModel)">
+                          <option value="" [selected]="!districtModel">Select District</option>
+                          <option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-3 m-0 p-0">
+                        <div class="form-group">
+                          <select class="filter_style form-control" [(ngModel)]="cityModel" name="cityId">
+                            <option value="" [selected]="!cityModel">Select City</option>
+                            <option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div _ngcontent-c17="" class="col-md-3">
+                          <div class="form-group">
+                            <div class="input-group-append">
+                              <input type="text" class="filter_style form-control" readOnly placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model"
+                                (dateSelect)="changeDate();" ngbDatepicker #d="ngbDatepicker">
+                              <button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button"> <i class="fa fa-calendar"
+                                  aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+          </div>
+
+
+  
+  
+  <div style="overflow-y:auto;">
+    <table class="table table-borderless table_today_installed table-fixed">
+      <thead class="thead-bg">
+        <tr>
+          <th>Trip ID</th>
+          <th>Citizen Mobile No</th>
+          <th>Vehicle No</th>
+          <th>Driver Name</th>
+          <th>DL No </th>
+          <th>Driver Mobile No </th>
+          <th>Deviation Date</th>
+          <th>Deviation Location </th>
+          <th>Actions </th>
+        </tr>
+      </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+        <tr *ngFor="let routeDeviation of routeDeviationArray | paginate: { id: 'routeDeviationList', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+          <td class="align-middle">{{routeDeviation.tripId}}</td>
+          <td class="number align-middle">{{routeDeviation.citizenMobileNumber}}</td>
+          <td class="align-middle">{{routeDeviation.rcNumber}}</td>
+          <td class="align-middle">{{routeDeviation.driverName}}</td>
+          <td class="align-middle">{{routeDeviation.dlNumber}}</td>
+          <td class="align-middle">{{routeDeviation.driverContactNumber}}</td>
+          <td class="align-middle">{{routeDeviation.deviationTime}}</td>
+          <td class="align-middle">{{routeDeviation.geoLocation}}</td>
+          <td class="action align-middle"><a class="icon" (click)="viewDetails(routeDeviation);"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+        </tr>
+        <tr *ngIf="routeDeviationArray == null || routeDeviationArray.length == 0">
+          <td></td>
+          <td></td>
+          <td>
+            <span style="color:red;">No Data Found</span>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div style="margin:0px auto;">
+        <pagination-controls id="routeDeviationList" class="pagination" (pageChange)="pageChanged($event)" maxSize="9"
+          directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

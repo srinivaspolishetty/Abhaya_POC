@@ -1,0 +1,12 @@
+<div class="modal-bgcolog">
+    <div class="modal-header">
+      <h4 class="modal-title">Auth Drivers</h4>
+      <button type="button" class="close" (click)="activeModal.close('Close click')">&times;</button>
+    </div>
+    <div class="modal-body">
+        {{vehicleIotNumber}}
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div> -->
+  </div>

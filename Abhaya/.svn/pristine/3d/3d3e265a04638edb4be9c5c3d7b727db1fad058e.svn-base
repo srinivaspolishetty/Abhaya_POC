@@ -1,0 +1,146 @@
+import { Component, OnInit } from '@angular/core';
+import { Driver } from './driver.model';
+import { PageModel } from '../page.model';
+import { DriverApiService } from './services/driver.api.service';
+import { PaginationModel } from '../pagination.model';
+import { DriverComponent } from './driver/driver.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
+import { MastersServicesApi } from '../util/services/masters.api';
+import { UserDetails } from '../../login/userdetails.model';
+import { District } from '../util/district.model';
+import { City } from '../util/city.model';
+import {DriverdetailsComponent} from './driverdetails/driverdetails.component';
+
+@Component({
+  selector: 'app-drivers',
+  templateUrl: './drivers.component.html',
+  styleUrls: ['./drivers.component.css']
+})
+export class DriversComponent implements OnInit {
+
+  public driveArray:  Array<Driver> = [];
+  public page: PageModel;
+  public p: number;
+  searchValue = '';
+  public showSearchClear = false;
+  isTodaysInstalled  = false;
+  closedText = 'Todays';
+  openText = 'All';
+  districtModel: any;
+  cityModel: any;
+  districtArray: Array<District> = [];
+  cityArray: Array<City> = [];
+  userDetails: UserDetails;
+
+  constructor(private driverApiService: DriverApiService, private modalService: NgbModal, private activatedRoute: ActivatedRoute,
+    private mastersServicesApi: MastersServicesApi) {
+    this.page = new PageModel(0, 0, 0, 0);
+    this.activatedRoute.params.subscribe(params => {
+      this.isTodaysInstalled = params['isTodaysInstalled'] !== undefined ? params['isTodaysInstalled'] : false;
+      console.log('isTodaysInstalled ' + this.isTodaysInstalled);
+    });
+    this.userDetails = JSON.parse(localStorage.getItem('userdetails'));
+    this.districtModel = '';
+    this.cityModel = '';
+
+  }
+
+  ngOnInit() {
+    this.getDistricts(this.userDetails.stateId);
+    this.getDrivers(0, '', this.districtModel, this.cityModel);
+  }
+
+  getDistricts(value) {
+    if (value === '') {
+      this.districtArray = [];
+    }
+    this.districtModel = '';
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+  getCities(value) {
+    this.cityModel = '';
+    if (value === '') {
+      this.cityArray = [];
+    }
+    this.getDrivers(0, '', this.districtModel, this.cityModel);
+    this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+      this.cityArray = data;
+    });
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    this.getDrivers(this.p - 1, this.searchValue, this.districtModel, this.cityModel);
+    console.log(event);
+  }
+
+  searchData() {
+    if (this.searchValue !== undefined) {
+      this.getDrivers(0, this.searchValue, this.districtModel, this.cityModel);
+      this.showSearchClear = (this.searchValue.length > 4) ? true : false;
+    }
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.showSearchClear = false;
+    this.searchData();
+  }
+  changeResults() {
+    this.isTodaysInstalled = !this.isTodaysInstalled;
+  }
+
+  getDrivers(page: number, searchValue: string, districtId: string, cityId: string) {
+    this.driverApiService.getAll(page, 10, searchValue, districtId, cityId).subscribe((data:  PaginationModel) => {
+      this.driveArray  =  data.content;
+      this.page = data.page;
+      console.log(this.driveArray);
+    });
+  }
+
+  openDriver() {
+    const modalRef = this.modalService.open(DriverComponent, {backdrop: 'static', keyboard: false});
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'refreshContent') {
+        this.getDrivers(0, '', this.districtModel, this.cityModel);
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  editDriver(driver: Driver) {
+    const modalRef = this.modalService.open(DriverComponent, {backdrop: 'static', keyboard: false});
+    modalRef.componentInstance.dlNumber = driver.dlNumber;
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'refreshContent') {
+        this.getDrivers(0, '', this.districtModel, this.cityModel);
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  omitSpecialChar(event) {
+    let k;
+    k = event.charCode;
+    return((k > 64 && k < 91) || (k > 96 && k < 123) || k === 8 || (k >= 48 && k <= 57));
+  }
+
+  onlyAllowNumbers(event) {
+    let k;
+    k = event.charCode;
+    return((k >= 48 && k <= 57));
+  }
+  openDriverdetails() {
+    const modalRef = this.modalService.open(DriverdetailsComponent, { windowClass: 'popup_alignment_dashBoard', backdrop: 'static',
+    keyboard: false });
+  }
+
+
+}

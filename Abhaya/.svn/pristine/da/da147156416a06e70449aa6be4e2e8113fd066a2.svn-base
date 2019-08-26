@@ -1,0 +1,202 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-10 m-0 p-0">
+          <a class="active"><img src="assets/images/device_deport_icon.png">SUSPICIOUS VEHICLES</a>
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="col-2 btn_green">
+        	<button type="button" class="btn btn-primary btn_green" (click)="addSuspiciousVehicle()">Add Vehicle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row_style dashboard_secondrow">
+  <div class="container">
+  	 <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/dashboard']" routerLinkActive="active">Home</a></li>
+           <li class="breadcrumb-item" aria-current="page">Suspicious Vehicles</li>
+        </ol>
+      </nav>
+	<div class="row vehicle_div_align">
+		<div class="col-3">
+			<div class="card_box_1">
+				<div class="img_bg_round">
+					<img src="assets/images/ic_male.png"/>
+				</div>
+				
+				<img src="assets/images/SVG/ic_delete.svg" style="width:8%; float:right;"/>
+		
+					<div class="suspicious_details_align">		
+						<div class="suspicious_details">
+						<h6>Owner Name</h6>
+						<h5>Ashok Kumar</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Vehicle Number</h6>
+							<h5>TS09EQ5555</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Current Location</h6>
+							<h5>SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad, Telangana-500081</h5>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="card_box_1">
+				<div class="img_bg_round">
+						<img src="assets/images/ic_male.png"/>
+				</div>
+					<div class="suspicious_details_align">		
+						<div class="suspicious_details">
+						<h6>Owner Name</h6>
+						<h5>Ashok Kumar</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Vehicle Number</h6>
+							<h5>TS09EQ5555</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Current Location</h6>
+							<h5>SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad, Telangana-500081</h5>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="card_box_1">
+				<div class="img_bg_round">
+						<img src="assets/images/ic_male.png"/>
+				</div>
+					<div class="suspicious_details_align">		
+						<div class="suspicious_details">
+						<h6>Owner Name</h6>
+						<h5>Ashok Kumar</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Vehicle Number</h6>
+							<h5>TS09EQ5555</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Current Location</h6>
+							<h5>SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad, Telangana-500081</h5>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="card_box_1">
+				<div class="img_bg_round">
+						<img src="assets/images/ic_male.png"/>
+				</div>
+					<div class="suspicious_details_align">		
+						<div class="suspicious_details">
+						<h6>Owner Name</h6>
+						<h5>Ashok Kumar</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Vehicle Number</h6>
+							<h5>TS09EQ5555</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Current Location</h6>
+							<h5>SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad, Telangana-500081</h5>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+	<div class="row vehicle_div_align">
+		<div class="col-3">
+			<div class="card_box_1">
+				<div class="img_bg_round">
+						<img src="assets/images/ic_male.png"/>
+				</div>
+					<div class="suspicious_details_align">		
+						<div class="suspicious_details">
+						<h6>Owner Name</h6>
+						<h5>Ashok Kumar</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Vehicle Number</h6>
+							<h5>TS09EQ5555</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Current Location</h6>
+							<h5>SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad, Telangana-500081</h5>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="card_box_1">
+				<div class="img_bg_round">
+						<img src="assets/images/ic_male.png"/>
+				</div>
+					<div class="suspicious_details_align">		
+						<div class="suspicious_details">
+						<h6>Owner Name</h6>
+						<h5>Ashok Kumar</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Vehicle Number</h6>
+							<h5>TS09EQ5555</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Current Location</h6>
+							<h5>SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad, Telangana-500081</h5>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="card_box_1">
+				<div class="img_bg_round">
+						<img src="assets/images/ic_male.png"/>
+				</div>
+					<div class="suspicious_details_align">		
+						<div class="suspicious_details">
+						<h6>Owner Name</h6>
+						<h5>Ashok Kumar</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Vehicle Number</h6>
+							<h5>TS09EQ5555</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Current Location</h6>
+							<h5>SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad, Telangana-500081</h5>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="card_box_1">
+				<div class="img_bg_round">
+						<img src="assets/images/ic_male.png"/>
+				</div>
+					<div class="suspicious_details_align">		
+						<div class="suspicious_details">
+						<h6>Owner Name</h6>
+						<h5>Ashok Kumar</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Vehicle Number</h6>
+							<h5>TS09EQ5555</h5>
+						</div>
+						<div class="suspicious_details">
+							<h6>Current Location</h6>
+							<h5>SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad, Telangana-500081</h5>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="card_boxshadow_vehicle_report1 heading_main">
+  <div class="row report_bg m-0 p-0">
+    <div class="col-3">
+      <div class="">
+        <img src="assets/images/SVG/ic_deviceInstalled.svg" style=" width:55%; margin-top:29%">
+        <Label>Vehicle Status</Label>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <div (click)="navigateTomovement('Running')" class="cursor-hand report_text">
+          <span>Running</span>
+          <h4>{{vehicleRunning}}</h4>
+        </div>
+      </div>
+      <div (click)="navigateTomovement('Towing')" class="cursor-hand report_text_bottom1">
+        <span>Towing</span>
+        <h4>{{vehicleTowing}}</h4>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <div (click)="navigateTomovement('Idling')" class="cursor-hand report_text1">
+          <span>Idling</span>
+          <h4>{{vehicleIdel}}</h4>
+        </div>
+      </div>
+      <div (click)="navigateTomovement('Parked')" class="cursor-hand report_text_bottom2">
+        <span>Parked</span>
+        <h4>{{vehicleParked}}</h4>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <div (click)="navigateTomovement('Overspeed')" class="cursor-hand report_text2">
+          <span>Over Speed</span>
+          <h4>{{vehicleOverSpeed}}</h4>
+        </div>
+      </div>
+      <div (click)="navigateTomovement('Stopped')" class="cursor-hand report_text_bottom3">
+        <span>Stopped</span>
+        <h4>{{vehicleStopped}}</h4>
+      </div>
+    </div>
+  </div>
+
+</div>

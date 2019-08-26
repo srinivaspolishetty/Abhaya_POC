@@ -1,0 +1,96 @@
+/* CSS Document */
+body{
+	margin: auto;
+	background-color: white;
+	overflow:hidden;
+}
+.login_banner{
+	width:750px;
+	height:560px;
+	background-image:url(../../assets/images/bg_login.png)
+}
+.login_logo{
+	margin-top:27px;
+}
+.login_logo img{
+	float:right;
+	padding-left:168px;
+}
+.vertical_line{
+	height:20px;
+	width:3px;
+	background-color:#5946c3;
+}
+.login_text h3{
+	padding-left:10px;
+	font-weight: bold;
+	font-size:18px;
+	color:#5946c3;
+}
+.form_design{
+	margin-top:40PX;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 65%;
+    font-size: 16px;
+   padding-bottom:12PX;
+	border: none;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #d7d7d7;
+	outline: none;
+}
+.form_design option {
+    font-weight: normal;
+    display: block;
+    white-space: pre;
+    min-height: 3.2em;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 1px;
+    padding-left: 2px;
+	box-sizing: border-box;
+}
+
+
+.form_design input[type=text]:focus, textarea:focus {
+   margin-top:40PX;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 65%;
+    font-size: 16px;
+   padding-bottom:12PX;
+	border: none;
+    margin-bottom: 12px;
+   border: none;
+   border-bottom: 1px solid #d7d7d7;
+	outline: none;
+}
+
+.btn_submit{
+	margin-top:30px;
+	width:150px;
+	height:45px;	
+	background-color: #9d5cda;
+	color:#ffffff;
+	font-weight: 300;
+	font-size:18px;
+	border: none;
+	border-radius: 6px;
+	outline: none;
+	cursor: pointer;
+}
+
+.footer {
+	margin-top:20px;
+   position: fixed;
+	height:60px;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   color:#939496;
+   text-align: center;
+}
+.footer_text{
+	float:right;
+	padding-top:10px;
+}

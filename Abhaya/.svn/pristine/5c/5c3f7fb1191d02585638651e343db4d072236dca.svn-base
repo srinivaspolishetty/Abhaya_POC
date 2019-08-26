@@ -1,0 +1,76 @@
+<div class="row row_shadow">
+    <div class="container">
+        <div class="topnav">
+            <div class="row m-0 p-0">
+                <div class="col-11 m-0 p-0">
+                    <a class="active icon_alignment">
+                        <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                        <span>CLOSED TRIPS</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row_style">
+    <div class="container dashboard_top">
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/dashboard']" routerLinkActive="active">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/tripDetails']" routerLinkActive="active">Trip Details</a></li>
+           <li class="breadcrumb-item" aria-current="page">Closed Trips</li>
+        </ol>
+      </nav>
+        <div class="row m-0 p-0">
+            <!-- <app-trip-vehicle-details tripId="tripId"></app-trip-vehicle-details> -->
+            <div class="col-4 m-0 p-0" *ngFor="let tripDetails of tripDetailsArray">
+                <div class="card_boxshadow_alert">
+                        <div class="alert_details m-0 p-0">
+                            <h5>Vehicle No: {{tripDetails.rcNumber}}</h5>
+                        </div>
+                        <div class="row row_top m-0 p-0">
+                            <div class="passport col-4">
+                                <img src="assets/images/SVG/ic_deviceInstalled.svg">
+                            </div>
+                            <div class=" details_text col-8">
+                                <h6>Owner Name</h6>
+                                <h5>{{tripDetails.ownerName}}</h5>
+                                <h6>Mobile Number</h6>
+                                <h5>{{tripDetails.ownerContactNumber}}</h5>
+                                <h6>Address</h6>
+                                <h5>{{tripDetails.vehicleAddress}}</h5>
+                            </div>
+                        </div>
+                        <hr class="hr_custom m-0 p-0">
+                        <div class="alert_details m-0 p-0">
+                            <h5>Driver Details</h5>
+                        </div>
+                        <div class="row m-0 p-0">
+                            <div class="passport col-4">
+                                <img src="assets/images/Driver.png">
+                            </div>
+                            <div class=" details_text col-8">
+                                <h6>Driver Name</h6>
+                                <h5>{{tripDetails.driverName}}</h5>
+                                <h6>DL Number</h6>
+                                <h5>{{tripDetails.dlNumber}}</h5>
+                                <h6>Mobile Number</h6>
+                                <h5>{{tripDetails.driverContactNumber}}</h5>
+                                <h6>Address</h6>
+                                <h5>{{tripDetails.driverAddress}}</h5>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row card_boxshadow_alert">
+                    <div id="googleMap" class="closed_trip_height">
+                        <agm-map [latitude]="lat" [longitude]="lng">
+                            <agm-direction [origin]="origin" [destination]="destination" [renderOptions]="renderOpts" [markerOptions]="markerOpts" [waypoints]="waypoints"></agm-direction>
+                        </agm-map>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

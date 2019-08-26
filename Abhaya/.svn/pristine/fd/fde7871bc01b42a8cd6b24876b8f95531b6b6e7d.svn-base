@@ -1,0 +1,89 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+    <h5 class="modal-title">{{modelTitle}} Vehicle</h5>
+    <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit();" novalidate>
+  <div class="row popup_size">
+    <div class="col-6">
+      <div class="form-group">
+        <label class="label_text" for="exampleInputEmail1">ENTER VEHICLE NUMBER</label>
+        <input type="text" class="form-control form_select" aria-describedby="emailHelp" placeholder="TS09EQ5636" 
+        name="rcNumber" [(ngModel)]="formVehicle.rcNumber" #rcNumber="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && rcNumber.invalid }" required />
+      </div>
+      <div class="form-group">
+        <label class="label_text" for="exampleInputEmail1">OWNER NAME</label>
+        <input type="text" class="form-control form_select" aria-describedby="emailHelp" placeholder="Owner Name"
+        name="ownerName" [(ngModel)]="formVehicle.ownerName" #ownerName="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && ownerName.invalid }" required />
+      </div>
+      <div class="form-group">
+        <label class="label_text" for="exampleInputEmail1">Registration Date</label>
+        <div class="input-group">
+        <div class="input-group-append">
+          <input class="form-control form_select" placeholder="yyyy-mm-dd"
+          name="registrationDate" [(ngModel)]="formVehicle.registrationDateModel" #registrationDate="ngModel" 
+          [minDate] = "minDate" [maxDate]="maxDate" ngbDatepicker #d="ngbDatepicker" 
+          [ngClass]="{ 'is-invalid': f.submitted && rcNumber.invalid }" required/>
+            <button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button">
+            <i class="fa fa-calendar" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="label_text" for="exampleFormControlSelect1">SELECT STATE</label>
+        <select class="form-control form_select" name="stateId" [(ngModel)]="formVehicle.stateId" #stateId="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && stateId.invalid }" required>
+          <option *ngFor="let state of stateArray" value="{{state.stateId}}">{{state.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="label_text" for="exampleFormControlSelect1">SELECT CITY</label>
+        <select class="form-control form_select" name="cityId" [(ngModel)]="formVehicle.cityId" #cityId="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && cityId.invalid }" required>
+          <option *ngFor="let city of cityArray" value="{{city.cityId}}">{{city.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label class="label_text" for="exampleFormControlSelect1">VEHICLE TYPE</label>
+        <input type="text" class="form-control form_select" aria-describedby="emailHelp" placeholder="Vehicle Type"
+         name="vehicleName" [(ngModel)]="formVehicle.vehicleName" #vehicleName="ngModel"
+         [ngClass]="{ 'is-invalid': f.submitted && vehicleName.invalid }" required>
+      </div>
+      <div class="form-group">
+        <label class="label_text" for="exampleInputEmail1">REGISTRED MOBILE NO</label>
+        <input type="text" class="form-control form_select" aria-describedby="emailHelp" placeholder="9999999999"
+        name="ownerContactNumber" [(ngModel)]="formVehicle.ownerContactNumber" #ownerContactNumber="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && ownerContactNumber.invalid }" required>
+      </div>
+      <div class="form-group">
+        <label class="label_text" for="exampleFormControlSelect1">RC Expiry Date</label>
+        <div class="input-group">
+        <div class="input-group-append">
+          <input class="form-control form_select" placeholder="yyyy-mm-dd" 
+          name="rcExpiryDate" [(ngModel)]="formVehicle.rcExpiryDateModel" #rcExpiryDate="ngModel"
+          [minDate]="registrationDate" ngbDatepicker #d1="ngbDatepicker" 
+          [ngClass]="{ 'is-invalid': f.submitted && rcNumber.invalid }" required/>
+            <button style="outline:none" class="date_btn_style calendar" (click)="d1.toggle()" type="button">
+            <i class="fa fa-calendar" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="label_text" for="exampleFormControlSelect1">SELECT DISTRICT</label>
+        <select class="form-control form_select" 
+        name="districtId" [(ngModel)]="formVehicle.districtId" #districtId="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && districtId.invalid }" required>
+          <option *ngFor="let district of districtArray" value="{{district.districtId}}">{{district.name}}</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-primary btn_save">SAVE</button>
+  </div>
+  </form>
+</div>

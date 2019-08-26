@@ -1,0 +1,27 @@
+<div class="card_boxshadow_vehicle_report3 heading_main">
+  <div class="row report_bg2 m-0 p-0">
+    <div class="col-6">
+      <a [routerLink]="['/rta/vehicles']" class="text-dark link-no-line">
+        <img src="assets/images/SVG/ic_driverstatus.svg" style=" width:55%; margin-top:29%">
+        <Label>Vehicle Authentication</Label>
+        <h4>{{totalAuthCount}}</h4>
+      </a>
+    </div>
+    <div class="col-6 m-0 p-0">
+      <div>
+        <div class="report_text">
+          <a [routerLink]="['/rta/driverduty']" class="link-no-line">
+            <span>Authenticated</span>
+            <h4>{{authValue}}</h4>
+          </a>
+        </div>
+      </div>
+      <div class="report_text_bottom3">
+        <a [routerLink]="['/rta/vehicles']" class="link-no-line">
+          <span>Unauthenticated</span>
+          <h4>{{unAuthValue}}</h4>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

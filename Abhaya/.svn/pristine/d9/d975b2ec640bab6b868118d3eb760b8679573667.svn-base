@@ -1,0 +1,303 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active icon_alignment">
+            <i class="fa fa-pie-chart" aria-hidden="true"></i> <span>DASHBOARD</span></a>
+        </div>
+        <div class="col-1 m-0 p-0">
+          <div class="btn-group btn_todays out_line_green">
+            <button type="button" class="out_line_green  btn btn btn-outline-primary">Today's</button>
+            <button type="button" class="out_line_green  btn btn btn-outline-primary">All</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="container dashboard_secondrow">
+    <div class="row m-0 p-0">
+      <div class="col-7">
+        <div class="card_boxshadow_left">
+          <div class="row">
+            <div class="col-3">
+              <div class="gradient_box_left auto_img">
+                <img src="assets/images/SVG/ic_deviceInstalled.svg" style="width:72%;">
+                <h4>Tracking
+                  <br>Reports
+                </h4>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="div_padding progress_bar_text1 text-center">
+                <p>
+                  <span> Live Tracking</span>
+                </p>
+                <h4>89663</h4>
+                <div class="progress progress_line">
+                  <div class="progress-bar progress_bar_line" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  <span class="vertical_line_left"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="div_padding progress_bar_text2 text-center">
+                <p>
+                  <span> Route Deviation</span>
+                </p>
+                <h4>89</h4>
+                <div class="progress progress_line">
+                  <div class="progress-bar progress_bar_line2" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  <span class="vertical_line_left"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="div_padding progress_bar_text3 text-center">
+                <p>
+                  <span> Ignition Off</span>
+                </p>
+                <h4>03</h4>
+                <div class="progress progress_line">
+                  <div class="progress-bar progress_bar_line3" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="card_boxshadow_right">
+          <div class="row">
+            <div class="col-4">
+              <div class="gradient_box_right auto_img">
+                <img src="assets/images/SVG/ic_Distresscall.svg" style="width:72%;">
+                <h4>Distress
+                  <br> Alerts
+                </h4>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="div_padding_right progress_bar_text3 text-center">
+                <p>
+                  <span> Distress Call</span>
+                </p>
+                <h4>03</h4>
+                <span class="vertical_line_right"></span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="div_padding_right progress_bar_text2 text-center">
+                <p>
+                  <span> Panic Alerts</span>
+                </p>
+                <h4>50</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <div class="card_boxshadow_left2">
+            <div class="row m-0 p-0">
+              <div class="col-8">
+                <div class="table_graph_heading">
+                  <h3>District Wise Trackings</h3>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="btn-group float-right">
+                  <select class="form-control">
+                    <option value="">Oct 2018</option>
+                    <option value="">Sep 2018</option>
+                    <option value="">Aug 2018</option>
+                  </select>
+                </div>
+              </div>
+              <ngx-charts-bar-horizontal
+                [view]="horizontalBarChart.view"
+                [scheme]="horizontalBarChart.colorScheme"
+                [results]="horizontalBarChart.data"
+                [gradient]="horizontalBarChart.gradient"
+                [xAxis]="horizontalBarChart.showXAxis"
+                [yAxis]="horizontalBarChart.showYAxis"
+                [legend]="horizontalBarChart.showLegend"
+                [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
+                [showYAxisLabel]="horizontalBarChart.showYAxisLabel"
+                [xAxisLabel]="horizontalBarChart.xAxisLabel"
+                [yAxisLabel]="horizontalBarChart.yAxisLabel"
+                [showDataLabel]="horizontalBarChart.showDataLabel"
+                (select)="onSelect($event)">
+              </ngx-charts-bar-horizontal>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="col-5">
+          <div class="card_boxshadow_right2">
+            <div class="col-8 table_heading_main m-0 p-0">
+              <h3>Live Tracking Reports</h3>
+            </div>
+            <div>
+            <ngx-charts-pie-chart
+              [view]="pieChart.view"
+              [scheme]="pieChart.colorScheme"
+              [results]="pieChart.data"
+              [legend]="pieChart.showLegend"
+              [explodeSlices]="pieChart.explodeSlices"
+              [labels]="pieChart.showLabels"
+              [doughnut]="pieChart.doughnut"
+              [gradient]="pieChart.gradient"
+              [legendPosition]="pieChart.legendPosition"
+              [arcWidth]="pieChart.arcWidth"
+              [legendTitle]="pieChart.legendTitle"
+              (select)="onSelect($event)">
+            </ngx-charts-pie-chart>
+            </div>
+          </div>
+        </div>
+      
+      <!-- ---------------------------------------Table-->
+      <div class="container m-0 p-0">
+        <div class="card_boxshadow_full">
+          <div class="row">
+            <div class="col-8 table_heading_main">
+              <h3>Live Tracking</h3>
+            </div>
+            <div class="col-4">
+              <button type="button" class="btn-primary btn_custom" value="view" (click)="openTrip()">View All</button>
+            </div>
+          </div>
+          <table class="table table-borderless table_police_dashboard table-fixed">
+            <thead class="thead-bg">
+              <tr>
+                <th style="width:6%;"colspan="2">Vehicle Number</th>
+                <th class="number">IoT Device Number</th>
+                <th>Owner Name</th>
+                <th>#Mobile Number</th>
+                <th>Maker's Calss</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+                <tr>
+                  <td style="width:3%;"><img src="assets/images/SVG/ic_deviceInstalled.svg"></td>
+                    <td class="align-middle"><span> AP01AP1234 </span></td>
+                  <td class="number align-middle">IoT1234556567</td>
+                  <td class="align-middle">Ashok Moddukuri</td>
+                  <td class="align-middle">964 000 0011</td>
+                  <td class="align-middle">Bajaj Auto</td>
+                  <td class="action align-middle">
+                    <a class="icon" href="#">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width:3%;" class="align-middle">
+                    <img src="assets/images/SVG/ic_deviceInstalled.svg"></td>
+                   <td> <span> AP01AP1234 </span></td>
+                  <td class="number align-middle">IoT1234556567</td>
+                  <td class="align-middle">Ashok Moddukuri</td>
+                  <td class="align-middle">964 000 0011</td>
+                  <td class="align-middle">Bajaj Auto</td>
+                  <td class="action align-middle">
+                    <a class="icon" href="#">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width:3%;" class="align-middle">
+                    <img src="assets/images/SVG/ic_deviceInstalled.svg"></td>
+                    <td><span> AP01AP1234 </span> </td>
+                  <td class="number align-middle">IoT1234556567</td>
+                  <td class="align-middle">Ashok Moddukuri</td>
+                  <td class="align-middle">964 000 0011</td>
+                  <td class="align-middle">Bajaj Auto</td>
+                  <td class="action align-middle">
+                    <a class="icon" href="#">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width:3%;" class="align-middle">
+                    <img src="assets/images/SVG/ic_deviceInstalled.svg"></td>
+                    <td><span> AP01AP1234 </span></td>
+                  <td class="number align-middle">IoT1234556567</td>
+                  <td class="align-middle">Ashok Moddukuri</td>
+                  <td class="align-middle">964 000 0011</td>
+                  <td class="align-middle">Bajaj Auto</td>
+                  <td class="action align-middle">
+                    <a class="icon" href="#">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width:3%;" class="align-middle">
+                    <img src="assets/images/SVG/ic_deviceInstalled.svg"></td>
+                    <td><span> AP01AP1234 </span></td>
+                  <td class="number align-middle">IoT1234556567</td>
+                  <td class="align-middle">Ashok Moddukuri</td>
+                  <td class="align-middle">964 000 0011</td>
+                  <td class="align-middle">Bajaj Auto</td>
+                  <td class="action align-middle">
+                    <a class="icon" href="#">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width:3%;" class="align-middle">
+                    <img src="assets/images/SVG/ic_deviceInstalled.svg"></td>
+                    <td><span> AP01AP1234 </span></td>                  
+                  <td class="number align-middle">IoT1234556567</td>
+                  <td class="align-middle">Ashok Moddukuri</td>
+                  <td class="align-middle">964 000 0011</td>
+                  <td class="align-middle">Bajaj Auto</td>
+                  <td class="action align-middle">
+                    <a class="icon" href="#">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width:3%;" class="align-middle">
+                    <img src="assets/images/SVG/ic_deviceInstalled.svg"></td>
+                   <td> <span> AP01AP1234 </span></td>                  
+                  <td class="number align-middle">IoT1234556567</td>
+                  <td class="align-middle">Ashok Moddukuri</td>
+                  <td class="align-middle">964 000 0011</td>
+                  <td class="align-middle">Bajaj Auto</td>
+                  <td class="action align-middle">
+                    <a class="icon" href="#">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width:3%;" class="align-middle">
+                    <img src="assets/images/SVG/ic_deviceInstalled.svg"></td>
+                    <td><span> AP01AP1234 </span></td>                  
+                  <td class="number align-middle">IoT1234556567</td>
+                  <td class="align-middle">Ashok Moddukuri</td>
+                  <td class="align-middle">964 000 0011</td>
+                  <td class="align-middle">Bajaj Auto</td>
+                  <td class="action align-middle">
+                    <a class="icon" href="#">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+import { Component, OnInit } from '@angular/core';
+import { Driver } from './driver.model';
+import { PageModel } from '../page.model';
+import { DriverApiService } from './services/driver.api.service';
+import { PaginationModel } from '../pagination.model';
+import { DriverComponent } from './driver/driver.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-drivers',
+  templateUrl: './drivers.component.html',
+  styleUrls: ['./drivers.component.css']
+})
+export class DriversComponent implements OnInit {
+
+  public driveArray:  Array<Driver> = [];
+  public page: PageModel;
+  public p: number;
+  searchValue;
+  public showSearchClear = false;
+  constructor(private driverApiService: DriverApiService, private modalService: NgbModal) {
+    this.page = new PageModel(0, 0, 0, 0);
+  }
+
+  ngOnInit() {
+    this.getDrivers(0, '');
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    this.getDrivers(this.p - 1, this.searchValue);
+    console.log(event);
+  }
+
+  searchData() {
+    if (this.searchValue !== undefined) {
+      this.getDrivers(0, this.searchValue);
+      this.showSearchClear = (this.searchValue.length > 4) ? true : false;
+    }
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.showSearchClear = false;
+    this.searchData();
+  }
+
+  getDrivers(page: number, searchValue: string) {
+    this.driverApiService.getAll(page, 10, searchValue).subscribe((data:  PaginationModel) => {
+      this.driveArray  =  data.content;
+      this.page = data.page;
+      console.log(this.driveArray);
+    });
+  }
+
+  openDriver() {
+    const modalRef = this.modalService.open(DriverComponent, {backdrop: 'static', keyboard: false});
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'refreshContent') {
+        this.getDrivers(0, '');
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  editDriver(driver: Driver) {
+    const modalRef = this.modalService.open(DriverComponent, {backdrop: 'static', keyboard: false});
+    modalRef.componentInstance.dlNumber = driver.dlNumber;
+    modalRef.result.then((result) => {
+      console.log(result);
+      if (result === 'refreshContent') {
+        this.getDrivers(0, '');
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+}

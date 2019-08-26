@@ -1,0 +1,69 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { VehicleApiService } from '../../shared/vehicles/services/vehicle.api.service';
+import { PaginationModel } from '../../shared/pagination.model';
+import { LiveVehicle } from '../../shared/vehicles/livevehicle.model';
+import { GoogleMapsAPIWrapper, AgmMap, LatLngBounds, LatLngBoundsLiteral } from '@agm/core';
+
+declare var google: any;
+
+@Component({
+  selector: 'app-operational-reports',
+  templateUrl: './operational-reports.component.html',
+  styleUrls: ['./operational-reports.component.css']
+})
+export class OperationalReportsComponent implements OnInit, OnDestroy {
+
+  lat = 17.6868;
+  lng = 83.2185;
+  iconURL = '/assets/images/ic_auto.png';
+
+  liveVehicleArray: Array<LiveVehicle> = [];
+  gMaps;
+  map: any;
+  zoom: 13;
+
+  constructor(private vehicleApiService: VehicleApiService) {
+    this.gMaps = GoogleMapsAPIWrapper;
+  }
+
+  getVehicle;
+  ngOnInit() {
+    this.getLiveVehicles();
+    this.getVehicle = setInterval(() => {
+      this.getLiveVehicles();
+    }, 10000);
+  }
+
+  mapReady(map) {
+    this.map = map;
+  }
+  clickedMarker(label: string, index: number, $event) {
+    this.lat = $event.latitude;
+    this.lng = $event.longitude;
+    this.map.setCenter({ lat: $event.latitude, lng: $event.longitude });
+    const position = new google.maps.LatLng($event.latitude, $event.longitude);
+    this.map.panTo(position);
+    this.map.setZoom(15);
+  }
+
+  mapClicked($event: MouseEvent) {
+    console.log($event);
+  }
+
+  markerDragEnd(m: Marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+
+  getLiveVehicles() {
+    this.vehicleApiService.getLiveVehicles().subscribe((data: PaginationModel) => {
+      this.liveVehicleArray = data.content;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.getVehicle) {
+      clearInterval(this.getVehicle);
+    }
+  }
+
+}

@@ -1,0 +1,37 @@
+import { Component, OnInit } from '@angular/core';
+import { RouteDeviationService } from './services/route.deviation.services';
+import { PageModel } from '../page.model';
+import { RouteDeviation } from './route-deviation.model';
+import { PaginationModel } from '../pagination.model';
+
+@Component({
+  selector: 'app-route-deviation',
+  templateUrl: './route-deviation.component.html',
+  styleUrls: ['./route-deviation.component.css']
+})
+export class RouteDeviationComponent implements OnInit {
+
+  public routeDeviationArray: Array<RouteDeviation> = [];
+  public page: PageModel;
+  public p: number;
+
+  searchValue;
+  constructor(private routeDeviationService: RouteDeviationService) {
+    this.page = new PageModel(0, 0, 0, 0);
+   }
+
+  ngOnInit() {
+    this.getRouteDeviations(0, ' ');
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    this.getRouteDeviations(this.p - 1, this.searchValue);
+  }
+  getRouteDeviations(page: number, searchValue: string) {
+    this.routeDeviationService.getAll(page, 10, searchValue).subscribe((data:  PaginationModel) => {
+      this.routeDeviationArray  =  data.content;
+      this.page = data.page;
+    });
+  }
+}

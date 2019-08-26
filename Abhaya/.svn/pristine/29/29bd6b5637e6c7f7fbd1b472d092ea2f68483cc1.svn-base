@@ -1,0 +1,17 @@
+<div class="modal-content popup_width">
+    <div class="modal-header popup_size">
+     
+      <h5 class="modal-title">Raw Data Details</h5>
+      
+      <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="row popup_size">
+      <h6 class="modal-title rawdata_text">ID:37355</h6>
+      <div class="col-md-12 wordbreakall rawdata">
+          {{selectedRawData}}
+      </div>
+    </div>
+  </div>

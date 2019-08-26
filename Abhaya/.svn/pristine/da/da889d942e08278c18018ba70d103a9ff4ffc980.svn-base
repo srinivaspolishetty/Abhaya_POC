@@ -1,0 +1,55 @@
+      <div class="row">
+        <div class="col-md-3">
+          <div class="section-head">
+            <img src="assets/images/SVG/ic_deviceInstalled.svg">
+            <h4>Trip Tracking
+              <br><span class="totalcount">{{totalTripCount}}</span>
+            </h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div (click)="navigateTotripdetails(false);" class="cursor-hand div_padding progress_bar_text1 text-center cursor-hand">
+            <p>
+              <span> Open</span>
+            </p>
+            <h4>{{tripOpenCount}}</h4>
+            <div class="progress progress_line">
+              <div class="progress-bar progress_bar_line" role="progressbar" style="width: 75%" aria-valuenow="75"
+                aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <span class="section-vertical-line-right"></span>
+        </div>
+
+        <div class="col-md-3">
+          <div (click)="navigateTotripdetails(true);" class="cursor-hand div_padding progress_bar_text2 text-center cursor-hand">
+            <p>
+              <span> Closed</span>
+            </p>
+            <div>
+              <a>
+                <h4>{{tripClosedCount}}</h4>
+              </a>
+            </div>
+            <div class="progress progress_line">
+              <div class="progress-bar progress_bar_line2" role="progressbar" style="width: 75%" aria-valuenow="75"
+                aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <span class="section-vertical-line-right"></span>
+        </div>
+        <div class="col-md-3">
+
+          <div (click)="navigateToroutedeviation();" class="cursor-hand div_padding progress_bar_text3 text-center cursor-hand">
+            <p>
+              <span> Route Deviation's</span>
+            </p>
+            <h4>{{routeDeviationCount}}</h4>
+            <div class="progress progress_line">
+              <div class="progress-bar progress_bar_line3" role="progressbar" style="width: 75%" aria-valuenow="75"
+                aria-valuemin="0" aria-valuemax="100"></div>
+
+            </div>
+          </div>
+        </div>
+      </div>

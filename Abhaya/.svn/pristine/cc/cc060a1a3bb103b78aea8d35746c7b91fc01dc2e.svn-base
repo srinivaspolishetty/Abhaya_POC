@@ -1,0 +1,139 @@
+<div class="row row_shadow">
+   <div class="container">
+      <div class="topnav">
+         <div class="row m-0 p-0">
+            <div class="col-11 m-0 p-0">
+               <a class="active icon_alignment">
+                  <!--   <i class="fa fa-pie-chart" aria-hidden="true"></i> -->
+                  <img class="img_topnav" src="assets/images/SVG/ic_tripdetails_blue.svg" style="width:23px !important;">
+                  <span>OPEN TRIP</span>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="row_style">
+   <div class="container dashboard_top">
+      <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']"
+                  routerLinkActive="active">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a>Trip Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/tripDetails']"
+                  routerLinkActive="active">Trip Details</a></li>
+            <li class="breadcrumb-item" aria-current="page">Open Trip</li>
+         </ol>
+      </nav>
+      <div class="row m-0 p-0">
+         <div class="col-4 m-0 p-0" *ngFor="let tripDetails of tripDetailsArray">
+            <!-- <div class="details_nav">
+                           <div class="row m-0 p-0">
+                              <div class="col-6 m-0 p-0" (click)="toggleDriver(false);">
+                                 <a [ngClass]="!isDriver ? 'active' : ''">
+                                 <span>DRIVER DETAILS</span></a>
+                              </div>
+                              <div class="col-6 m-0 p-0" (click)="toggleDriver(true);">
+                                 <a [ngClass]="isDriver ? 'active' : ''">
+                                 <span>VEHICLE DETAILS</span></a>
+                              </div>
+                           </div>
+                        </div> -->
+            <!-- <div class="row m-0 p-0">
+                           <div class="passport col-5">
+                              <img [src]="isDriver ? 'assets/images/SVG/ic_deviceInstalled.svg' : 'assets/images/Driver.png' ">
+                           </div>
+                           <div class=" details_text col-7 m-0 p-0" *ngIf="isDriver">
+                              <h6>Owner Name</h6>
+                              <h5>{{tripDetails.ownerName}}</h5>
+                              <h6>Mobile Number</h6>
+                              <h5>{{tripDetails.ownerContactNumber}}</h5>
+                              <h6>Address</h6>
+                              <h5>{{tripDetails.vehicleAddress}}</h5>
+                           </div>
+                           <div class=" details_text col-7 m-0 p-0" *ngIf="!isDriver">
+                              <h6>Owner Name</h6>
+                              <h5>{{tripDetails.driverName}}</h5>
+                              <h6>Mobile Number</h6>
+                              <h5>{{tripDetails.driverContactNumber}}</h5>
+                              <h6>Address</h6>
+                              <h5>{{tripDetails.driverAddress}}</h5>
+                           </div>
+                        </div> -->
+            <div class="card_boxshadow_alert">
+               <div class="citizen_mobile m-0 p-0">
+                  <h5><span>Citizen Mobile </span>{{tripDetailsArray[0].citizenMobileNumber}}</h5>
+               </div>
+               <div class="alert_details m-0 p-0">
+                  <h5>Trip Details</h5>
+               </div>
+               <div class="row row_top m-0 p-0">
+                  <div class="col-10">
+                     <div class="row">
+                        <div class="col-3 m-0 p-0">
+                           <img src="assets/images/SVG/ic_VehDevicemap.svg">
+                        </div>
+                        <div class="col-9 address_text m-0 p-0">
+                           <h6>Source:</h6> <span class="d-inline-block p-l-2">{{tripDetailsArray[0].sourceLocation}}</span>
+                           <h6>Destination:</h6> <span class="d-inline-block p-l-2">{{tripDetailsArray[0].destiLocation}}</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-10 m-t-4 icon_color offset-md-2">
+                     <i class="fa fa-clock-o p-l-5"></i> <span>{{tripDetailsArray[0].requestTime}}</span>
+                  </div>
+               </div>
+               <div class="driver_details" *ngFor="let tripDetails of tripDetailsArray">
+                  <div class="details_nav">
+                     <div class="row m-0 p-0">
+                        <div class="col-6 m-0 p-0" (click)="toggleDriver(false);">
+                           <a [ngClass]="!isDriver ? 'active' : ''">
+                              <span>DRIVER DETAILS</span></a>
+                        </div>
+                        <div class="col-6 m-0 p-0" (click)="toggleDriver(true);">
+                           <a [ngClass]="isDriver ? 'active' : ''">
+                              <span>VEHICLE DETAILS</span></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row m-0 p-0">
+                     <div class="passport col-5">
+                        <img *ngIf="!isDriver && !noImage" [src]="driverImage ">
+                        <img *ngIf="!isDriver && noImage" src="assets/images/Driver.png ">
+                        <img *ngIf="isDriver" src="assets/images/SVG/ic_deviceInstalled.svg">
+                     </div>
+                     <div class=" details_text col-7 m-0 p-0" *ngIf="isDriver">
+                        <h6>Owner Name</h6>
+                        <h5>{{tripDetails.ownerName}}</h5>
+                        <h6>Mobile Number</h6>
+                        <h5>{{tripDetails.ownerContactNumber}}</h5>
+                        <h6>Address</h6>
+                        <h5>{{tripDetails.vehicleAddress}}</h5>
+                     </div>
+                     <div class=" details_text col-7 m-0 p-0" *ngIf="!isDriver">
+                        <h6>Driver Name</h6>
+                        <h5>{{tripDetails.driverName}}</h5>
+                        <h6>Mobile Number</h6>
+                        <h5>{{tripDetails.driverContactNumber}}</h5>
+                        <h6>Address</h6>
+                        <h5>{{tripDetails.driverAddress}}</h5>
+                     </div>
+                  </div>
+               </div>
+
+
+
+            </div>
+         </div>
+         <div class="col-8">
+            <div class="row card_boxshadow_alert">
+               <div id="googleMap" style="width:100%;height:585px;">
+                  <iframe [src]="template | safe" width="100%" height="581px"></iframe>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

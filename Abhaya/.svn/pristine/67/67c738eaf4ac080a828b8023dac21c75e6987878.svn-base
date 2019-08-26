@@ -1,0 +1,179 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-10 m-0 p-0">
+          <a class="active icon_alignment text_align">
+            <img class="img_topnav" src="assets/images/SVG/ic_vehicles_blue.svg" style="width:23px !important;">{{currentPageTitle}}</a>
+          <!-- <a class="active" *ngIf="isTodaysInstalled"><img src="assets/images/device_deport_icon.png">Today's Installed</a>
+          <a class="active" *ngIf="pendinginstallation"><img src="assets/images/device_deport_icon.png">Pending Installation</a>
+          <a class="active" *ngIf="pendinginstallation"><img src="assets/images/device_deport_icon.png">Total Installed</a> -->
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="col-2 m-0 p-0" *ngIf="currentPageTitle !== 'VEHICLES'">
+          <div class="btn-group btn_todays float-right">
+            <button type="button" class="active out_line_blue btn_all btn btn btn-outline-primary">{{buttonTitle}}</button>
+            <button type="button" class="out_line_blue2 btn_all btn btn btn-outline-primary" (click)="changeResults();">All</button>
+          </div>
+        </div>
+        <div class="col-1 m-0 p-0" *ngIf="currentPageTitle == 'VEHICLES'">
+          <div class="add_btn float-right">
+            <button type="button" class="add_btn" (click)="openVehicle();">
+              <span>+</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container container_height">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">
+        <a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a>Vehicle Management</a>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">Vehicles</li>
+    </ol>
+  </nav>
+
+
+
+
+  <div class="row page-filters">
+    <div class="col-md-3 p-t-6">
+      <span>Total Records: <b>{{page.totalElements}}</b></span>
+    </div>
+    <div class="col-md-9 text-right">
+      <button type="button" class="btn btn-bare" (click)="refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
+        Refresh</button>|
+      <button type="button" class="btn btn-bare" (click)="vehicleDownload()"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download</button>|
+      <button type="button" class="btn btn-bare" (click)="btnShowFilters()"><i class="fa fa-filter" aria-hidden="true"></i>
+        Filters</button>
+    </div>
+  </div>
+  <div class="slide-filters" [ngClass]="{'show': showFilters == true}">
+    <div class="row slide-filters-content">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="text" class="filter_style form-control" aria-describedby="emailHelp" placeholder="Search IoT Number / RC Number"
+            [(ngModel)]="searchValue" (keyup)="searchData();">
+          <button type="button" class="btn_close close" aria-label="Close">
+            <span aria-hidden="true" (click)="clearSearch();" *ngIf="showSearchClear">&times;</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <select class="filter_style form-control" [(ngModel)]="districtModel" name="stateId" (change)="getCities(districtModel)">
+            <option value="" [selected]="!districtModel">Select District</option>
+            <option *ngFor="let district of districtArray" [ngValue]="district.id">{{district.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <select class="filter_style form-control" [(ngModel)]="cityModel" name="cityId" (change)="getVehicles(0, searchValue, districtModel, cityModel)">
+            <option value="" [selected]="!cityModel">Select City</option>
+            <option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="qrcode" class="qrcode-download">
+    <div class="qrcode-download-image">
+      <qrcode [qrdata]="selectdRcNumber" [size]="256" [level]="'M'" style="width:140px;"></qrcode>
+      <h1>{{selectdRcNumber}}</h1>
+    </div>
+  </div>
+  <table class="table table-borderless table_today_installed table-fixed">
+    <thead class="thead-bg">
+      <tr>
+        <th>Vehicle No.</th>
+        <th>IoT Number</th>
+        <th>Owner Name</th>
+        <th>#Mobile Number</th>
+        <th>City</th>
+        <th>District</th>
+        <th>Date</th>
+        <th>Valid from</th>
+        <th>Valid to</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg" *ngIf="vehicleArray !== null || vehicleArray.length !== 0">
+      <tr *ngFor="let vehicle of vehicleArray | paginate: { id: 'vehicleList', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+        <!-- <td class="align-middle"><img src="assets/images/SVG/ic_deviceInstalled.svg"></td> -->
+        <td class="align-middle">
+          {{vehicle.rcNumber}}
+        </td>
+        <td class="align-middle">
+          {{vehicle.serialNumber}}
+        </td>
+        <td class="align-middle">{{vehicle.ownerName}}</td>
+        <td class="number align-middle">{{vehicle.ownerContactNumber}}</td>
+        <td class="align-middle">{{vehicle.cityName}}</td>
+        <td class="align-middle">{{vehicle.districtName}}</td>
+        <td class="align-middle">{{vehicle.createdDate}}</td>
+        <td class="align-middle">{{vehicle.registrationDate}}</td>
+        <td class="align-middle">{{vehicle.rcExpiryDate}}</td>
+        <td>
+          <div class='actions-menu dropdown-click'>
+            <button>
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
+            </button>
+            <ul>
+              <li>
+                <a title="Edit Vehicle Details" class="icon" (click)="editVehicle(vehicle);">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>Edit Vehicle</span>
+                </a>
+              </li>
+              <li>
+                <a title="Download QR Code" class="icon" (click)="downloadpdf(vehicle);">
+                  <i class="fa fa-qrcode" aria-hidden="true"></i> <span>Download QR</span>
+                </a>
+              </li>
+              <li>
+                <a title="Install Device" class="icon" (click)="openRegistration(vehicle);">
+                  <i class="fa fa-wrench" aria-hidden="true"></i><span>Install Device</span>
+                </a>
+              </li>
+              <li>
+                <a title="View Vehicle Map" class="icon" (click)="openVehiclemap(vehicle);">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i><span>View Vehicle Map</span>
+                </a>
+              </li>
+              <li>
+                <a title="View Vehicle Map" class="icon" (click)="viewAuthDrivers(vehicle);">
+                  <i class="fa fa-address-book-o" aria-hidden="true"></i><span>Authenticated Drivers</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="vehicleArray == null || vehicleArray.length == 0">
+        <tr>
+          <td colspan="10">
+              <div class="alert alert-warning tablealert">
+                  <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> No Vehicles Available.
+                </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div style="margin:0px auto;">
+      <pagination-controls id="vehicleList" class="pagination" (pageChange)="pageChanged($event)" maxSize="9"
+        directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+      </pagination-controls>
+    </div>
+  </div>
+</div>

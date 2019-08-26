@@ -1,0 +1,119 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+    <h5 class="modal-title">Add Administrative</h5>
+    <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+	<form name="form" #f="ngForm" novalidate>
+  <div class="row popup_size">
+  	<div class="col-12">
+  		 <div class="form-group">
+					<label class="label_text">Select Type</label>
+					<select class="form-control form_select" [(ngModel)]="selectType" name="selectId" (change)="changeSelect(selectType)">
+            <option value="">Please Select</option>
+						<option *ngIf="userDetails.userRoles.name == SUPER_ADMIN" value="State">State</option>
+	          <option value="District">District</option>
+	          <option value="City">City</option>
+					</select>
+	      </div>
+  	</div>
+
+		<div class="col-md-12" *ngIf="selectType == 'State'">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="label_text">State Name</label>
+						<input type="text" name="newStateName" [(ngModel)]="newStateName" class="form-control form_select" placeholder="State Name"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+				 <div class="form-group">
+						<label class="label_text">State Code</label>
+						<input type="text" name="newStateCode" [(ngModel)]="newStateCode" class="form-control form_select" placeholder="State Code"/>
+					</div>
+				</div>
+		</div>
+		</div>
+
+
+		<div class="col-md-12" *ngIf="selectType == 'District'">
+			<div class="row">
+					<!-- <div class="col-6">
+							<div class="form-group">
+								 <label class="label_text">Select State</label>
+								 <select class="form-control form_select" [(ngModel)]="selectState" name="selectId" (change)="changeSelect(selectState)">
+									 <option value="">Please Select</option>
+									 <option value="State">State</option>
+									 <option value="District">District</option>
+									 <option value="City">City</option>
+								 </select>
+							 </div>
+					 </div> -->
+					 <div class="col-md-6">
+							<div class="form-group">
+								<label class="label_text">State Name</label>
+								<input type="text" [(ngModel)]="selectedState" name="selectedStateName" class="form-control form_select" readonly placeholder="State Name"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+								<div class="form-group">
+									<label class="label_text">Dristict Name</label>
+									<input [(ngModel)]="newDistrictName" name="newDistrictName" type="text" class="form-control form_select" placeholder="District Name"/>
+								</div>
+							</div>
+				<div class="col-md-6">
+				 <div class="form-group">
+						<label class="label_text">District Code</label>
+						<input [(ngModel)]="newDistrictCode" name="newDistrictCode" type="text" class="form-control form_select" placeholder="District Code"/>
+					</div>
+				</div>
+		</div>
+		</div>
+
+
+
+		<div class="col-md-12"  *ngIf="selectType == 'City'">
+			<div class="row">
+					<!-- <div class="col-6">
+							<div class="form-group">
+								 <label class="label_text">Select District</label>
+								 <select class="form-control form_select" [(ngModel)]="selectDistrict" name="selectId" (change)="changeSelect(selectDistrict)">
+									 <option value="">Please Select</option>
+									 <option value="State">State</option>
+									 <option value="District">District</option>
+									 <option value="City">City</option>
+								 </select>
+							 </div>
+					 </div> -->
+					 <div class="col-md-6">
+							<div class="form-group">
+								<label class="label_text">District Name</label>
+								<input type="text" [(ngModel)]="selectedDistrict" name="selectedDistrict" class="form-control form_select" readonly placeholder="State Name"/>
+							</div>
+						</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="label_text">City Name</label>
+						<input type="text" class="form-control form_select" placeholder="City Name"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+				 <div class="form-group">
+						<label class="label_text">City Code</label>
+						<input type="text" class="form-control form_select" placeholder="City Code"/>
+					</div>
+				</div>
+		</div>
+		</div>
+
+		<div class="col-md-12">
+        <div class="row">
+						<button class="btn btn-primary btn_save align-middle" (click)="onSubmit()">Save</button>
+				</div>
+    </div>
+
+  
+ </div>
+  </form>
+</div>

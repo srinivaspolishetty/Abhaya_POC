@@ -1,0 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { MastersServicesApi } from '../util/services/masters.api';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserComponent } from './user/user.component';
+import { UserDetails } from '../../login/userdetails.model';
+
+@Component({
+  selector: 'app-usermanagement',
+  templateUrl: './usermanagement.component.html',
+  styleUrls: ['./usermanagement.component.css']
+})
+export class UsermanagementComponent implements OnInit {
+
+  public userDetails: Array<UserDetails> = [];
+  constructor(private mastersServicesApi: MastersServicesApi, private modalService: NgbModal) { }
+
+  ngOnInit() {
+    this.getStates();
+  }
+  getStates() {
+    this.mastersServicesApi.getUsers().subscribe((data: any) => {
+      this.userDetails = data.content;
+      console.log(this.userDetails);
+    });
+  }
+
+
+  openModal(userDetails: UserDetails) {
+    const modalRef = this.modalService.open(UserComponent, { backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.editUserDetails = userDetails;
+    modalRef.result.then((result) => {
+      if (result === 'refreshContent') {
+        // this.getUsers(0, ' ');
+      }
+    });
+  }
+
+}

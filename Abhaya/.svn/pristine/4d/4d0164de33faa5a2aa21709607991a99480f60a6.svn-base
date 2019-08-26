@@ -1,0 +1,64 @@
+import { Component, OnInit } from '@angular/core';
+import { DriverDutyApiService } from './services/driverduty.api.service';
+import { DriverDuty } from './driverDuty.model';
+import { PageModel } from '../page.model';
+import { PaginationModel } from '../pagination.model';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-driver-duty',
+  templateUrl: './driver-duty.component.html',
+  styleUrls: ['./driver-duty.component.css']
+})
+export class DriverDutyComponent implements OnInit {
+
+  public driverDutyArray:  Array<DriverDuty> = [];
+  public page: PageModel;
+  public p: number;
+  model: NgbDateStruct;
+  maxDate = this.calendar.getToday();
+  private selected: string;
+  searchValue = '';
+  public showSearchClear = false;
+
+  constructor(private driverDutyApiService: DriverDutyApiService, private calendar: NgbCalendar) {
+    this.page = new PageModel(0, 0, 0, 0);
+    this.model = this.calendar.getToday();
+  }
+
+  ngOnInit() {
+    this.getDriverDuties(0, '');
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    this.getDriverDuties(this.p - 1, this.searchValue);
+  }
+
+  searchData() {
+    if (this.searchValue !== undefined) {
+      this.getDriverDuties(0, this.searchValue);
+      this.showSearchClear = (this.searchValue.length > 4) ? true : false;
+    }
+  }
+
+  changeDate() {
+    this.getDriverDuties(0, this.searchValue);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
+    this.showSearchClear = false;
+    this.searchData();
+  }
+
+  getDriverDuties(page: number, searchValue: string) {
+    this.selected = this.model.day + '/' + this.model.month + '/' + this.model.year;
+    this.driverDutyApiService.getAll(page, 10, this.selected, searchValue).subscribe((data:  PaginationModel) => {
+      this.driverDutyArray  =  data.content;
+      this.page = data.page;
+      console.log(this.driverDutyArray);
+    });
+  }
+
+}

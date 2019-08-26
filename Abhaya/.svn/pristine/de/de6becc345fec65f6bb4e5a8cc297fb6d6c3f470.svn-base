@@ -1,0 +1,19 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TripTrackingApiService {
+
+  private url = `${environment.apiBase}${environment.version}/`;
+  private api = `tripTrackingDetails`;
+  private searchParams = '';
+  constructor(private httpClient: HttpClient) { }
+
+  getAll(page, size, packetDate, searchValue) {
+    this.searchParams = `?page=${page}&size=${size}&startDate=${packetDate}&endDate=${packetDate}&searchValue=${searchValue}`;
+    return this.httpClient.get(`${this.url}${this.api}/${this.searchParams}`);
+  }
+}

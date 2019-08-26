@@ -1,0 +1,138 @@
+<nav class="navbar nav_bg">
+  <div class="container">
+    <div class="row">
+      <div [ngClass]="showMenuFlag ? 'col-1 menu_bar change' : 'col-1 menu_bar'" (click)="toogleHeader();">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+        <li class="dropdown list-unstyled">
+          <div [ngClass]="showMenuFlag ? 'dropdown-menu show menu_color' : 'dropdown-menu menu_color'">
+            <a class="dropdown-item" [routerLink]="['/rta/dashboard']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_dashboard.svg">Dash Board</a>
+
+
+                <div class="dropdown dropright">
+                  <a class="dropdown-item list_dropdown_style btn btn-primary dropdown-toggle" role="button" id="vehiclemenu" data-toggle="dropdown">
+                <img src="assets/images/SVG/ic_vehclelist.svg">Vehicle Management
+                  </a>
+              <div class="dropdown-menu" aria-labelledby="vehiclemenu">
+               <a class="dropdown-item" [routerLink]="['/rta/vehicles']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_vehclelist.svg">Vehicles</a>
+               <a class="dropdown-item" [routerLink]="['/rta/suspicious']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_reports.svg">Suspicious Vehicles</a>
+              </div>
+              </div>
+
+
+              <div class="dropdown dropright">
+                  <a class="dropdown-item list_dropdown_style btn btn-primary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+                <img src="assets/images/SVG/ic_driverlist.svg">Driver Management
+                  </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" [routerLink]="['/rta/drivers']" routerLinkActive="active">
+                  <img src="assets/images/SVG/ic_driverlist.svg">Drivers</a>
+                  <a class="dropdown-item" [routerLink]="['/rta/driverduty']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_driverduty.svg">Driver Duty Details</a>
+              </div>
+              </div>
+
+
+            <div class="dropdown dropright">
+                  <a class="dropdown-item list_dropdown_style btn btn-primary dropdown-toggle" role="button" id="tripmenu" data-toggle="dropdown">
+                <img src="assets/images/SVG/ic_triptackingdetails.svg">Trip Management
+                  </a>
+              <div class="dropdown-menu" aria-labelledby="tripmenu">
+              <a class="dropdown-item" [routerLink]="['/rta/tripTracking']" routerLinkActive="active">
+                <img src="assets/images/SVG/ic_triptackingdetails.svg">Vehicle Tracking</a>
+              <a class="dropdown-item" [routerLink]="['/rta/tripDetails']" routerLinkActive="active">
+                <img src="assets/images/SVG/ic_tripdetails.svg">Trip Details</a>
+                <a class="dropdown-item" [routerLink]="['/rta/routedeviation']" routerLinkActive="active">
+                <img src="assets/images/SVG/ic_rootdeviation.svg">Route Deviation</a>
+              <a class="dropdown-item" [routerLink]="['/rta/panicalertslist']" routerLinkActive="active">
+                <img src="assets/images/SVG/ic_panicalerts.svg">Panic Alerts</a>
+                <a class="dropdown-item" [routerLink]="['/rta/showvideo']" routerLinkActive="active">
+                <img src="assets/images/SVG/ic_modemdetails.svg">Video Streaming</a>
+              </div>
+            </div>
+             
+              <div class="dropdown dropright">
+                <a class="dropdown-item list_dropdown_style btn btn-primary dropdown-toggle" role="button" id="devicemenu" data-toggle="dropdown">
+                  <img src="assets/images/SVG/ic_rawData.svg">Device Management
+                </a>
+              <div class="dropdown-menu" aria-labelledby="devicemenu">
+                <a class="dropdown-item" [routerLink]="['/rta/modemdetails']" routerLinkActive="active">
+                  <img src="assets/images/SVG/ic_modemdetails.svg">Modem Details
+                </a>
+                <a class="dropdown-item" [routerLink]="['/rta/rawdata']" routerLinkActive="active">
+                  <img src="assets/images/SVG/ic_rawData.svg">Raw Data
+                </a>
+              </div>
+              </div>
+
+
+            <!-- <a class="dropdown-item" [routerLink]="['/rta/vehicles']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_vehclelist.svg">Vehicles</a> -->
+            <!-- <a class="dropdown-item" [routerLink]="['/rta/drivers']" routerLinkActive="active">
+            <img src="assets/images/SVG/ic_driverlist.svg">Drivers</a> -->
+            <!-- <a class="dropdown-item" [routerLink]="['/rta/driverduty']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_driverduty.svg">Driver Duty Details</a> -->
+            <!-- <a class="dropdown-item" [routerLink]="['/rta/tripTracking']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_triptackingdetails.svg">Trip Tracking</a>
+            <a class="dropdown-item" [routerLink]="['/rta/tripDetails']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_tripdetails.svg">Trip Details</a>
+            <a class="dropdown-item" [routerLink]="['/rta/panicalertslist']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_panicalerts.svg">Panic Alerts</a> -->
+            <!-- <a class="dropdown-item" [routerLink]="['/rta/suspicious']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_reports.svg">Suspicious Vehicle</a> -->
+            <!-- <a class="dropdown-item" [routerLink]="['/rta/routedeviation']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_rootdeviation.svg">Route Deviation</a> -->
+            <a class="dropdown-item" [routerLink]="['/rta/usermanagement']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_usermanagement.svg">User Management</a>
+               <a class="dropdown-item" [routerLink]="['/rta/reports']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_reports.svg">Reports</a>
+            <!-- <a class="dropdown-item" [routerLink]="['/rta/rawdata']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_rawData.svg">Raw Data</a>
+            <a class="dropdown-item" [routerLink]="['/rta/modemdetails']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_modemdetails.svg">Modem Details</a> -->
+            <!-- <a class="dropdown-item" [routerLink]="['/rta/showvideo']" routerLinkActive="active">
+              <img src="assets/images/SVG/ic_modemdetails.svg">Video</a> -->
+          </div>
+        </li>
+      </div>
+      <div class="col-3">
+        <div class="navbar_logo" (click)="navigateDashBoard()"></div>
+      </div>
+      <div class="col-4">
+        <div class="search_bg"></div>
+      </div>
+      <div class="col-4">
+        <div class="row">
+          <div class="col-2 notification"></div>
+          <div class="col-3 offset-md-1">
+            <div class=" profile_name">
+              <!-- <img src="assets/images/profile-pic.png"> -->
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="profile_name">
+              <li class="dropdown list-unstyled">
+                <a href="#" class="sign_out dropdown-toggle" data-toggle="dropdown">Ratan Kumar
+                  <div [ngClass]="showProfileFlag ? 'sign_out dropdown-menu show menu_color' : 'dropdown-menu menu_color'">
+                    <a class="dropdown-item" [routerLink]="['/login']"> Sign Out</a>
+                    <a class="dropdown-item" [routerLink]="['/login']"> Change Password</a>
+                    <a class="dropdown-item" [routerLink]="['/login']"> Settings</a>
+                  </div>
+                  <span class="caret"></span>
+                </a>
+                <br>
+                <h5>MVI Officer
+                  <span class="caret"></span>
+                </h5>
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

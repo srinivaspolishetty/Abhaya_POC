@@ -1,0 +1,30 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+    <h5 class="modal-title">Vehicle Current Location</h5>
+    <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<div class="blockdiv" *ngIf="noVehicle == true">
+  Vehicle Current Location Not Available
+</div>
+  <div class="col-md-12 popup_size">
+      <div class="row" *ngIf="ismapped == true">
+          <div id="googleMap" class="vehicle_location">
+            <agm-map [zoom]="10" [latitude]="lat" [longitude]="lng" [zoomControl]="false" (mapReady)="mapReady($event)">
+              <agm-marker (markerClick)="clickedMarker($event)" [latitude]="lat" [longitude]="lng" [iconUrl]="iconURL">
+                <agm-info-window>
+                  <strong>{{vehiclelocation.rcNumber}}</strong>
+                </agm-info-window>
+              </agm-marker>
+    
+            </agm-map>
+          </div>
+        </div>
+        <div class="row" *ngIf="ismapped == false">
+           <strong>There is No IOT Device Mapped to this Vehicle</strong>
+          </div>
+  </div>
+
+
+</div>

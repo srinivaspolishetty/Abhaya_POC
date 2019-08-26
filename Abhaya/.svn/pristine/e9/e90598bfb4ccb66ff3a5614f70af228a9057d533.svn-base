@@ -1,0 +1,98 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active"><img src="assets/images/device_deport_icon.png">Device Details</a>
+          <div class="text_align">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container container_height">
+   <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a>Device Management</a></li>
+           <li class="breadcrumb-item" aria-current="page">Device Details</li>
+        </ol>
+      </nav>
+	  <div class="row filter_alignment">
+      <div class="col-3 m-0 p-0">
+        <div class="form-group">
+          <input type="text" class="filter_style form-control" aria-describedby="emailHelp"
+            placeholder="Search by Serial Number / IMEI / SIM "  [(ngModel)]="searchValue" (keyup)="searchData();">
+            <button type="button" class="btn_close close" aria-label="Close">
+              <span aria-hidden="true" (click)="clearSearch();" *ngIf="showSearchClear">&times;</span>
+            </button>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+        <div class="input-group-append">
+          <!--<input type="text" class="filter_style form-control" aria-describedby="emailHelp"
+            placeholder="Select Date"> <i class="fa fa-calendar"></i> -->
+            <input type="text" class="filter_style form-control" readOnly placeholder="yyyy-mm-dd" name="dp" 
+        [(ngModel)]="model" (dateSelect)="changeDate();" [maxDate]="maxDate" ngbDatepicker #d="ngbDatepicker">
+          <button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button"> <i class="fa fa-calendar" aria-hidden="true"></i></button>
+        </div>
+        </div>
+      </div>
+    </div>
+<table class="table table-borderless table_today_installed">
+      <thead class="thead-bg">
+        <tr>
+          <th>SNO</th>
+          <th>Serial Number</th>
+          <th>SIM Number</th>
+          <th>Static IP Address</th>
+          <th>IMEI Number</th>
+          <th>IMSI Number</th>
+          <th>Mobile Number</th>
+          <th>Date</th>
+          <th>Signal Strength</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+          <tr *ngFor="let modemdata of modemdetails | paginate: { id: 'modemdatapagelist', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+          <td class="align-middle">{{modemdata.modemDeviceId}}</td>
+          <td class="align-middle">{{modemdata.serialNumber}}</td>
+          <td class="align-middle">{{modemdata.simNumber}}</td>
+          <td class="align-middle">{{modemdata.ipAddress}}</td>
+          <td class="align-middle">{{modemdata.imeiNumber}}</td>
+          <td class="align-middle">{{modemdata.imsiNumber}}</td>
+          <td class="align-middle">{{modemdata.mobileNumber}}</td>
+          <td class="align-middle">{{modemdata.createdDate}}</td>
+          <td class="action align-middle">{{modemdata.signalStrength}}</td>
+          <td class="action align-middle"><a class="icon"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+        </tr>
+        <tr *ngIf="modemdetails == null || modemdetails.length == 0">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <span style="color:red;">No Data Found</span>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div class="row">
+        <div style="margin:0px auto;">
+          <pagination-controls id="modemdatapagelist" class="pagination" (pageChange)="pageChanged($event)" maxSize="6"
+            directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+          </pagination-controls>
+        </div>
+      </div>
+
+</div>

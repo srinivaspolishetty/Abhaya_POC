@@ -1,0 +1,130 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+    <h5 class="modal-title">{{modelTitle}} Driver</h5>
+    <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit();" novalidate>
+  <div class="row popup_size">
+		<div class="col-12">
+		<div class="row">
+	  <div class="col-6">
+	      <div class="form-group">
+	        <label class="label_text" for="exampleInputEmail1">Driver Name</label>
+	        <input type="text" class="form-control form_select" aria-describedby="emailHelp" placeholder="Driver Name"
+	        name="driverName" [(ngModel)]="formDriver.driverName" #driverName="ngModel"
+	        [ngClass]="{ 'is-invalid': f.submitted && driverName.invalid }" required />
+				</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group">
+				<label class="label_text" for="exampleFormControlSelect1">Gender</label>
+				<select class="form-control form_select" 
+				name="gender" [(ngModel)]="formDriver.gender" #gender="ngModel"
+				[ngClass]="{ 'is-invalid': f.submitted && gender.invalid }" required>
+				<option selected="selected">Select</option>
+					<option>Male</option>
+					<option>Female</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6">
+	      <div class="form-group">
+	        <label class="label_text" for="exampleInputEmail1">Contact Number</label>
+	        <input type="text" class="form-control form_select" aria-describedby="emailHelp" placeholder="9966887558"
+	        name="contactNumber" [(ngModel)]="formDriver.contactNumber" #contactNumber="ngModel"
+	        [ngClass]="{ 'is-invalid': f.submitted && contactNumber.invalid }" required />
+				</div>
+			</div>
+			<div class="col-6">
+					<div class="form-group">
+							<label class="label_text" for="exampleInputEmail1">DL Number</label>
+							<input type="text" class="form-control form_select" aria-describedby="emailHelp" placeholder="DL11258964660"
+							name="dlNumber" [(ngModel)]="formDriver.dlNumber" #dlNumber="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && dlNumber.invalid }"  required />
+						</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+		  <div class="form-group">
+	        <label class="label_text" for="exampleFormControlSelect1">State</label>
+	        <select class="form-control form_select" name="stateId" [(ngModel)]="formDriver.stateId" #stateId="ngModel"
+	        [ngClass]="{ 'is-invalid': f.submitted && stateId.invalid }" required (change)="onStateChange(stateId.value)">
+					<option [ngValue]="-1">Select State</option>     
+					<option *ngFor="let state of stateArray" value="{{state.id}}">{{state.name}}</option>
+	        </select>
+				</div>
+			</div>
+			<div class="col-6">
+					<div class="form-group">
+							<label class="label_text" for="exampleInputEmail1">DL Expiry Date</label>
+							<div class="input-group" style="display:inherit">
+							<div class="input-group-append">
+								<input class="form-control form_select" placeholder="yyyy-mm-dd"
+								name="dlExpiryDate" [(ngModel)]="formDriver.dlExpiryDateModel" #dlExpiryDate="ngModel"
+								[minDate] = "minDate" [maxDate]="maxDate" ngbDatepicker #d="ngbDatepicker" 
+								[ngClass]="{ 'is-invalid': f.submitted && dlExpiryDate.invalid }" required/>
+									<button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button">
+									<i class="fa fa-calendar" aria-hidden="true"></i></button>
+								</div>
+							</div>
+						</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+					<div class="form-group">
+							<label class="label_text" for="exampleFormControlSelect1">District</label>
+							<select class="form-control form_select" 
+							name="districtId" [(ngModel)]="formDriver.districtId" #districtId="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && districtId.invalid }" required (change)="onDistrictChange(districtId.value)">
+							<option [ngValue]="-1">Select District</option>    	
+							<option *ngFor="let district of districtArray" value="{{district.id}}">{{district.name}}</option>
+							</select>
+						</div>
+			</div>
+	     <div class="col-6">
+					<div class="form-group">
+							<label class="label_text" for="exampleInputEmail1">RFID</label>
+							<input type="text" class="form-control form_select" aria-describedby="emailHelp" placeholder="RF45697212"
+							name="rfId" [(ngModel)]="formDriver.rfId" #contactNumber="ngModel"
+							required />
+						</div>
+			 </div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+						<div class="form-group">
+								<label class="label_text" for="exampleFormControlSelect1">City</label>
+								<select class="form-control form_select" name="cityId" [(ngModel)]="formDriver.cityId" #cityId="ngModel"
+								[ngClass]="{ 'is-invalid': f.submitted && cityId.invalid }" required>
+								<option [ngValue]="-1">Select City</option>    	
+								<option *ngFor="let city of cityArray" value="{{city.id}}">{{city.name}}</option>
+								</select>
+							</div>
+				</div>
+			</div>
+		</div>
+	    
+	    
+	     
+	     
+	      
+	     
+	     <!--  <form class="md-form">
+  <div class="file-field">
+    <div class="float-left">
+      <input type="file">
+    </div>
+  </div>
+</form> -->
+    <div class="col-12">
+    	<button class="btn btn-primary btn_save">SAVE</button>
+    </div>
+  </div>
+  </form>
+</div>

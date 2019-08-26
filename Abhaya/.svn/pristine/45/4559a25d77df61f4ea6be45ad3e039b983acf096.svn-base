@@ -1,0 +1,72 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TripTrackingDetails } from '../triptrackingdetails.model';
+import { TripDetailsApiService } from '../services/tripdetails.api.service';
+import { TripDetails } from '../tripdetails.model';
+import { PaginationModel } from '../../pagination.model';
+
+@Component({
+  selector: 'app-closed-trips',
+  templateUrl: './closed-trips.component.html',
+  styleUrls: ['./closed-trips.component.css']
+})
+export class ClosedTripsComponent implements OnInit {
+
+  origin: any;
+  destination: any;
+
+  lat = 51.678418;
+
+  lng = 7.809007;
+  originstr: string;
+  destinationstr: string;
+
+  tripId: number;
+
+  tripDetailsArray: Array<TripDetails> = [];
+
+  renderOpts = { suppressMarkers: true};
+
+  markerOpts = {
+    origin: { icon: '../../../assets/images/source.png'},
+    destination: { icon: '../../../assets/images/dest.png', label: 'marker label', opacity: 0.8}
+  };
+
+  waypoints = [];
+
+  public tripTrackingDetails: Array<TripTrackingDetails> = [];
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private tripDetailsApiService: TripDetailsApiService) { }
+
+  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.tripId = params['tripId'];
+      this.originstr = params['origin'];
+      this.destinationstr = params['destination'];
+      this.getTripTrackingDetails();
+      this.getTripDetails();
+      this.origin = { lat: Number(this.originstr.split(',')[0]), lng: Number(this.originstr.split(',')[1]) };
+      this.destination = { lat: Number(this.destinationstr.split(',')[0]), lng: Number(this.destinationstr.split(',')[1]) };
+    });
+  }
+
+  openPanicAlerts() {
+    this.router.navigate(['/police/panicalerts']);
+  }
+
+  getTripDetails() {
+    this.tripDetailsApiService.getTripDetails(this.tripId).subscribe((data: TripDetails) => {
+      this.tripDetailsArray.push(data);
+    });
+  }
+  getTripTrackingDetails() {
+     this.tripDetailsApiService.getTripTrackingDetails(this.tripId).subscribe((data:  PaginationModel) => {
+      this.tripTrackingDetails  =  data.content;
+      let loop: number;
+      for (loop = 0; loop < this.tripTrackingDetails.length; loop++) {
+        this.waypoints.push({location: {lat: this.tripTrackingDetails[loop].latitude, lng: this.tripTrackingDetails[loop].langitude},
+          stopover: false});
+      }
+      console.log(this.waypoints);
+    });
+  }
+}

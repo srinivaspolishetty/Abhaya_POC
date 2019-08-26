@@ -1,0 +1,80 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-10 m-0 p-0">
+          <a class="active" href="#home"><img src="assets/images/device_deport_icon.png">TRIP DETAILS</a>
+          <div class="text_align">
+          </div>
+        </div>
+        <div class="col-2 m-0 p-0">
+         <!--  <ngx-toggle onText="{{closedText}}" offText="{{openText}}" [(ngModel)]="isTripClosed" (click)="changeTrip();">
+            <input type="checkbox" [(ngModel)]="isTripClosed" (click)="changeTrip();"/> 
+          </ngx-toggle> -->
+               <div class="btn-group btn_left">
+               	<button type="button" [ngClass]="!isTripClosed ? 'active out_line_blue btn btn btn-outline-primary' : 'out_line_blue btn btn btn-outline-primary'"  (click)="changeTrip(false);">Open Trips</button>
+                <button type="button" [ngClass]="isTripClosed ? 'active out_line_blue btn btn btn-outline-primary' : 'out_line_blue btn btn btn-outline-primary'" (click)="changeTrip(true);">Closed Trips</button>
+               </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div>
+    <div class="row filter_alignment">
+      <div class="col-3 m-0 p-0">
+        <div class="form-group">
+          <input type="text" class="filter_style form-control" aria-describedby="emailHelp"
+            placeholder="Search RC Number / Serial Number">
+        </div>
+      </div>
+<!--       <div class="col-3" *ngIf="isTripClosed">
+        <div class="form-group">
+          <input type="text" class="filter_style form-control" aria-describedby="emailHelp"
+            placeholder="Select Date"><i class="fa fa-calendar"></i>
+        </div>
+      </div> -->
+     <div class="col-3">
+      <div class="form-group">
+      <div class="input-group-append">
+        <input type="text" class="filter_style form-control" readOnly placeholder="yyyy-mm-dd" name="dp" 
+        [(ngModel)]="model" (dateSelect)="changeDate();" [maxDate]="maxDate" ngbDatepicker #d="ngbDatepicker">
+          <button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button"> <i class="fa fa-calendar" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <table class="table table-borderless table_today_installed">
+      <thead class="thead-bg column_size">
+        <tr>
+          <th style="width:11%;">Trip ID</th>
+          <th style="width:15%;">Citizen Mobile No</th>
+          <th>Request ID</th>
+          <th style="width:11%;">Start Time</th>
+          <th style="width:11%;">End Time</th>
+          <th>Source</th>
+          <th>Destination</th>
+        </tr>
+      </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+        <tr (click)="navigateToTrip(tripDetails)" *ngFor="let tripDetails of tripDetailsArray | paginate: { id: 'tripDetailsList', itemsPerPage: page.size, currentPage: p, totalItems: page.totalElements }">
+          <td class="align-middle">{{tripDetails.tripId}}</td>
+          <td class="align-middle">{{tripDetails.citizenMobileNumber}}</td>
+          <td class="align-middle">{{tripDetails.requestId}}</td>
+          <td class="align-middle">{{tripDetails.requestTime}}</td>
+          <td class="align-middle">{{tripDetails.closeTime}}</td>
+          <td class="align-middle">{{tripDetails.sourceLocation}}</td>
+          <td class="align-middle">{{tripDetails.destiLocation}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div style="margin:0px auto;">
+        <pagination-controls id="tripDetailsList" class="pagination" (pageChange)="pageChanged($event)" maxSize="6"
+          directionLinks="true" autoHide="true" responsive="true" previousLabel="Prev" nextLabel="Next">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

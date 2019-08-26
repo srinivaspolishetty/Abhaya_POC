@@ -1,0 +1,121 @@
+import { Component, OnInit } from '@angular/core';
+import { RouteDeviationService } from './services/route.deviation.services';
+import { PageModel } from '../page.model';
+import { RouteDeviation } from './route-deviation.model';
+import { PaginationModel } from '../pagination.model';
+import { District } from '../util/district.model';
+import { City } from '../util/city.model';
+import { MastersServicesApi } from '../util/services/masters.api';
+import { UserDetails } from '../../login/userdetails.model';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateFRParserFormatter } from '../util/dateformatter';
+declare let jsPDF;
+import * as autoTable from 'jspdf-autotable'
+
+@Component({
+  selector: 'app-route-deviation',
+  templateUrl: './route-deviation.component.html',
+  styleUrls: ['./route-deviation.component.css']
+})
+export class RouteDeviationComponent implements OnInit {
+
+  public routeDeviationArray: Array<RouteDeviation> = [];
+  public page: PageModel;
+  public p: number;
+
+  searchValue;
+
+  formatDate: string;
+  districtModel: any;
+  cityModel: any;
+  districtArray: Array<District> = [];
+  cityArray: Array<City> = [];
+  userDetails: UserDetails;
+  model: NgbDateStruct;
+
+  constructor(private routeDeviationService: RouteDeviationService, private mastersServicesApi: MastersServicesApi, private calendar: NgbCalendar, private ngbDateFRParserFormatter: NgbDateFRParserFormatter) {
+    this.page = new PageModel(0, 0, 0, 0);
+    this.userDetails = JSON.parse(localStorage.getItem('userdetails'));
+    this.districtModel = '';
+    this.cityModel = '';
+    this.model = this.calendar.getToday();
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+  }
+
+  ngOnInit() {
+    this.getDistricts(this.userDetails.stateId);
+    this.getRouteDeviations(0, '', this.formatDate);
+  }
+  changeDate() {
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.getRouteDeviations(0, '', this.formatDate);
+  }
+  getDistricts(value) {
+    if (value === '') {
+      this.districtArray = [];
+    }
+    this.districtModel = '';
+    this.mastersServicesApi.getDistricts(value).subscribe((data: District[]) => {
+      this.districtArray = data;
+    });
+  }
+
+  getCities(value) {
+    this.cityModel = '';
+    if (value === '') {
+      this.cityArray = [];
+    }
+    this.mastersServicesApi.getCities(value).subscribe((data: City[]) => {
+      this.cityArray = data;
+    });
+  }
+  pageChanged(event) {
+    this.p = event;
+    this.getRouteDeviations(this.p - 1, this.searchValue, this.formatDate);
+  }
+  getRouteDeviations(page: number, searchValue: string, selectDate: string) {
+    console.log(selectDate);
+    this.routeDeviationService.getAll(page, 10, searchValue, selectDate).subscribe((data: PaginationModel) => {
+      this.routeDeviationArray = data.content;
+      this.page = data.page;
+    });
+  }
+  downloadRouteDeviationTable() {
+    this.formatDate = this.ngbDateFRParserFormatter.format(this.model);
+    this.routeDeviationService.getAll(0, '', '', this.formatDate).subscribe((data: PaginationModel) => {
+      this.routeDeviationArray = data.content;
+      this.page = data.page;
+      const doc = new jsPDF('l', 'mm', 'a4');
+      const col = ["Vehicle Number", "Driver Name", "Location", "Deviation Date Time", "Geo Location"];
+      const rows = [];
+      const itemNew = this.routeDeviationArray
+      console.log(this.routeDeviationArray);
+      itemNew.forEach(element => {
+        const temp = [element.rcNumber, element.driverName, element.location, element.deviationTime, element.geoLocation];
+        rows.push(temp);
+      });
+      doc.autoTable(col, rows, {
+        theme: 'grid',
+        styles: {overflow: 'linebreak'},
+        headerStyles: { fillColor: [103, 66, 192] },
+        bodyStyles: {},
+        alternateRowStyles: {},
+        columnStyles: {
+          0: {columnWidth: 35},
+          1: {columnWidth: 35},
+          2: {columnWidth: 40},
+          3: {columnWidth: 40},
+          4: {columnWidth: 110}
+        },
+        margin: { top: 15 },
+        pageBreak: 'always',
+        halign: 'center',
+        valign: 'middle',
+        addPageContent: function (data) {
+          doc.text("Route Deviation Details", 15, 10);
+        }
+      });
+      doc.save('Route_Deviation_Details.pdf');
+    })
+  }
+}

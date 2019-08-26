@@ -1,0 +1,53 @@
+<div class="row row_shadow">
+	<div class="container">
+		<div class="topnav">
+			<div class="row m-0 p-0">
+				<div class="col-10 m-0 p-0">
+					<a class="active icon_alignment text_align"> <img class="img_topnav" src="assets/images/SVG/ic_vehicles_blue.svg" style="width:23px !important;">
+					<span>SUSPICIOUS VEHICLES</span></a>
+				</div>
+				<div class="col-1 m-0 p-0">
+		          <div class="add_btn float-right">
+		            <button type="button" class="add_btn" (click)="addSuspiciousVehicle()"><span>+</span></button>
+		          </div>
+		        </div>
+				<!-- <div class="col-2 btn_green">
+					<button type="button" class="btn btn-primary btn_green" (click)="addSuspiciousVehicle()">Add Vehicle</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row_style dashboard_secondrow">
+	<div class="container container_height">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page"><a>Vehicle Management</a></li>
+				<li class="breadcrumb-item" aria-current="page">Suspicious Vehicles</li>
+			</ol>
+		</nav>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4" *ngFor="let vechile of vehicleDetails">
+						<div class="media Suspicious-box">
+							<a class="pull-left" href="#">
+								<img class="Suspicious-driver-photo" src="assets/images/ic_male.png" />
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">{{vechile.ownerName}}</h4>
+								<h5><small> Vehicle No: </small>{{vechile.rcNumber}}</h5>
+								<hr style="margin:8px auto">
+
+								<h6 class=""><b>Current Location</b></h6>
+								<span class="label label-default">SEZ, Hitech City-2, Gachibowli, Phase 2, HITECH City, Hyderabad,
+									Telangana-500081</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,43 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PanicAlert } from './panicalert.model';
+import { PageModel } from '../page.model';
+import { PanicApiService } from './services/panic.alert.services';
+import { PaginationModel } from '../pagination.model';
+
+@Component({
+  selector: 'app-panic-alerts-list',
+  templateUrl: './panic-alerts-list.component.html',
+  styleUrls: ['./panic-alerts-list.component.css']
+})
+export class PanicAlertsListComponent implements OnInit {
+
+  public panicAlertArray: Array<PanicAlert> = [];
+  public page: PageModel;
+  public p: number;
+
+  searchValue;
+
+  constructor(private router: Router, private panicApiService: PanicApiService) {
+    this.page = new PageModel(0, 0, 0, 0);
+  }
+
+  ngOnInit() {
+    this.getPanicAlerts(0, ' ');
+  }
+  openPanicAlerts(panicAlert: PanicAlert) {
+    this.router.navigate(['/rta/panicalert'], { queryParams: {tripId: panicAlert.tripId,
+       rcNumber: panicAlert.rcNumber, citizenMobileNumber: panicAlert.citizenMobileNumber}, queryParamsHandling: 'merge' });
+  }
+
+  pageChanged(event) {
+    this.p = event;
+    this.getPanicAlerts(this.p - 1, this.searchValue);
+  }
+  getPanicAlerts(page: number, searchValue: string) {
+    this.panicApiService.getAll(page, 10, searchValue).subscribe((data:  PaginationModel) => {
+      this.panicAlertArray  =  data.content;
+      this.page = data.page;
+    });
+  }
+}

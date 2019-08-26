@@ -1,0 +1,46 @@
+.actions-menu {
+    position:relative;
+    padding-top:6px;
+  }
+  .actions-menu i{
+   color:#6742c0;
+  }
+  .actions-menu button {
+    border: 0;
+    background:transparent;
+    cursor: pointer;
+  }
+  .actions-menu button:focus {
+    outline:none;
+  }
+  .actions-menu ul{
+    display: block;
+    margin: 0;
+    padding: 0;
+    width:200px;
+    list-style:none;
+    position:absolute;
+    display:none;
+    background-color:#fff;
+    border-radius:5px; 
+    z-index: 999;
+    -moz-box-shadow: 0px 5px 3px rgba(135, 79, 178, 0.8);
+  -webkit-box-shadow: 0px 5px 3px rgba(135, 79, 178, 0.8);
+  /* box-shadow: 0px 5px 3px rgba(225,232,239,0.45); */
+  box-shadow: 0px 5px 3px rgba(135, 79, 178, 0.8)
+  }
+  .actions-menu ul li {
+      margin:0;
+      padding:10px;
+    color:black;
+    display: block;
+    text-align:left;
+  }
+  .actions-menu ul li a{
+      text-align:left;
+  }
+  .actions-menu.dropdown-click button:focus + ul, .actions-menu.dropdown-click ul:hover{
+    top:20px;
+    right:10px;
+    display:block;
+  }

@@ -1,0 +1,20 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-suspicious-vehicle',
+  templateUrl: './suspicious-vehicle.component.html',
+  styleUrls: ['./suspicious-vehicle.component.css']
+})
+export class SuspiciousVehicleComponent implements OnInit {
+
+  model: any = {};
+  constructor(public activeModal: NgbActiveModal) { }
+
+  ngOnInit() {
+  }
+
+  onSubmit() {
+    this.activeModal.close();
+  }
+}

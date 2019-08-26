@@ -1,0 +1,22 @@
+<div class="modal-content popup_width">
+  <div class="modal-header popup_size">
+    <h5 class="modal-title">Add Suspicious</h5>
+    <button type="button" class="close close_removeoutline" aria-label="Close" (click)="activeModal.close('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="row popup_size">
+      <div class="col-6">
+        <div class="form-group">
+          <label class="label_text" for="exampleInputEmail1">ENTER VEHICLE NUMBER</label>
+          <input [(ngModel)]="vehicleNumber" type="text" class="form-control form_select" [(ngModel)]="model.rcNumber" name="rcNumber" aria-describedby="emailHelp"
+            placeholder="XX09EQ5636" />
+        </div>
+        <button class="btn btn-primary btn_save align-middle" type="submit">Next</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>

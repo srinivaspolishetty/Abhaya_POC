@@ -1,0 +1,156 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-10 m-0 p-0">
+          <a class="active icon_alignment text_align"><img class="img_topnav" src="assets/images/SVG/ic_Reports_blue.svg"><span>REPORTS</span></a>
+          <div class="text_align">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dashboard_secondrow">
+  <div class="container container_height">
+     <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/rta/livetracking']" routerLinkActive="active">Home</a></li>
+           <li class="breadcrumb-item" aria-current="page">Reports</li>
+        </ol>
+      </nav>
+	<div class="row">
+        <div class="col-7">
+          <div class="card_boxshadow_left02">
+            <div class="row m-0 p-0">
+              <div class="col-8">
+                <div class="table_graph_heading">
+                  <h3>District Wise Trackings</h3>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="btn-group float-right">
+                  <select class="form-control">
+                    <option value="">Oct 2018</option>
+                    <option value="">Sep 2018</option>
+                    <option value="">Aug 2018</option>
+                  </select>
+                </div>
+              </div>
+              <ngx-charts-bar-horizontal
+                [view]="horizontalBarChart.view"
+                [scheme]="horizontalBarChart.colorScheme"
+                [results]="horizontalBarChart.data"
+                [gradient]="horizontalBarChart.gradient"
+                [xAxis]="horizontalBarChart.showXAxis"
+                [yAxis]="horizontalBarChart.showYAxis"
+                [legend]="horizontalBarChart.showLegend"
+                [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
+                [showYAxisLabel]="horizontalBarChart.showYAxisLabel"
+                [xAxisLabel]="horizontalBarChart.xAxisLabel"
+                [yAxisLabel]="horizontalBarChart.yAxisLabel"
+                [showDataLabel]="horizontalBarChart.showDataLabel"
+                (select)="onSelect($event)">
+              </ngx-charts-bar-horizontal>
+            </div>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="card_boxshadow_right02">
+            <div class="col-8 table_heading_main m-0 p-0">
+              <h3>Live Tracking Reports</h3>
+            </div>
+            <div>
+            	<!-- <img src="assets/images/livetracking-report.jpg"> -->
+            <ngx-charts-pie-chart
+              [view]="pieChart.view"
+              [scheme]="pieChart.colorScheme"
+              [results]="pieChart.data"
+              [legend]="pieChart.showLegend"
+              [explodeSlices]="pieChart.explodeSlices"
+              [labels]="pieChart.showLabels"
+              [doughnut]="pieChart.doughnut"
+              [gradient]="pieChart.gradient"
+              [legendPosition]="pieChart.legendPosition"
+              [arcWidth]="pieChart.arcWidth"
+              [legendTitle]="pieChart.legendTitle"
+              (select)="onSelect($event)">
+            </ngx-charts-pie-chart>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-7">
+          <div class="card_boxshadow_left2">
+            <div class="row m-0 p-0">
+              <div class="col-8">
+                <div class="table_graph_heading">
+                  <h3>District Wise Trackings</h3>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="btn-group float-right">
+                  <select class="form-control">
+                    <option value="">Oct 2018</option>
+                    <option value="">Sep 2018</option>
+                    <option value="">Aug 2018</option>
+                  </select>
+                </div>
+              </div>
+              <img src="assets/images/timebased.jpg">
+              <!-- <ngx-charts-bar-horizontal
+                [view]="horizontalBarChart.view"
+                [scheme]="horizontalBarChart.colorScheme"
+                [results]="horizontalBarChart.data"
+                [gradient]="horizontalBarChart.gradient"
+                [xAxis]="horizontalBarChart.showXAxis"
+                [yAxis]="horizontalBarChart.showYAxis"
+                [legend]="horizontalBarChart.showLegend"
+                [showXAxisLabel]="horizontalBarChart.showXAxisLabel"
+                [showYAxisLabel]="horizontalBarChart.showYAxisLabel"
+                [xAxisLabel]="horizontalBarChart.xAxisLabel"
+                [yAxisLabel]="horizontalBarChart.yAxisLabel"
+                [showDataLabel]="horizontalBarChart.showDataLabel"
+                (select)="onSelect($event)">
+              </ngx-charts-bar-horizontal> -->
+            </div>
+          </div>
+        </div>    
+        <div class="col-5">
+          <div class="card_boxshadow_right2">
+            <div class="col-8 table_heading_main m-0 p-0">
+              <h3>Live Tracking Reports</h3>
+            </div>
+            <div>
+            	<!-- <img src="assets/images/speed-viol.jpg"> -->
+            <ngx-charts-pie-chart
+              [view]="pieChartLive.view"
+              [scheme]="pieChartLive.colorScheme"
+              [results]="pieChartLive.data"
+              [legend]="pieChartLive.showLegend"
+              [explodeSlices]="pieChartLive.explodeSlices"
+              [labels]="pieChartLive.showLabels"
+              [doughnut]="pieChartLive.doughnut"
+              [gradient]="pieChartLive.gradient"
+              [legendPosition]="pieChartLive.legendPosition"
+              [arcWidth]="pieChartLive.arcWidth"
+              [legendTitle]="pieChartLive.legendTitle"
+              (select)="onSelect($event)">
+            </ngx-charts-pie-chart>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row m-0 p-0">
+      <div class="col-4 m-0 p-0">
+        <div class="card_boxshadow_report1"></div>
+      </div>
+      <div class="col-4 m-0 p-0"><div class="card_boxshadow_report2"></div>
+    </div>
+      <div class="col-4 m-0 p-0"><div class="card_boxshadow_report3"></div>
+    </div>
+    </div>
+
+</div>
+    </div>

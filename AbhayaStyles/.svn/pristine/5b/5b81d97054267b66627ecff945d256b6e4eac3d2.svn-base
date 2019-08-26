@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/abhayastyles.css">
+</head>
+<body>
+
+
+
+<div>
+    <div class="container-left">Menu</div>
+	<div class="container-right">
+            <div class="header">
+                    <div class="row">
+                            <div class="col-md-8">
+                                <div class="header-search p-t-3">
+                                  <form class="example" action="action_page.php">
+                                        <button type="submit"><i class="fa fa-search"></i></button>
+                                    <input type="text" placeholder="Search.." name="search">
+                                  </form>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="header-profile">
+                                <img src="assets/ic_profile.svg"> 
+                                <h5>Ashok Moddukuri
+                                        <br>
+                                        <span>UI Developer</span>
+                                </h5>
+                                <span class="arrow-down">
+                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </span>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                 <div class="main-content">
+                         <div class="row p-t-3">  
+                         <div class="col-md-10">
+                         <h4>Master Dashboard</h4> 
+                         </div>
+                         <div class="col-md-2 text-right">
+                                 <button type="button" class="active btn-left btn-toggle">Today</button>
+                                 <button type="button" class="btn-right btn-toggle">All</button>
+                         </div> 
+                        </div>         
+                          <div class="row">
+                                <div class="col-md-4 p-r-1">
+                                    <div class="box-rect-round">
+                                                    <div class="box-heading" >
+                                                            <h5><img src="assets/ic_TripTracking.svg">Trip Tracking</h5> <span>13</span>
+                                                    </div>   
+                                                <ul class="box-details">
+                                                   <li>
+                                                        <h6>OPEN</h6> <span>13</span>
+                                                       </li>
+                                                       <li>
+                                                        <h6>CLOSED</h6> <span>13</span>
+                                                       </li>
+                                                       <li>
+                                                            <h6>ROUTE DEVIATION</h6> <span>13</span>
+                                                           </li>
+                                                    </ul>
+                                             </div>
+                                     </div>
+                                     <div class="col-md-8 p-l-1">
+                                            <div class="box-rect-round">
+                                                    <div class="box-heading" >
+                                                            <h5><img src="assets/ic_PanicAlerts.svg">Panic Alerts</h5> <span>13</span>
+                                                    </div>  
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="box-panic">
+                                                               <div class="box-round-circle"><img src="assets/ic_PanicAlerts_video.svg"></div>
+                                                              
+                                                                  <ul class="box-details p-l-0 p-t-3">
+                                                               <li>
+                                                                    <h6>OPEN</h6> <span>13</span>
+                                                                   </li>
+                                                                   <li>
+                                                                        <h6>CLOSE</h6> <span>13</span>
+                                                                       </li>
+                                                                </ul>
+                                                                
+                                                            </div></div>
+                                                        <div class="col-md-4">
+                                                                <div class="box-panic">
+                                                                        <div class="box-round-circle"><img src="assets/ic_PanicAlerts_mobile.svg"></div>
+                                                                        
+                                                                            <ul class="box-details p-l-0 p-t-3">
+                                                                         <li>
+                                                                              <h6>OPEN</h6> <span>13</span>
+                                                                             </li>
+                                                                             <li>
+                                                                                  <h6>CLOSE</h6> <span>13</span>
+                                                                                 </li>
+                                                                          </ul>
+                                                                         
+                                                                </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                                <div class="box-panic">
+                                                                        <div class="box-round-circle"><img src="assets/ic_PanicAlerts_device.svg"></div>
+                                                                        
+                                                                            <ul class="box-details p-l-0 p-t-3">
+                                                                         <li>
+                                                                              <h6>OPEN</h6> <span>13</span>
+                                                                             </li>
+                                                                             <li>
+                                                                                  <h6>CLOSE</h6> <span>13</span>
+                                                                                 </li>
+                                                                          </ul>
+                                                                          
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                     </div>                                  
+                          </div>  
+                          <div class="m-t-2 row">
+                              <div class="col-md-12">
+                                <div class="box-rect-round">
+                                    <table class="abhaya-table">
+                                            <thead>
+                                              <tr>
+                                                <th>Trip ID</th>
+                                                <th>Citizen Mobile No</th>
+                                                <th>Vehicle No</th>
+                                                <th>Start Time</th>
+                                                <th>Source</th>
+                                                <th>Destination</th>
+                                                <th></th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td>01</td>
+                                                <td>9642949201</td>
+                                                <td>AP39 1234</td>
+                                                <td>15:10:52</td>
+                                                <td>Polyclinic road, Pettengle Pet, Siddhartha Nagar</td>
+                                                <td>MG Road, Auto Nagar, Vijayawada</td>
+                                                <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                              </tr>
+                                              <tr>
+                                                <td>01</td>
+                                                <td>9642949201</td>
+                                                <td>AP39 1234</td>
+                                                <td>15:10:52</td>
+                                                <td>Polyclinic road, Pettengle Pet, Siddhartha Nagar</td>
+                                                <td>MG Road, Auto Nagar, Vijayawada</td>
+                                                <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                              </tr>
+                                              <tr>
+                                                <td>01</td>
+                                                <td>9642949201</td>
+                                                <td>AP39 1234</td>
+                                                <td>15:10:52</td>
+                                                <td>Polyclinic road, Pettengle Pet, Siddhartha Nagar</td>
+                                                <td>MG Road, Auto Nagar, Vijayawada</td>
+                                                <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                              </tr>
+                                              <tr>
+                                                <td>01</td>
+                                                <td>9642949201</td>
+                                                <td>AP39 1234</td>
+                                                <td>15:10:52</td>
+                                                <td>Polyclinic road, Pettengle Pet, Siddhartha Nagar</td>
+                                                <td>MG Road, Auto Nagar, Vijayawada </td>
+                                                <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                            </div>  
+                        </div>                  
+                    </div>
+                
+    </div>
+</div>
+</body>
+</html>

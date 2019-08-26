@@ -1,0 +1,175 @@
+<div class="row row_shadow">
+  <div class="container">
+    <div class="topnav">
+      <div class="row m-0 p-0">
+        <div class="col-11 m-0 p-0">
+          <a class="active" href="#home"><img src="assets/images/device_deport_icon.png">Raw Data</a>
+          <div class="text_align">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+	  <div class="row filter_alignment">
+      <div class="col-3 m-0 p-0">
+        <div class="form-group">
+          <input type="text" class="filter_style form-control" aria-describedby="emailHelp"
+            placeholder="Search by Serial Number / IMEI "  [(ngModel)]="searchValue" (keyup)="searchData();">
+            <button type="button" class="btn_close close" aria-label="Close">
+              <span aria-hidden="true" (click)="clearSearch();" *ngIf="showSearchClear">&times;</span>
+            </button>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+        <div class="input-group-append">
+          <!--<input type="text" class="filter_style form-control" aria-describedby="emailHelp"
+            placeholder="Select Date"> <i class="fa fa-calendar"></i> -->
+            <input type="text" class="filter_style form-control" readOnly placeholder="yyyy-mm-dd" name="dp" 
+        [(ngModel)]="model" (dateSelect)="changeDate();" [maxDate]="maxDate" ngbDatepicker #d="ngbDatepicker">
+          <button style="outline:none" class="date_btn_style calendar" (click)="d.toggle()" type="button"> <i class="fa fa-calendar" aria-hidden="true"></i></button>
+        </div>
+        </div>
+      </div>
+    </div>
+<table class="table table-borderless table_today_installed">
+      <thead class="thead-bg">
+        <tr>
+          <th>SNO</th>
+          <th>Serial Number</th>
+          <!-- <th>IMEI Number</th> -->
+          <!-- <th>Packet Date</th> -->
+          <!-- <th>Packet Time</th> -->
+          <th>IMEI Number</th>
+          <th>Packet Date</th>
+          <!-- <th>Location</th> -->
+          <th>Packet Time</th>
+          <th>Raw Data</th>
+          <!-- <th>Created Date</th> -->
+        </tr>
+      </thead>
+      <tbody class="hoverTable align-middle no-border-x table_alignment img_auto row_bg">
+        <tr>
+          <td class="align-middle">01</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+           <tr>
+          <td class="align-middle">02</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+           <tr>
+          <td class="align-middle">03</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+           <tr>
+          <td class="align-middle">04</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+           <tr>
+          <td class="align-middle">05</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+           <tr>
+          <td class="align-middle">06</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+           <tr>
+          <td class="align-middle">07</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+           <tr>
+          <td class="align-middle">08</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+           <tr>
+          <td class="align-middle">09</td>
+          <!-- <td class="align-middle">{{tripTracking.imeiNumber}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetDate}}</td> -->
+          <!-- <td class="align-middle">{{tripTracking.packetTime}}</td> -->
+          <td class="align-middle">112233</td>
+          <td class="align-middle">1243436788997</td>
+          <!-- <td class="align-middle">{{tripTracking.location}}</td> -->
+          <td class="align-middle">20/12/2018</td>
+          <td class="align-middle">12:30 PM</td>
+           <td class="action align-middle"><a class="icon" (click)="tripdetails();"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+          <!-- <td class="align-middle">{{tripTracking.createdDate}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+
+
+</div>

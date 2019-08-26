@@ -1,0 +1,59 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { environment } from '../../../environments/environment';
+import * as Stomp from '@stomp/stompjs';
+import * as SockJS from 'sockjs-client';
+
+@Component({
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
+})
+export class MainComponent implements OnInit {
+
+  private stompClient = null;
+
+  msgs: string[] = [];
+
+  disabled = true;
+  url = '/rta/dashboard';
+  constructor(private router: Router) {
+    if (this.router.url !== '/rta') {
+      this.url = this.router.url;
+    }
+    this.router.navigate([this.url]);
+   }
+
+   setConnected(connected: boolean) {
+    this.disabled = !connected;
+
+    if (connected) {
+      this.msgs = [];
+    }
+  }
+
+  ngOnInit() {
+    this.connect();
+  }
+
+  connect() {
+    const socket = new SockJS(`${environment.apiBase}/distress`);
+    this.stompClient = Stomp.over(socket);
+
+    const _this = this;
+    this.stompClient.connect({}, function (frame) {
+      _this.setConnected(true);
+      console.log('Connected: ' + frame);
+      _this.stompClient.subscribe('/topic/messages', function (hello) {
+        _this.msgs.push(hello.body);
+      });
+    });
+  }
+
+  openPanicAlerts() {
+    this.msgs = [];
+    this.router.navigate(['/rta/panicalertslist']);
+  }
+
+}
